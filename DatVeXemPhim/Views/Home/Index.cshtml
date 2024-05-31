@@ -1,0 +1,94 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - My ASP.NET Application</title>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <link href="~/css/style.css" rel="stylesheet" />
+    <link href="~/css/styles.css" rel="stylesheet" />
+</head>
+<body>
+    <h1>@ViewData["Title"]</h1>
+    <section id="portfolio-details" class="portfolio-details">
+        <div class="container">
+            <div class="row gy-4">
+                <div class="col-lg-8">
+                    <div class="portfolio-details-slider swiper">
+                        <div class="swiper-wrapper align-items-center">
+                            <div class="swiper-slide">
+                                <img src="https://iguov8nhvyobj.vcdn.cloud/media/catalog/product/cache/1/thumbnail/190x260/2e2b8cd282892c71872b9e67d2cb5039/r/s/rsz_1200x1800_2.jpg" alt="Movie 1">
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="https://iguov8nhvyobj.vcdn.cloud/media/catalog/product/cache/1/thumbnail/190x260/2e2b8cd282892c71872b9e67d2cb5039/p/o/poster_payoff_godzilla_va_kong_3_1_.jpg" alt="Movie 2">
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="https://iguov8nhvyobj.vcdn.cloud/media/catalog/product/cache/1/thumbnail/190x260/2e2b8cd282892c71872b9e67d2cb5039/7/0/700x1000_exhuma-min.jpg" alt="Movie 3">
+                            </div>
+                        </div>
+                        <div class="swiper-pagination"></div>
+                    </div>
+                </div>
+            </div>
+            <h1>TOP 5 BỘ PHIM HOT NHẤT</h1>
+            <div class="row movie-list">
+                <div class="col-lg-8">
+                    <div class="movie-item">
+                        <img src="https://starlight.vn/Areas/Admin/Content/Fileuploads/images/furiosa.jpg" alt="Movie 1">
+                        <div class="movie-details">
+                            <div class="movie-title">Movie 1</div>
+                            <div class="movie-description">This is a brief description of Movie 1.</div>
+                        </div>
+                    </div>
+                    <div class="movie-item">
+                        <img src="https://starlight.vn/Areas/Admin/Content/Fileuploads/images/an-mang-lau-4.jpg" alt="Movie 2">
+                        <div class="movie-details">
+                            <div class="movie-title">Movie 2</div>
+                            <div class="movie-description">This is a brief description of Movie 2.</div>
+                        </div>
+                    </div>
+                    <div class="movie-item">
+                        <img src="https://starlight.vn/Areas/Admin/Content/Fileuploads/images/POSTER/lat-mat-7.jpg" alt="Movie 3">
+                        <div class="movie-details">
+                            <div class="movie-title">Movie 3</div>
+                            <div class="movie-description">This is a brief description of Movie 3.</div>
+                        </div>
+                    </div>
+                    <div class="movie-item">
+                        <img src="https://starlight.vn/Areas/Admin/Content/Fileuploads/images/POSTER/lat-mat-7.jpg" alt="Movie 4">
+                        <div class="movie-details">
+                            <div class="movie-title">Movie 4</div>
+                            <div class="movie-description">This is a brief description of Movie 4.</div>
+                        </div>
+                    </div>
+                    <div class="movie-item">
+                        <img src="https://starlight.vn/Areas/Admin/Content/Fileuploads/images/POSTER/lat-mat-7.jpg" alt="Movie 5">
+                        <div class="movie-details">
+                            <div class="movie-title">Movie 5</div>
+                            <div class="movie-description">This is a brief description of Movie 5.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script>
+        var swiper = new Swiper('.swiper', {
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            autoplay: {
+                delay: 2500,
+                disableOnInteraction: false,
+            },
+            loop: true,
+        });
+    </script>
+</body>
+</html>

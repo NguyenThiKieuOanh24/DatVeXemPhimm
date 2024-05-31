@@ -1,0 +1,118 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - DatVeXemPhim</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/favicon.ico" />
+    <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/DatVeXemPhim.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header id="header" class="d-flex align-items-center">
+        <div class="container d-flex align-items-center justify-content-between">
+            <h1 class="logo"><a href="index.cshtml">Tên Ứng dụng<span>.</span></a></h1>
+
+            <nav id="navbar" class="navbar">
+                <ul>
+                    <li><a class="nav-link scrollto active" href="#hero">Trang chủ</a></li>
+                    <li class="dropdown">
+                        <a href="#"><span>Phim</span> <i class="bi bi-chevron-down"></i></a>
+                        <ul>
+                            <li class="dropdown">
+                                <a href="#">Phim đang chiếu</a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#"><span>Phim sắp chiếu</span> <i class="bi bi-chevron-right"></i></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a class="nav-link scrollto" href="#contact">Tin Tức</a></li>
+                </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav><!-- .navbar -->
+            <!-- Search Bar -->
+            <form class="d-flex search-bar" action="/search" method="GET">
+                <input class="form-control me-2" type="search" placeholder="Tìm kiếm phim..." aria-label="Search" name="query">
+                <button class="btn btn-outline-success" type="submit">Tìm kiếm</button>
+            </form>
+
+            <nav id="navbar" class="navbar">
+                <ul>
+                    <li><a class="nav-link scrollto active" href="#hero">Đăng nhập</a></li>
+                    <li><a class="nav-link scrollto active" href="#hero">Đăng ký</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer id="footer">
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 footer-contact">
+                        <h3>BizLand<span>.</span></h3>
+                        <p>
+                            A108 Adam Street <br>
+                            New York, NY 535022<br>
+                            United States <br><br>
+                            <strong>Phone:</strong> +1 5589 55488 55<br>
+                            <strong>Email:</strong> info@example.com<br>
+                        </p>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 footer-links">
+                        <h4>Danh sách rạp</h4>
+                        <ul>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Rạp 1- 145 trần hưng đạo,tp qn, bđ</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Rạp 1- 145 trần hưng đạo,tp qn, bđ</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Rạp 1- 145 trần hưng đạo,tp qn, bđ</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Rạp 1- 145 trần hưng đạo,tp qn, bđ</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Rạp 1- 145 trần hưng đạo,tp qn, bđ</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 footer-links">
+                        <h4>Danh sách thành viên</h4>
+                        <ul>
+                            <li><i class="bx bx-chevron-right"></i><p>Trần Đình Chiến - 4451050025</p></li>
+                            <li><i class="bx bx-chevron-right"></i><p>Lê Anh Đức - 4451050080</p></li>
+                            <li><i class="bx bx-chevron-right"></i><p>Trần Phúc Hưng - 4451050147</p></li>
+                            <li><i class="bx bx-chevron-right"></i><p>Nguyễn Phi Hùng - 4451050140</p></li>
+                            <li><i class="bx bx-chevron-right"></i><p>Trần Đặng Lâm - 4451050172</p></li>
+                            <li><i class="bx bx-chevron-right"></i><p>Nguyễn Thị Kiều Oanh - 4451050252</p></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 footer-links">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container py-4">
+            <div class="copyright">
+                &copy; Copyright <strong><span>TênUD</span></strong>. All Rights Reserved
+            </div>
+            <div class="credits">
+                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+            </div>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
