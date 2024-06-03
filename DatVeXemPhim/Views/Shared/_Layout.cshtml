@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - DatVeXemPhim</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/lib/favicon.ico" />
+    <link rel="shortcut icon" href="~/lib/favicon.ico" />
     <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/DatVeXemPhim.styles.css" asp-append-version="true" />
 </head>
@@ -23,9 +23,13 @@
                     <li class="dropdown">
                         <a href="#"><span>Phim</span> <i class="bi bi-chevron-down"></i></a>
                         <ul>
+<<<<<<< Updated upstream
                             <li class="dropdown">
                                 <a href="#">Phim đang chiếu</a>
                             </li>
+=======
+                            <li><a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="Index">Phim đang chiếu</a></li>
+>>>>>>> Stashed changes
                             <li class="dropdown">
                                 <a href="#"><span>Phim sắp chiếu</span> <i class="bi bi-chevron-right"></i></a>
                             </li>
@@ -41,10 +45,10 @@
                 <button class="btn btn-outline-success" type="submit">Tìm kiếm</button>
             </form>
 
-            <nav id="navbar" class="navbar">
+            <nav id="user-navbar" class="navbar">
                 <ul>
-                    <li><a class="nav-link scrollto active" href="#hero">Đăng nhập</a></li>
-                    <li><a class="nav-link scrollto active" href="#hero">Đăng ký</a></li>
+                    <li><a class="nav-link scrollto" href="#login">Đăng nhập</a></li>
+                    <li><a class="nav-link scrollto" href="#register">Đăng ký</a></li>
                 </ul>
             </nav>
         </div>
@@ -74,28 +78,25 @@
                     <div class="col-lg-3 col-md-6 footer-links">
                         <h4>Danh sách rạp</h4>
                         <ul>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Rạp 1- 145 trần hưng đạo,tp qn, bđ</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Rạp 1- 145 trần hưng đạo,tp qn, bđ</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Rạp 1- 145 trần hưng đạo,tp qn, bđ</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Rạp 1- 145 trần hưng đạo,tp qn, bđ</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Rạp 1- 145 trần hưng đạo,tp qn, bđ</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Rạp 1 - 145 Trần Hưng Đạo, TP QN, BD</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Rạp 2 - 123 Lê Lợi, TP QN, BD</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Rạp 3 - 789 Nguyễn Huệ, TP QN, BD</a></li>
                         </ul>
                     </div>
 
                     <div class="col-lg-3 col-md-6 footer-links">
                         <h4>Danh sách thành viên</h4>
                         <ul>
-                            <li><i class="bx bx-chevron-right"></i><p>Trần Đình Chiến - 4451050025</p></li>
-                            <li><i class="bx bx-chevron-right"></i><p>Lê Anh Đức - 4451050080</p></li>
-                            <li><i class="bx bx-chevron-right"></i><p>Trần Phúc Hưng - 4451050147</p></li>
-                            <li><i class="bx bx-chevron-right"></i><p>Nguyễn Phi Hùng - 4451050140</p></li>
-                            <li><i class="bx bx-chevron-right"></i><p>Trần Đặng Lâm - 4451050172</p></li>
-                            <li><i class="bx bx-chevron-right"></i><p>Nguyễn Thị Kiều Oanh - 4451050252</p></li>
+                            <li><i class="bx bx-chevron-right"></i> Trần Đình Chiến - 4451050025</li>
+                            <li><i class="bx bx-chevron-right"></i> Lê Anh Đức - 4451050080</li>
+                            <li><i class="bx bx-chevron-right"></i> Trần Phúc Hưng - 4451050147</li>
+                            <li><i class="bx bx-chevron-right"></i> Nguyễn Phi Hùng - 4451050140</li>
+                            <li><i class="bx bx-chevron-right"></i> Trần Đặng Lâm - 4451050172</li>
+                            <li><i class="bx bx-chevron-right"></i> Nguyễn Thị Kiều Oanh - 4451050252</li>
                         </ul>
                     </div>
 
-                    <div class="col-lg-3 col-md-6 footer-links">
-                    </div>
+                    <div class="col-lg-3 col-md-6 footer-links"></div>
                 </div>
             </div>
         </div>
@@ -111,7 +112,6 @@
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
