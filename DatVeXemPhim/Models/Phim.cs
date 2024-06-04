@@ -3,6 +3,7 @@
     public class Phim
     {
         public int iD { get; set; }
+        public string posterPhim { get; set; }
         public string tenPhim { get; set; }
         public string daoDien { get; set; }
         public string dienVien { get; set; }
