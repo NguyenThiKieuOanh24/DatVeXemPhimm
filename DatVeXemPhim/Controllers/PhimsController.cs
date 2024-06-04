@@ -54,7 +54,9 @@ namespace DatVeXemPhim.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("iD,tenPhim,daoDien,dienVien,theLoai,thoiGianKhoiChieu,thoiLuong,ngonNgu")] Phim phim)
+     
+        public async Task<IActionResult> Create([Bind("iD,tenPhim,daoDien,dienVien,theLoai,thoiGianKhoiChieu,thoiLuong,ngonNgu,posterPhim")] Phim phim)
+
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +88,11 @@ namespace DatVeXemPhim.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("iD,tenPhim,daoDien,dienVien,theLoai,thoiGianKhoiChieu,thoiLuong,ngonNgu")] Phim phim)
+
+
+
+        public async Task<IActionResult> Edit(int id, [Bind("iD,tenPhim,daoDien,dienVien,theLoai,thoiGianKhoiChieu,thoiLuong,ngonNgu,posterPhim")] Phim phim)
+
         {
             if (id != phim.iD)
             {
@@ -153,5 +159,27 @@ namespace DatVeXemPhim.Controllers
         {
             return _context.Phim.Any(e => e.iD == id);
         }
+        public async Task<IActionResult> NowShowing()
+        {
+            var NowShowing = await _context.XuatChieu
+                .Include(x => x.Phim)
+                .Where(x => x.ngayChieu <= DateTime.Now && x.gioKetThuc >= DateTime.Now)
+                .Select(x => x.Phim)
+                .Distinct()
+                .ToListAsync();
+
+            return View(NowShowing);
+        }
+
+        // GET: Movies/Upcoming
+        public async Task<IActionResult> Upcoming()
+        {
+            var UpComing = await _context.Phim
+                .Where(p => p.thoiGianKhoiChieu > DateTime.Now)
+                .ToListAsync();
+
+            return View(UpComing);
+        }
+
     }
 }
