@@ -45,6 +45,7 @@ public static class SeedData
                     theLoai = "asdasd",
                     thoiGianKhoiChieu = DateTime.Parse("1959-4-15"),
                     thoiLuong = "asdasd",
+                    ngonNgu = "asdasd"
                     ngonNgu = "asdasd",
                     posterPhim = "link_to_poster_2.jpg",
                 },

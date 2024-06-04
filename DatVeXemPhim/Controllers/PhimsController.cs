@@ -54,7 +54,9 @@ namespace DatVeXemPhim.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+     
         public async Task<IActionResult> Create([Bind("iD,tenPhim,daoDien,dienVien,theLoai,thoiGianKhoiChieu,thoiLuong,ngonNgu,posterPhim")] Phim phim)
+
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +88,11 @@ namespace DatVeXemPhim.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+
+
+
         public async Task<IActionResult> Edit(int id, [Bind("iD,tenPhim,daoDien,dienVien,theLoai,thoiGianKhoiChieu,thoiLuong,ngonNgu,posterPhim")] Phim phim)
+
         {
             if (id != phim.iD)
             {
@@ -174,5 +180,6 @@ namespace DatVeXemPhim.Controllers
 
             return View(UpComing);
         }
+
     }
 }
