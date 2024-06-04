@@ -34,5 +34,9 @@ namespace DatVeXemPhim.Controllers
             return View();
         }
 
+        public IActionResult Phim()
+        {
+            return View();
+        }
     }
 }
