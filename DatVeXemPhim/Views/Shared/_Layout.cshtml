@@ -1,4 +1,4 @@
-﻿@{
+@{
     ViewData["Title"] = "Home Page";
 }
 <!DOCTYPE html>
@@ -21,13 +21,13 @@
                 <ul>
                     <li><a class="nav-link scrollto active" href="#hero">Trang chủ</a></li>
                     <li class="dropdown">
-                        <a href="#"><span>Phim</span> <i class="bi bi-chevron-down"></i></a>
+                        <a href="#"><span>Danh sách Phim</span> <i class="bi bi-chevron-down"></i></a>
                         <ul>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="Index">Phim đang chiếu</a>
-                            </li>
                             <li class="dropdown">
-                                <a href="#"><span>Phim sắp chiếu</span> <i class="bi bi-chevron-right"></i></a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Phims" asp-action="NowShowing">Phim đang chiếu</a>
+                            </li
+                            <li>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Phims" asp-action="UpComing">Phim sắp chiếu</a>
                             </li>
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Phims" asp-action="NowShowing">Phim đang chiếu</a>
                             </li
