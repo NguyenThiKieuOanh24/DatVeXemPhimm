@@ -7,7 +7,7 @@ namespace DatVeXemPhim.Models
         public int iD { get; set; }
         public int maPhong { get; set; }
         public int maPhim { get; set; }
-        [ForeignKey("MaPhim")]
+        [ForeignKey("maPhim")]
         public Phim Phim { get; set; }
         public DateTime ngayChieu { get; set; }
         public DateTime gioBatDau { get; set; }
