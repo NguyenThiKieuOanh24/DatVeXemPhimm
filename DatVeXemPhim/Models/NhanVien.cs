@@ -11,5 +11,7 @@
         public string gioiTinh { get; set; }
         public string taiKhoan { get; set; }
         public string matKhau { get; set; }
+
+        public ICollection<Ve> Ves { get; set; }
     }
 }

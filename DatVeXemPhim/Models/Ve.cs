@@ -9,5 +9,10 @@
         public int maGhe { get; set; }
         public DateTime ngayBanVe { get; set; }
         public int tongTien { get; set; }
+
+        public KhachHang KhachHang { get; set; }
+        public NhanVien NhanVien { get; set; }
+        public Ghe Ghe { get; set; }
+        public XuatChieu XuatChieu { get; set; }
     }
 }
