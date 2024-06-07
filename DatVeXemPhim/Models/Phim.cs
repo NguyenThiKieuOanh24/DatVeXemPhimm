@@ -12,5 +12,6 @@
         public string thoiLuong { get; set; }
         public string ngonNgu { get; set; }
 
+        public TheLoaiPhim TheLoaiPhim { get; set; }
     }
 }

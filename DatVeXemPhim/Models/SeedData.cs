@@ -46,7 +46,7 @@ public static class SeedData
                     thoiGianKhoiChieu = DateTime.Parse("1959-4-15"),
                     thoiLuong = "asdasd",
                     ngonNgu = "asdasd",
-                    posterPhim = "link_to_poster_2.jpg",
+                    posterPhim = "link_to_poster_2.jpg"
                 },
                 new Phim
                 {
@@ -57,7 +57,7 @@ public static class SeedData
                     thoiGianKhoiChieu = DateTime.Parse("2024-6-5"),
                     thoiLuong = "asdasd",
                     ngonNgu = "asdasd",
-                    posterPhim = "link_to_poster_2.jpg",
+                    posterPhim = "link_to_poster_2.jpg"
                 },
                 new Phim
                 {
@@ -68,7 +68,7 @@ public static class SeedData
                     thoiGianKhoiChieu = DateTime.Parse("2024-6-4"),
                     thoiLuong = "asdasd",
                     ngonNgu = "asdasd",
-                    posterPhim = "link_to_poster_2.jpg",
+                    posterPhim = "link_to_poster_2.jpg"
                 },
                 new Phim
                 {
@@ -79,7 +79,7 @@ public static class SeedData
                     thoiGianKhoiChieu = DateTime.Parse("2024-6-6"),
                     thoiLuong = "asdasd",
                     ngonNgu = "asdasd",
-                    posterPhim = "link_to_poster_2.jpg",
+                    posterPhim = "link_to_poster_2.jpg"
                 }
             };
             context.Phim.AddRange(phims);
