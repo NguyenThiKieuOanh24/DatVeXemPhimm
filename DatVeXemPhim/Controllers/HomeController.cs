@@ -1,5 +1,7 @@
+﻿using DatVeXemPhim.Data;
 using DatVeXemPhim.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace DatVeXemPhim.Controllers
@@ -7,15 +9,17 @@ namespace DatVeXemPhim.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly DatVeXemPhimContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, DatVeXemPhimContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()    
         {
-            return View();
+            return View(await _context.Phim.ToListAsync());
         }
 
         public IActionResult Privacy()
@@ -37,6 +41,25 @@ namespace DatVeXemPhim.Controllers
         public IActionResult Phim()
         {
             return View();
+        }
+
+        public async Task<IActionResult> Search(string searchString)
+        {
+
+            if (_context.Phim == null)
+            {
+                return Problem("List null");
+            }
+
+            var movies = from m in _context.Phim
+                         select m;
+            var k = movies.Count();
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                movies = movies.Where(s => s.tenPhim!.Contains(searchString));  
+            }
+            var a = 5;
+            return View(await movies.ToListAsync());
         }
     }
 }

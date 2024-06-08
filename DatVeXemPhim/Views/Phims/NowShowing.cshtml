@@ -2,7 +2,7 @@
 @{
     ViewData["Title"] = "Phim Đang Chiếu";
 }   
-<h1>Phim Đang Chiếu</h1>
+<h1 style="margin-top: 20px">Phim Đang Chiếu</h1>
 <div class="row">
     @foreach (var phim in Model)
     {
@@ -20,6 +20,8 @@
                         <small class="text-muted">Ngôn ngữ: @phim.ngonNgu</small>
                         <small class="text-muted">Khởi chiếu: @phim.thoiGianKhoiChieu.ToShortDateString()</small>
                     </div>
+                    <div><a asp-controller="Phims" asp-action="Details" asp-route-id="@phim.iD"><button style="margin-top: 20px" class="btn btn-warning">Xem chi tiết</button></a></div>
+
                 </div>
             </div>
         </div>
