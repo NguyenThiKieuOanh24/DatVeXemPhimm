@@ -1,5 +1,6 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model IEnumerable<DatVeXemPhim.Models.Phim>
+@{
+    ViewData["Title"] = "Trang chủ";
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -12,7 +13,6 @@
     <link href="~/css/styles.css" rel="stylesheet" />
 </head>
 <body>
-    <h1>@ViewData["Title"]</h1>
     <section id="portfolio-details" class="portfolio-details">
         <div class="container">
             <div class="row gy-4">
@@ -33,46 +33,25 @@
                     </div>
                 </div>
             </div>
-            <h1>TOP 5 BỘ PHIM HOT NHẤT</h1>
-            <div class="row movie-list">
-                <div class="col-lg-8">
-                    <div class="movie-item">
-                        <img src="https://starlight.vn/Areas/Admin/Content/Fileuploads/images/furiosa.jpg" alt="Movie 1">
-                        <div class="movie-details">
-                            <div class="movie-title">Movie 1</div>
-                            <div class="movie-description">This is a brief description of Movie 1.</div>
-                        </div>
-                    </div>
-                    <div class="movie-item">
-                        <img src="https://starlight.vn/Areas/Admin/Content/Fileuploads/images/an-mang-lau-4.jpg" alt="Movie 2">
-                        <div class="movie-details">
-                            <div class="movie-title">Movie 2</div>
-                            <div class="movie-description">This is a brief description of Movie 2.</div>
-                        </div>
-                    </div>
-                    <div class="movie-item">
-                        <img src="https://starlight.vn/Areas/Admin/Content/Fileuploads/images/POSTER/lat-mat-7.jpg" alt="Movie 3">
-                        <div class="movie-details">
-                            <div class="movie-title">Movie 3</div>
-                            <div class="movie-description">This is a brief description of Movie 3.</div>
-                        </div>
-                    </div>
-                    <div class="movie-item">
-                        <img src="https://starlight.vn/Areas/Admin/Content/Fileuploads/images/POSTER/lat-mat-7.jpg" alt="Movie 4">
-                        <div class="movie-details">
-                            <div class="movie-title">Movie 4</div>
-                            <div class="movie-description">This is a brief description of Movie 4.</div>
-                        </div>
-                    </div>
-                    <div class="movie-item">
-                        <img src="https://starlight.vn/Areas/Admin/Content/Fileuploads/images/POSTER/lat-mat-7.jpg" alt="Movie 5">
-                        <div class="movie-details">
-                            <div class="movie-title">Movie 5</div>
-                            <div class="movie-description">This is a brief description of Movie 5.</div>
-                        </div>
-                    </div>
+
+<h1>TOP 5 BỘ PHIM HOT NHẤT</h1>
+<div class="row movie-list">
+    <div class="col-lg-8">
+        @foreach (var movie in Model.OrderBy(m => Guid.NewGuid()).Take(5))
+        {
+            <div class="movie-item">
+                <img src="@movie.posterPhim" alt="@movie.tenPhim">
+                <div class="movie-details">
+                    <div class="movie-title">@movie.tenPhim</div>
+                    <div class="movie-description">@movie.daoDien</div>
+                    <div><a asp-controller="Phims" asp-action="Details" asp-route-id="@movie.iD"><button style="margin-top: 20px" class="btn btn-warning">Xem chi tiết</button></a></div>
                 </div>
             </div>
+        }
+    </div>
+</div>
+
+
         </div>
     </section>
 

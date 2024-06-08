@@ -15,11 +15,12 @@
 <body>
     <header id="header" class="d-flex align-items-center">
         <div class="container d-flex align-items-center justify-content-between">
-            <h1 class="logo"><a href="index.cshtml">Tên Ứng dụng<span>.</span></a></h1>
-
+           
+            <h1 class="logo"><a asp-controller="Home" asp-action="Index">Coly Cinema<span></span></a></h1>
+             
             <nav id="navbar" class="navbar">
                 <ul>
-                    <li><a class="nav-link scrollto active" href="#hero">Trang chủ</a></li>
+                    <li><a class="nav-link scrollto active" asp-controller="Home" asp-action="Index">Trang chủ</a></li>
                     <li class="dropdown">
                         <a href="#"><span>Danh sách Phim</span> <i class="bi bi-chevron-down"></i></a>
                         <ul>
@@ -39,9 +40,9 @@
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav><!-- .navbar -->
             <!-- Search Bar -->
-            <form class="d-flex search-bar" action="/search" method="GET">
-                <input class="form-control me-2" type="search" placeholder="Tìm kiếm phim..." aria-label="Search" name="query">
-                <button class="btn btn-outline-success" type="submit">Tìm kiếm</button>
+            <form class="d-flex search-bar" asp-controller="Home" asp-action="Search" method="get">
+                <input class="form-control me-2" type="search" placeholder="Tìm kiếm phim..." aria-label="Search" name="SearchString">
+                <input class="btn btn-outline-success" type="submit" value="Tìm kiếm"/>
             </form>
 
             <nav id="user-navbar" class="navbar">
@@ -62,27 +63,21 @@
     <footer id="footer">
         <div class="footer-top">
             <div class="container">
+                <h3>Coly Cinema<span></span></h3>
                 <div class="row">
                     <div class="col-lg-3 col-md-6 footer-contact">
-                        <h3>BizLand<span>.</span></h3>
+                        <h4>Địa Chỉ</h4>
                         <p>
-                            A108 Adam Street <br>
-                            New York, NY 535022<br>
-                            United States <br><br>
-                            <strong>Phone:</strong> +1 5589 55488 55<br>
-                            <strong>Email:</strong> info@example.com<br>
+                            170 An Dương Vương <br>
+                            Nguyễn Văn Cừ, TP.Quy Nhơn<br>
+                            Bình Định <br><br>
                         </p>
                     </div>
-
                     <div class="col-lg-3 col-md-6 footer-links">
-                        <h4>Danh sách rạp</h4>
-                        <ul>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Rạp 1 - 145 Trần Hưng Đạo, TP QN, BD</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Rạp 2 - 123 Lê Lợi, TP QN, BD</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Rạp 3 - 789 Nguyễn Huệ, TP QN, BD</a></li>
-                        </ul>
+                        <h4>Chăm Sóc Khách Hàng</h4>
+                            <strong>Phone:</strong> +1 5589 55488 55<br>
+                            <strong>Email:</strong> coly123@example.com<br> 
                     </div>
-
                     <div class="col-lg-3 col-md-6 footer-links">
                         <h4>Danh sách thành viên</h4>
                         <ul>
@@ -94,18 +89,16 @@
                             <li><i class="bx bx-chevron-right"></i> Nguyễn Thị Kiều Oanh - 4451050252</li>
                         </ul>
                     </div>
+                    <div class="col-lg-3 col-md-6 footer-links">
 
-                    <div class="col-lg-3 col-md-6 footer-links"></div>
+                    </div>
                 </div>
             </div>
         </div>
 
         <div class="container py-4">
             <div class="copyright">
-                &copy; Copyright <strong><span>TênUD</span></strong>. All Rights Reserved
-            </div>
-            <div class="credits">
-                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                &copy; Copyright <strong><span>Coly Cenima</span></strong>. All Rights Reserved
             </div>
         </div>
     </footer>
