@@ -1,0 +1,35 @@
+﻿@model IEnumerable<DatVeXemPhim.Models.Ve>
+
+<h1 style="margin-top: 20px">Bước 1: Chọn thời gian</h1>
+
+<button class="button" onclick="toggleSelection(this)">11:30</button>
+<button class="button" onclick="toggleSelection(this)">2:00</button>
+<button class="button" onclick="toggleSelection(this)">3:00</button>
+<button class="button" onclick="toggleSelection(this)">4:00</button>
+
+<script>
+    function toggleSelection(button) {
+        button.classList.toggle('selected');
+    }
+
+    function getSelectedTimes() {
+        const buttons = document.querySelectorAll('.button');
+        const selectedTimes = [];
+
+        buttons.forEach(button => {
+            if (button.classList.contains('selected')) {
+                selectedTimes.push(button.innerText);
+            }
+        });
+
+        alert('Các thời gian đã chọn: ' + selectedTimes.join(', '));
+    }
+</script>
+
+<div>
+    <label for="datePicker">Chọn ngày:</label>
+    <input type="date" id="datePicker" name="datePicker">
+</div>
+<div><a asp-controller="Ves" asp-action="DatGhe" asp-route-id=""><button onclick="getSelectedTimes()" style="margin-top: 20px" class="btn btn-warning">Tiếp theo</button></a></div>
+</h1>
+

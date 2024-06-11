@@ -19,6 +19,7 @@ namespace DatVeXemPhim.Controllers
 
         public async Task<IActionResult> Index()    
         {
+            ViewBag.CurrentDate = DateTime.Now;
             return View(await _context.Phim.ToListAsync());
         }
 

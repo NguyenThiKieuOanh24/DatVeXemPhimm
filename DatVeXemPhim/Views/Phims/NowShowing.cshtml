@@ -3,16 +3,8 @@
     ViewData["Title"] = "Phim Đang Chiếu";
 }   
 <h1 style="margin-top: 20px">Phim Đang Chiếu</h1>
-<div>
-    <label for="timePicker">Chọn thời gian:</label>
-    <div>
-        <a asp-controller="Ves" asp-action="DatGhe" asp-route-id=""><button style="margin-top: 20px" class="btn btn-warning">11:30</button></a>
-        <a asp-controller="Ves" asp-action="DatGhe" asp-route-id=""><button style="margin-top: 20px" class="btn btn-warning">11:30</button></a>
-        <a asp-controller="Ves" asp-action="DatGhe" asp-route-id=""><button style="margin-top: 20px" class="btn btn-warning">11:30</button></a>
-        <a asp-controller="Ves" asp-action="DatGhe" asp-route-id=""><button style="margin-top: 20px" class="btn btn-warning">11:30</button></a>
-    </div>
-</div>
-<div><a class="nav-link scrollto" asp-controller="Ves" asp-action="ThoiGian">Đặt Vé</a></div>
+
+<div><a class="nav-link scrollto" asp-controller="Ves" asp-action="DatVe">Đặt Vé</a></div>
 <div class="row">
     @foreach (var phim in Model)
     {
