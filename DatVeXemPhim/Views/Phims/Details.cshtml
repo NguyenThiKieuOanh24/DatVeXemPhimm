@@ -3,58 +3,65 @@
 @{
     ViewData["Title"] = "Details";
 }
+<link href="~/css/phim.css" rel="stylesheet" />
+<div class="container">
+    <h1>@Model.tenPhim</h1>
 
-<h1>Details</h1>
-
-<div>
-    <h4>Phim</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.tenPhim)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.tenPhim)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.daoDien)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.daoDien)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.dienVien)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.dienVien)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.theLoai)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.theLoai)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.thoiGianKhoiChieu)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.thoiGianKhoiChieu)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.thoiLuong)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.thoiLuong)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ngonNgu)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ngonNgu)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.iD">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <div>
+        <h4>Thông tin chi tiết</h4>
+        <hr />
+        <dl class="row dl-horizontal">
+            <dt class="col-sm-4">
+                Poster
+            </dt>
+            <dd class="col-sm-8">
+                <img src="@Model.posterPhim" alt="Poster của @Model.tenPhim" class="poster-img" />
+            </dd>
+            <dt class="col-sm-4">
+                Tên phim
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.tenPhim)
+            </dd>
+            <dt class="col-sm-4">
+                Đạo diễn
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.daoDien)
+            </dd>
+            <dt class="col-sm-4">
+                Diễn viên
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.dienVien)
+            </dd>
+            <dt class="col-sm-4">
+                Thể loại
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.theLoai)
+            </dd>
+            <dt class="col-sm-4">
+                Thời gian khởi chiếu
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.thoiGianKhoiChieu)
+            </dd>
+            <dt class="col-sm-4">
+                Thời lượng
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.thoiLuong)
+            </dd>
+            <dt class="col-sm-4">
+                Ngôn ngữ
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.ngonNgu)
+            </dd>
+        </dl>
+    </div>
+    <div>
+        <a asp-action="" class="btn">Đặt vé</a>
+    </div>
 </div>
