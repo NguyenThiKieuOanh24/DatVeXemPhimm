@@ -3,6 +3,16 @@
     ViewData["Title"] = "Phim Đang Chiếu";
 }   
 <h1 style="margin-top: 20px">Phim Đang Chiếu</h1>
+<div>
+    <label for="timePicker">Chọn thời gian:</label>
+    <div>
+        <a asp-controller="Ves" asp-action="DatGhe" asp-route-id=""><button style="margin-top: 20px" class="btn btn-warning">11:30</button></a>
+        <a asp-controller="Ves" asp-action="DatGhe" asp-route-id=""><button style="margin-top: 20px" class="btn btn-warning">11:30</button></a>
+        <a asp-controller="Ves" asp-action="DatGhe" asp-route-id=""><button style="margin-top: 20px" class="btn btn-warning">11:30</button></a>
+        <a asp-controller="Ves" asp-action="DatGhe" asp-route-id=""><button style="margin-top: 20px" class="btn btn-warning">11:30</button></a>
+    </div>
+</div>
+<div><a class="nav-link scrollto" asp-controller="Ves" asp-action="ThoiGian">Đặt Vé</a></div>
 <div class="row">
     @foreach (var phim in Model)
     {
@@ -15,13 +25,12 @@
                     <p class="card-text">@phim.daoDien</p>
                     <div class="d-flex justify-content-between align-items-center">
                         <small class="text-muted">Diễn viên: @phim.dienVien</small>
-                        <small class="text-muted">Thể loại: @phim.theLoai</small>
+                        <small class="text-muted">Thể loại: @phim.maLoaiPhim</small>
                         <small class="text-muted">Thời lượng: @phim.thoiLuong</small>
                         <small class="text-muted">Ngôn ngữ: @phim.ngonNgu</small>
                         <small class="text-muted">Khởi chiếu: @phim.thoiGianKhoiChieu.ToShortDateString()</small>
                     </div>
-                    <div><a asp-controller="Phims" asp-action="Details" asp-route-id="@phim.iD"><button style="margin-top: 20px" class="btn btn-warning">Xem chi tiết</button></a></div>
-
+                    <div><a asp-controller="Phims" asp-action="Details" asp-route-id="@phim.id"><button style="margin-top: 20px" class="btn btn-warning">Xem chi tiết</button></a></div>
                 </div>
             </div>
         </div>

@@ -2,9 +2,9 @@
 {
     public class PhongChieu
     {
-        public int iD { get; set; }
+        public int id { get; set; }
         public string tenPhong { get; set; }
-
         public ICollection<XuatChieu> XuatChieus { get; set; }
+        public ICollection<Ghe>? Ghes { get; set; }
     }
 }

@@ -1,0 +1,19 @@
+﻿@model IEnumerable<DatVeXemPhim.Models.Ve>
+
+<h1 style="margin-top: 20px">Bước 1: Chọn thời gian</h1>
+<div>
+    <label for="timePicker">Chọn thời gian:</label>
+    <div><a asp-controller="Ves" asp-action="DatGhe" asp-route-id=""><button style="margin-top: 20px" class="btn btn-warning">11:30</button></a>
+        <a asp-controller="Ves" asp-action="DatGhe" asp-route-id=""><button style="margin-top: 20px" class="btn btn-warning">11:30</button></a>
+        <a asp-controller="Ves" asp-action="DatGhe" asp-route-id=""><button style="margin-top: 20px" class="btn btn-warning">11:30</button></a>
+        <a asp-controller="Ves" asp-action="DatGhe" asp-route-id=""><button style="margin-top: 20px" class="btn btn-warning">11:30</button></a>
+    </div>
+</div>
+
+<div>
+    <label for="datePicker">Chọn ngày:</label>
+    <input type="date" id="datePicker" name="datePicker">
+</div>
+    <div><a asp-controller="Ves" asp-action="DatGhe" asp-route-id=""><button style="margin-top: 20px" class="btn btn-warning">Tiếp theo</button></a></div>
+</h1>
+

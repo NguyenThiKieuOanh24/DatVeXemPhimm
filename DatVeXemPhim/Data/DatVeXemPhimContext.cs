@@ -14,26 +14,14 @@ namespace DatVeXemPhim.Data
         {
         }
 
-        public DbSet<DatVeXemPhim.Models.KhachHang> KhachHang { get; set; } = default!;
-        public DbSet<DatVeXemPhim.Models.Phim> Phim { get; set; } = default!;
-        public DbSet<DatVeXemPhim.Models.NhanVien> NhanVien { get; set; } = default!;
-        public DbSet<DatVeXemPhim.Models.Ve> Ve { get; set; } = default!;
-        public DbSet<DatVeXemPhim.Models.XuatChieu> XuatChieu { get; set; } = default!;
-        public DbSet<DatVeXemPhim.Models.Ghe> Ghe { get; set; } = default!;
-        public DbSet<DatVeXemPhim.Models.PhongChieu> PhongChieu { get; set; } = default!;
-        public DbSet<DatVeXemPhim.Models.TheLoaiPhim> TheLoaiPhim { get; set; } = default!;
+        public DbSet<DatVeXemPhim.Models.KhachHang> KhachHang { get; set; }
+        public DbSet<DatVeXemPhim.Models.Phim> Phim { get; set; }
+        public DbSet<DatVeXemPhim.Models.NhanVien> NhanVien { get; set; }
+        public DbSet<DatVeXemPhim.Models.Ve> Ve { get; set; }
+        public DbSet<DatVeXemPhim.Models.XuatChieu> XuatChieu { get; set; } 
+        public DbSet<DatVeXemPhim.Models.Ghe> Ghe { get; set; } 
+        public DbSet<DatVeXemPhim.Models.PhongChieu> PhongChieu { get; set; }
+        public DbSet<DatVeXemPhim.Models.TheLoaiPhim> TheLoaiPhim { get; set; } 
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<KhachHang>().ToTable("KhachHang");
-            modelBuilder.Entity<Phim>().ToTable("Phim");
-            modelBuilder.Entity<NhanVien>().ToTable("NhanVien");
-            modelBuilder.Entity<Ve>().ToTable("Ve");
-            modelBuilder.Entity<XuatChieu>().ToTable("XuatChieu");
-            modelBuilder.Entity<Ghe>().ToTable("Ghe");
-            modelBuilder.Entity<PhongChieu>().ToTable("PhongChieu");
-            modelBuilder.Entity<TheLoaiPhim>().ToTable("TheLoaiPhim");
-        }
-        
     }
 }

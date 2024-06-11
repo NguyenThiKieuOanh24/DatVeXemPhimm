@@ -61,5 +61,9 @@ namespace DatVeXemPhim.Controllers
             var a = 5;
             return View(await movies.ToListAsync());
         }
+        public IActionResult Ve()
+        {
+            return View();
+        }
     }
 }

@@ -34,7 +34,7 @@ namespace DatVeXemPhim.Controllers
             }
 
             var nhanVien = await _context.NhanVien
-                .FirstOrDefaultAsync(m => m.iD == id);
+                .FirstOrDefaultAsync(m => m.id == id);
             if (nhanVien == null)
             {
                 return NotFound();
@@ -88,7 +88,7 @@ namespace DatVeXemPhim.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("iD,hoTen,diaChi,soDienThoai,eMail,ngaySinh,gioiTinh,taiKhoan,matKhau")] NhanVien nhanVien)
         {
-            if (id != nhanVien.iD)
+            if (id != nhanVien.id)
             {
                 return NotFound();
             }
@@ -102,7 +102,7 @@ namespace DatVeXemPhim.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!NhanVienExists(nhanVien.iD))
+                    if (!NhanVienExists(nhanVien.id))
                     {
                         return NotFound();
                     }
@@ -125,7 +125,7 @@ namespace DatVeXemPhim.Controllers
             }
 
             var nhanVien = await _context.NhanVien
-                .FirstOrDefaultAsync(m => m.iD == id);
+                .FirstOrDefaultAsync(m => m.id == id);
             if (nhanVien == null)
             {
                 return NotFound();
@@ -151,7 +151,7 @@ namespace DatVeXemPhim.Controllers
 
         private bool NhanVienExists(int id)
         {
-            return _context.NhanVien.Any(e => e.iD == id);
+            return _context.NhanVien.Any(e => e.id == id);
         }
     }
 }

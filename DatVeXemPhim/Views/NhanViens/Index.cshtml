@@ -22,7 +22,7 @@
                 @Html.DisplayNameFor(model => model.soDienThoai)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.eMail)
+                @Html.DisplayNameFor(model => model.email)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.ngaySinh)
@@ -52,7 +52,7 @@
                 @Html.DisplayFor(modelItem => item.soDienThoai)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.eMail)
+                @Html.DisplayFor(modelItem => item.email)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ngaySinh)
@@ -67,9 +67,9 @@
                 @Html.DisplayFor(modelItem => item.matKhau)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.iD">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.iD">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.iD">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.id">Delete</a>
             </td>
         </tr>
 }

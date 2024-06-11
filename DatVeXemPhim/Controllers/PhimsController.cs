@@ -34,7 +34,7 @@ namespace DatVeXemPhim.Controllers
             }
 
             var phim = await _context.Phim
-                .FirstOrDefaultAsync(m => m.iD == id);
+                .FirstOrDefaultAsync(m => m.id == id);
             if (phim == null)
             {
                 return NotFound();
@@ -94,7 +94,7 @@ namespace DatVeXemPhim.Controllers
         public async Task<IActionResult> Edit(int id, [Bind("iD,tenPhim,daoDien,dienVien,theLoai,thoiGianKhoiChieu,thoiLuong,ngonNgu,posterPhim")] Phim phim)
 
         {
-            if (id != phim.iD)
+            if (id != phim.id)
             {
                 return NotFound();
             }
@@ -108,7 +108,7 @@ namespace DatVeXemPhim.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PhimExists(phim.iD))
+                    if (!PhimExists(phim.id))
                     {
                         return NotFound();
                     }
@@ -131,7 +131,7 @@ namespace DatVeXemPhim.Controllers
             }
 
             var phim = await _context.Phim
-                .FirstOrDefaultAsync(m => m.iD == id);
+                .FirstOrDefaultAsync(m => m.id == id);
             if (phim == null)
             {
                 return NotFound();
@@ -157,14 +157,14 @@ namespace DatVeXemPhim.Controllers
 
         private bool PhimExists(int id)
         {
-            return _context.Phim.Any(e => e.iD == id);
+            return _context.Phim.Any(e => e.id == id);
         }
         public async Task<IActionResult> NowShowing()
         {
             var NowShowing = await _context.XuatChieu
-                .Include(x => x.Phim)
+                .Include(x => x.fk_Phim)
                 .Where(x => x.ngayChieu <= DateTime.Now && x.gioKetThuc >= DateTime.Now)
-                .Select(x => x.Phim)
+                .Select(x => x.fk_Phim)
                 .Distinct()
                 .ToListAsync();
 

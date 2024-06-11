@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DatVeXemPhim.Migrations
 {
     [DbContext(typeof(DatVeXemPhimContext))]
-    [Migration("20240610142439_chien")]
-    partial class chien
+    [Migration("20240611052636_update2foreigkey")]
+    partial class update2foreigkey
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,11 +27,11 @@ namespace DatVeXemPhim.Migrations
 
             modelBuilder.Entity("DatVeXemPhim.Models.Ghe", b =>
                 {
-                    b.Property<int>("iD")
+                    b.Property<int>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("iD"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
 
                     b.Property<int>("maPhong")
                         .HasColumnType("int");
@@ -40,20 +40,22 @@ namespace DatVeXemPhim.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("iD");
+                    b.HasKey("id");
 
-                    b.ToTable("Ghe", (string)null);
+                    b.HasIndex("maPhong");
+
+                    b.ToTable("Ghe");
                 });
 
             modelBuilder.Entity("DatVeXemPhim.Models.KhachHang", b =>
                 {
-                    b.Property<int>("iD")
+                    b.Property<int>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("iD"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
 
-                    b.Property<string>("eMail")
+                    b.Property<string>("email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -65,31 +67,32 @@ namespace DatVeXemPhim.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("soDienThoai")
-                        .HasColumnType("int");
+                    b.Property<string>("soDienThoai")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("taiKhoan")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("iD");
+                    b.HasKey("id");
 
-                    b.ToTable("KhachHang", (string)null);
+                    b.ToTable("KhachHang");
                 });
 
             modelBuilder.Entity("DatVeXemPhim.Models.NhanVien", b =>
                 {
-                    b.Property<int>("iD")
+                    b.Property<int>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("iD"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
 
                     b.Property<string>("diaChi")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("eMail")
+                    b.Property<string>("email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -115,21 +118,18 @@ namespace DatVeXemPhim.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("iD");
+                    b.HasKey("id");
 
-                    b.ToTable("NhanVien", (string)null);
+                    b.ToTable("NhanVien");
                 });
 
             modelBuilder.Entity("DatVeXemPhim.Models.Phim", b =>
                 {
-                    b.Property<int>("iD")
+                    b.Property<int>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("iD"));
-
-                    b.Property<int>("TheLoaiPhimiD")
-                        .HasColumnType("int");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
 
                     b.Property<string>("daoDien")
                         .IsRequired()
@@ -138,6 +138,9 @@ namespace DatVeXemPhim.Migrations
                     b.Property<string>("dienVien")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("maLoaiPhim")
+                        .HasColumnType("int");
 
                     b.Property<string>("ngonNgu")
                         .IsRequired()
@@ -150,10 +153,6 @@ namespace DatVeXemPhim.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("theLoai")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("thoiGianKhoiChieu")
                         .HasColumnType("datetime2");
 
@@ -161,66 +160,54 @@ namespace DatVeXemPhim.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("iD");
+                    b.HasKey("id");
 
-                    b.HasIndex("TheLoaiPhimiD");
+                    b.HasIndex("maLoaiPhim");
 
-                    b.ToTable("Phim", (string)null);
+                    b.ToTable("Phim");
                 });
 
             modelBuilder.Entity("DatVeXemPhim.Models.PhongChieu", b =>
                 {
-                    b.Property<int>("iD")
+                    b.Property<int>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("iD"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
 
                     b.Property<string>("tenPhong")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("iD");
+                    b.HasKey("id");
 
-                    b.ToTable("PhongChieu", (string)null);
+                    b.ToTable("PhongChieu");
                 });
 
             modelBuilder.Entity("DatVeXemPhim.Models.TheLoaiPhim", b =>
                 {
-                    b.Property<int>("iD")
+                    b.Property<int>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("iD"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
 
                     b.Property<string>("tenLoaiPhim")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("iD");
+                    b.HasKey("id");
 
-                    b.ToTable("TheLoaiPhim", (string)null);
+                    b.ToTable("TheLoaiPhim");
                 });
 
             modelBuilder.Entity("DatVeXemPhim.Models.Ve", b =>
                 {
-                    b.Property<int>("iD")
+                    b.Property<int>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("iD"));
-
-                    b.Property<int>("GheiD")
-                        .HasColumnType("int");
-
-                    b.Property<int>("KhachHangiD")
-                        .HasColumnType("int");
-
-                    b.Property<int>("NhanVieniD")
-                        .HasColumnType("int");
-
-                    b.Property<int>("XuatChieuiD")
-                        .HasColumnType("int");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
 
                     b.Property<int>("maGhe")
                         .HasColumnType("int");
@@ -240,32 +227,26 @@ namespace DatVeXemPhim.Migrations
                     b.Property<int>("tongTien")
                         .HasColumnType("int");
 
-                    b.HasKey("iD");
+                    b.HasKey("id");
 
-                    b.HasIndex("GheiD");
+                    b.HasIndex("maGhe");
 
-                    b.HasIndex("KhachHangiD");
+                    b.HasIndex("maKhachHang");
 
-                    b.HasIndex("NhanVieniD");
+                    b.HasIndex("maNhanVien");
 
-                    b.HasIndex("XuatChieuiD");
+                    b.HasIndex("maXuatChieu");
 
-                    b.ToTable("Ve", (string)null);
+                    b.ToTable("Ve");
                 });
 
             modelBuilder.Entity("DatVeXemPhim.Models.XuatChieu", b =>
                 {
-                    b.Property<int>("iD")
+                    b.Property<int>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("iD"));
-
-                    b.Property<int>("PhimiD")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("PhongChieuiD")
-                        .HasColumnType("int");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
 
                     b.Property<DateTime>("gioBatDau")
                         .HasColumnType("datetime2");
@@ -282,74 +263,89 @@ namespace DatVeXemPhim.Migrations
                     b.Property<DateTime>("ngayChieu")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("iD");
+                    b.HasKey("id");
 
-                    b.HasIndex("PhimiD");
+                    b.HasIndex("maPhim");
 
-                    b.HasIndex("PhongChieuiD");
+                    b.HasIndex("maPhong");
 
-                    b.ToTable("XuatChieu", (string)null);
+                    b.ToTable("XuatChieu");
+                });
+
+            modelBuilder.Entity("DatVeXemPhim.Models.Ghe", b =>
+                {
+                    b.HasOne("DatVeXemPhim.Models.PhongChieu", "fk_PhongChieu")
+                        .WithMany("Ghes")
+                        .HasForeignKey("maPhong")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("fk_PhongChieu");
                 });
 
             modelBuilder.Entity("DatVeXemPhim.Models.Phim", b =>
                 {
-                    b.HasOne("DatVeXemPhim.Models.TheLoaiPhim", "TheLoaiPhim")
+                    b.HasOne("DatVeXemPhim.Models.TheLoaiPhim", "fk_TheLoaiPhim")
                         .WithMany("Phims")
-                        .HasForeignKey("TheLoaiPhimiD")
+                        .HasForeignKey("maLoaiPhim")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("TheLoaiPhim");
+                    b.Navigation("fk_TheLoaiPhim");
                 });
 
             modelBuilder.Entity("DatVeXemPhim.Models.Ve", b =>
                 {
-                    b.HasOne("DatVeXemPhim.Models.Ghe", "Ghe")
+                    b.HasOne("DatVeXemPhim.Models.Ghe", "fk_MaGhe")
                         .WithMany("Ves")
-                        .HasForeignKey("GheiD")
+                        .HasForeignKey("maGhe")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DatVeXemPhim.Models.KhachHang", "KhachHang")
+                    b.HasOne("DatVeXemPhim.Models.KhachHang", "fk_KhachHang")
                         .WithMany("Ves")
-                        .HasForeignKey("KhachHangiD")
+                        .HasForeignKey("maKhachHang")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DatVeXemPhim.Models.NhanVien", "NhanVien")
+                    b.HasOne("DatVeXemPhim.Models.NhanVien", "fk_NhanVien")
                         .WithMany("Ves")
-                        .HasForeignKey("NhanVieniD")
+                        .HasForeignKey("maNhanVien")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DatVeXemPhim.Models.XuatChieu", "XuatChieu")
+                    b.HasOne("DatVeXemPhim.Models.XuatChieu", "fk_XuatChieu")
                         .WithMany("Ves")
-                        .HasForeignKey("XuatChieuiD")
+                        .HasForeignKey("maXuatChieu")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Ghe");
+                    b.Navigation("fk_KhachHang");
 
-                    b.Navigation("KhachHang");
+                    b.Navigation("fk_MaGhe");
 
-                    b.Navigation("NhanVien");
+                    b.Navigation("fk_NhanVien");
 
-                    b.Navigation("XuatChieu");
+                    b.Navigation("fk_XuatChieu");
                 });
 
             modelBuilder.Entity("DatVeXemPhim.Models.XuatChieu", b =>
                 {
-                    b.HasOne("DatVeXemPhim.Models.Phim", "Phim")
-                        .WithMany()
-                        .HasForeignKey("PhimiD")
+                    b.HasOne("DatVeXemPhim.Models.Phim", "fk_Phim")
+                        .WithMany("XuatChieus")
+                        .HasForeignKey("maPhim")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DatVeXemPhim.Models.PhongChieu", null)
+                    b.HasOne("DatVeXemPhim.Models.PhongChieu", "fk_PhongChieu")
                         .WithMany("XuatChieus")
-                        .HasForeignKey("PhongChieuiD");
+                        .HasForeignKey("maPhong")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("Phim");
+                    b.Navigation("fk_Phim");
+
+                    b.Navigation("fk_PhongChieu");
                 });
 
             modelBuilder.Entity("DatVeXemPhim.Models.Ghe", b =>
@@ -367,8 +363,15 @@ namespace DatVeXemPhim.Migrations
                     b.Navigation("Ves");
                 });
 
+            modelBuilder.Entity("DatVeXemPhim.Models.Phim", b =>
+                {
+                    b.Navigation("XuatChieus");
+                });
+
             modelBuilder.Entity("DatVeXemPhim.Models.PhongChieu", b =>
                 {
+                    b.Navigation("Ghes");
+
                     b.Navigation("XuatChieus");
                 });
 

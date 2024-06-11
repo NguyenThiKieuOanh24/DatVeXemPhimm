@@ -10,22 +10,22 @@ using DatVeXemPhim.Models;
 
 namespace DatVeXemPhim.Controllers
 {
-    public class KhachHangsController : Controller
+    public class VesController : Controller
     {
         private readonly DatVeXemPhimContext _context;
 
-        public KhachHangsController(DatVeXemPhimContext context)
+        public VesController(DatVeXemPhimContext context)
         {
             _context = context;
         }
 
-        // GET: KhachHangs
+        // GET: Ves
         public async Task<IActionResult> Index()
         {
-            return View(await _context.KhachHang.ToListAsync());
+            return View(await _context.Ve.ToListAsync());
         }
 
-        // GET: KhachHangs/Details/5
+        // GET: Ves/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +33,39 @@ namespace DatVeXemPhim.Controllers
                 return NotFound();
             }
 
-            var khachHang = await _context.KhachHang
+            var ve = await _context.Ve
                 .FirstOrDefaultAsync(m => m.id == id);
-            if (khachHang == null)
+            if (ve == null)
             {
                 return NotFound();
             }
 
-            return View(khachHang);
+            return View(ve);
         }
 
-        // GET: KhachHangs/Create
+        // GET: Ves/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: KhachHangs/Create
+        // POST: Ves/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("iD,hoTen,soDienThoai,eMail,taiKhoan,matKhau")] KhachHang khachHang)
+        public async Task<IActionResult> Create([Bind("iD,maXuatChieu,maKhachHang,maNhanVien,maGhe,ngayBanVe,tongTien")] Ve ve)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(khachHang);
+                _context.Add(ve);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(khachHang);
+            return View(ve);
         }
 
-        // GET: KhachHangs/Edit/5
+        // GET: Ves/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +73,22 @@ namespace DatVeXemPhim.Controllers
                 return NotFound();
             }
 
-            var khachHang = await _context.KhachHang.FindAsync(id);
-            if (khachHang == null)
+            var ve = await _context.Ve.FindAsync(id);
+            if (ve == null)
             {
                 return NotFound();
             }
-            return View(khachHang);
+            return View(ve);
         }
 
-        // POST: KhachHangs/Edit/5
+        // POST: Ves/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("iD,hoTen,soDienThoai,eMail,taiKhoan,matKhau")] KhachHang khachHang)
+        public async Task<IActionResult> Edit(int id, [Bind("iD,maXuatChieu,maKhachHang,maNhanVien,maGhe,ngayBanVe,tongTien")] Ve ve)
         {
-            if (id != khachHang.id)
+            if (id != ve.id)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace DatVeXemPhim.Controllers
             {
                 try
                 {
-                    _context.Update(khachHang);
+                    _context.Update(ve);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!KhachHangExists(khachHang.id))
+                    if (!VeExists(ve.id))
                     {
                         return NotFound();
                     }
@@ -113,10 +113,10 @@ namespace DatVeXemPhim.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(khachHang);
+            return View(ve);
         }
 
-        // GET: KhachHangs/Delete/5
+        // GET: Ves/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,34 +124,47 @@ namespace DatVeXemPhim.Controllers
                 return NotFound();
             }
 
-            var khachHang = await _context.KhachHang
+            var ve = await _context.Ve
                 .FirstOrDefaultAsync(m => m.id == id);
-            if (khachHang == null)
+            if (ve == null)
             {
                 return NotFound();
             }
 
-            return View(khachHang);
+            return View(ve);
         }
 
-        // POST: KhachHangs/Delete/5
+        // POST: Ves/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var khachHang = await _context.KhachHang.FindAsync(id);
-            if (khachHang != null)
+            var ve = await _context.Ve.FindAsync(id);
+            if (ve != null)
             {
-                _context.KhachHang.Remove(khachHang);
+                _context.Ve.Remove(ve);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool KhachHangExists(int id)
+        private bool VeExists(int id)
         {
-            return _context.KhachHang.Any(e => e.id == id);
+            return _context.Ve.Any(e => e.id == id);
+        }
+        public IActionResult ThoiGian()
+        {
+            return View();
+        }
+        public IActionResult DatGhe()
+        {
+            return View();
+        }
+
+        public IActionResult DatVe()
+        {
+            return View();
         }
     }
 }
