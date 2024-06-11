@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DatVeXemPhim.Models.TheLoaiPhim>
+﻿@model IEnumerable<DatVeXemPhim.Models.PhongChieu>
 @{
     ViewData["Title"] = "Index";
 }
@@ -12,7 +12,7 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.tenLoaiPhim)
+                @Html.DisplayNameFor(model => model.tenPhong)
             </th>
             <th></th>
         </tr>
@@ -22,18 +22,12 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.tenLoaiPhim)
+                    @Html.DisplayFor(modelItem => item.tenPhong)
                 </td>
                 <td>
-<<<<<<< HEAD
-                    <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.id">Delete</a>
-=======
                     <a asp-action="Edit" asp-route-id="@item.iD">Edit</a> |
                     <a asp-action="Details" asp-route-id="@item.iD">Details</a> |
                     <a asp-action="Delete" asp-route-id="@item.iD">Delete</a>
->>>>>>> 6d85becf45debd6a7bb0ef55dd8d8fba8adfbd46
                 </td>
             </tr>
         }

@@ -4,8 +4,12 @@ namespace DatVeXemPhim.Models
 {
     public class Phim
     {
+<<<<<<< HEAD
 
         public int id { get; set; }
+=======
+        public int iD { get; set; }
+>>>>>>> 6d85becf45debd6a7bb0ef55dd8d8fba8adfbd46
         public string posterPhim { get; set; }
         public string tenPhim { get; set; }
         public string daoDien { get; set; }

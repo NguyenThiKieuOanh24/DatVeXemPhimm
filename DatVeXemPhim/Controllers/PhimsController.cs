@@ -55,7 +55,11 @@ namespace DatVeXemPhim.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
      
+<<<<<<< HEAD
         public async Task<IActionResult> Create([Bind("id, posterPhim, tenPhim, daoDien, dienVien, theLoaiPhim, thoiGianKhoiChieu, thoiLuong, ngonNgu")] Phim phim)
+=======
+        public async Task<IActionResult> Create([Bind("iD,tenPhim,daoDien,dienVien,theLoai,thoiGianKhoiChieu,thoiLuong,ngonNgu")] Phim phim)
+>>>>>>> 6d85becf45debd6a7bb0ef55dd8d8fba8adfbd46
 
         {
             if (ModelState.IsValid)
@@ -91,7 +95,11 @@ namespace DatVeXemPhim.Controllers
 
 
 
+<<<<<<< HEAD
         public async Task<IActionResult> Edit(int id, [Bind("id, posterPhim, tenPhim, daoDien, dienVien, theLoaiPhim, thoiGianKhoiChieu, thoiLuong, ngonNgu")] Phim phim)
+=======
+        public async Task<IActionResult> Edit(int id, [Bind("iD,tenPhim,daoDien,dienVien,theLoai,thoiGianKhoiChieu,thoiLuong,ngonNgu")] Phim phim)
+>>>>>>> 6d85becf45debd6a7bb0ef55dd8d8fba8adfbd46
 
         {
             if (id != phim.id)

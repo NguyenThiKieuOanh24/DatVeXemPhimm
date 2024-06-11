@@ -34,7 +34,11 @@ namespace DatVeXemPhim.Controllers
             }
 
             var theLoaiPhim = await _context.TheLoaiPhim
+<<<<<<< HEAD
                 .FirstOrDefaultAsync(m => m.id == id);
+=======
+                .FirstOrDefaultAsync(m => m.iD == id);
+>>>>>>> 6d85becf45debd6a7bb0ef55dd8d8fba8adfbd46
             if (theLoaiPhim == null)
             {
                 return NotFound();
@@ -55,7 +59,11 @@ namespace DatVeXemPhim.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
 
+<<<<<<< HEAD
         public async Task<IActionResult> Create([Bind("id, tenLoaiPhim")] TheLoaiPhim theLoaiPhim)
+=======
+        public async Task<IActionResult> Create([Bind("iD, tenLoaiPhim")] TheLoaiPhim theLoaiPhim)
+>>>>>>> 6d85becf45debd6a7bb0ef55dd8d8fba8adfbd46
 
         {
             if (ModelState.IsValid)
@@ -91,10 +99,17 @@ namespace DatVeXemPhim.Controllers
 
 
 
+<<<<<<< HEAD
         public async Task<IActionResult> Edit(int id, [Bind("id, tenLoaiPhim")] TheLoaiPhim theLoaiPhim)
 
         {
             if (id != theLoaiPhim.id)
+=======
+        public async Task<IActionResult> Edit(int id, [Bind("iD, tenLoaiPhim")] TheLoaiPhim theLoaiPhim)
+
+        {
+            if (id != theLoaiPhim.iD)
+>>>>>>> 6d85becf45debd6a7bb0ef55dd8d8fba8adfbd46
             {
                 return NotFound();
             }
@@ -108,7 +123,11 @@ namespace DatVeXemPhim.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
+<<<<<<< HEAD
                     if (!TheLoaiPhimExists(theLoaiPhim.id))
+=======
+                    if (!TheLoaiPhimExists(theLoaiPhim.iD))
+>>>>>>> 6d85becf45debd6a7bb0ef55dd8d8fba8adfbd46
                     {
                         return NotFound();
                     }
@@ -131,7 +150,11 @@ namespace DatVeXemPhim.Controllers
             }
 
             var theLoaiPhim = await _context.TheLoaiPhim
+<<<<<<< HEAD
                 .FirstOrDefaultAsync(m => m.id == id);
+=======
+                .FirstOrDefaultAsync(m => m.iD == id);
+>>>>>>> 6d85becf45debd6a7bb0ef55dd8d8fba8adfbd46
             if (theLoaiPhim == null)
             {
                 return NotFound();
@@ -157,7 +180,11 @@ namespace DatVeXemPhim.Controllers
 
         private bool TheLoaiPhimExists(int id)
         {
+<<<<<<< HEAD
             return _context.TheLoaiPhim.Any(e => e.id == id);
+=======
+            return _context.TheLoaiPhim.Any(e => e.iD == id);
+>>>>>>> 6d85becf45debd6a7bb0ef55dd8d8fba8adfbd46
         }
     }
 }

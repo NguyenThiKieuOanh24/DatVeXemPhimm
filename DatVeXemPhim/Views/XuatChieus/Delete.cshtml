@@ -1,25 +1,21 @@
-﻿@model DatVeXemPhim.Models.TheLoaiPhim
+﻿@model DatVeXemPhim.Models.PhongChieu
 
 @{
     ViewData["Title"] = "Delete";
 }
 
-<h1>Xóa</h1>
+<h1>Delete</h1>
 
 <h3>Bạn Có Chắc Muốn Xóa Không?</h3>
 <div>
-    <h4>Thể Loại Phim</h4>
+    <h4>Phòng Chiếu</h4>
     <hr />
     <dl class="row">
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.tenLoaiPhim)
+            @Html.DisplayFor(model => model.tenPhong)
         </dd>
         <form asp-action="Delete">
-<<<<<<< HEAD
-            <input type="hidden" asp-for="id" />
-=======
             <input type="hidden" asp-for="iD" />
->>>>>>> 6d85becf45debd6a7bb0ef55dd8d8fba8adfbd46
             <input type="submit" value="Delete" class="btn btn-danger" /> |
             <a asp-action="Index">Back to List</a>
         </form>
