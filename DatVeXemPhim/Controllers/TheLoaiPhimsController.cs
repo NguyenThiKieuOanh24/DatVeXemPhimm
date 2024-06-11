@@ -34,7 +34,7 @@ namespace DatVeXemPhim.Controllers
             }
 
             var theLoaiPhim = await _context.TheLoaiPhim
-                .FirstOrDefaultAsync(m => m.iD == id);
+                .FirstOrDefaultAsync(m => m.id == id);
             if (theLoaiPhim == null)
             {
                 return NotFound();
@@ -55,7 +55,7 @@ namespace DatVeXemPhim.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
 
-        public async Task<IActionResult> Create([Bind("iD, tenLoaiPhim")] TheLoaiPhim theLoaiPhim)
+        public async Task<IActionResult> Create([Bind("id, tenLoaiPhim")] TheLoaiPhim theLoaiPhim)
 
         {
             if (ModelState.IsValid)
@@ -91,10 +91,10 @@ namespace DatVeXemPhim.Controllers
 
 
 
-        public async Task<IActionResult> Edit(int id, [Bind("iD, tenLoaiPhim")] TheLoaiPhim theLoaiPhim)
+        public async Task<IActionResult> Edit(int id, [Bind("id, tenLoaiPhim")] TheLoaiPhim theLoaiPhim)
 
         {
-            if (id != theLoaiPhim.iD)
+            if (id != theLoaiPhim.id)
             {
                 return NotFound();
             }
@@ -108,7 +108,7 @@ namespace DatVeXemPhim.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!TheLoaiPhimExists(theLoaiPhim.iD))
+                    if (!TheLoaiPhimExists(theLoaiPhim.id))
                     {
                         return NotFound();
                     }
@@ -131,7 +131,7 @@ namespace DatVeXemPhim.Controllers
             }
 
             var theLoaiPhim = await _context.TheLoaiPhim
-                .FirstOrDefaultAsync(m => m.iD == id);
+                .FirstOrDefaultAsync(m => m.id == id);
             if (theLoaiPhim == null)
             {
                 return NotFound();
@@ -157,7 +157,7 @@ namespace DatVeXemPhim.Controllers
 
         private bool TheLoaiPhimExists(int id)
         {
-            return _context.TheLoaiPhim.Any(e => e.iD == id);
+            return _context.TheLoaiPhim.Any(e => e.id == id);
         }
     }
 }

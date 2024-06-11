@@ -34,7 +34,7 @@ namespace DatVeXemPhim.Controllers
             }
 
             var phongChieu = await _context.PhongChieu
-                .FirstOrDefaultAsync(m => m.iD == id);
+                .FirstOrDefaultAsync(m => m.id == id);
             if (phongChieu == null)
             {
                 return NotFound();
@@ -55,7 +55,7 @@ namespace DatVeXemPhim.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
 
-        public async Task<IActionResult> Create([Bind("iD, tenPhong")] PhongChieu phongChieu)
+        public async Task<IActionResult> Create([Bind("id, tenPhong")] PhongChieu phongChieu)
 
         {
             if (ModelState.IsValid)
@@ -91,10 +91,10 @@ namespace DatVeXemPhim.Controllers
 
 
 
-        public async Task<IActionResult> Edit(int id, [Bind("iD, tenPhong")] PhongChieu phongChieu)
+        public async Task<IActionResult> Edit(int id, [Bind("id, tenPhong")] PhongChieu phongChieu)
 
         {
-            if (id != phongChieu.iD)
+            if (id != phongChieu.id)
             {
                 return NotFound();
             }
@@ -108,7 +108,7 @@ namespace DatVeXemPhim.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PhongChieuExists(phongChieu.iD))
+                    if (!PhongChieuExists(phongChieu.id))
                     {
                         return NotFound();
                     }
@@ -131,7 +131,7 @@ namespace DatVeXemPhim.Controllers
             }
 
             var phongChieu = await _context.PhongChieu
-                .FirstOrDefaultAsync(m => m.iD == id);
+                .FirstOrDefaultAsync(m => m.id == id);
             if (phongChieu == null)
             {
                 return NotFound();
@@ -157,7 +157,7 @@ namespace DatVeXemPhim.Controllers
 
         private bool PhongChieuExists(int id)
         {
-            return _context.PhongChieu.Any(e => e.iD == id);
+            return _context.TheLoaiPhim.Any(e => e.id == id);
         }
     }
 }

@@ -1,4 +1,3 @@
-@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -9,44 +8,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - DatVeXemPhim</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="shortcut icon" href="~/lib/favicon.ico" />
+    <link rel="stylesheet" href="~/lib/favicon.ico" />
     <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/DatVeXemPhim.styles.css" asp-append-version="true" />
 </head>
 <body>
     <header id="header" class="d-flex align-items-center">
         <div class="container d-flex align-items-center justify-content-between">
-           
-            <h1 class="logo"><a asp-controller="Home" asp-action="Index">Coly Cinema<span></span></a></h1>
-             
+            <h1 class="logo">Trang Quản Lý</h1>
+
             <nav id="navbar" class="navbar">
                 <ul>
-                    <li><a class="nav-link scrollto active" asp-controller="Home" asp-action="Index">Trang chủ</a></li>
-                    <li class="dropdown">
-                        <a href="#"><span>Danh sách Phim</span> <i class="bi bi-chevron-down"></i></a>
-                        <ul>
-                            <li class="dropdown">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Phims" asp-action="NowShowing">Phim đang chiếu</a>
-                            </li>
-                            <li>
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Phims" asp-action="UpComing">Phim sắp chiếu</a>
-                            </li>    
-                        </ul>
-                    </li>
-                    <li><a class="nav-link scrollto" href="#contact">Tin Tức</a></li>
+                    <li><a class="nav-link scrollto" asp-area="" asp-controller="Phims" asp-action="Index">Quản Lí Phim</a></li>
+                    <li><a class="nav-link scrollto" asp-area="" asp-controller="TheLoaiPhims" asp-action="Index">Quản Lí Thể Loại</a></li>
+                    <li><a class="nav-link scrollto" asp-area="" asp-controller="PhongChieus" asp-action="Index">Quản Lí Phòng Chiếu</a></li>
+                    <li><a class="nav-link scrollto" asp-area="" asp-controller="Ghes" asp-action="Index">Quản Lí Phòng Ghế</a></li>
+                    <li><a class="nav-link scrollto" asp-area="" asp-controller="NhanViens" asp-action="Index">Quản Lí Nhân Viên</a></li>
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav><!-- .navbar -->
-            <!-- Search Bar -->
-            <form class="d-flex search-bar" asp-controller="Home" asp-action="Search" method="get">
-                <input class="form-control me-2" type="search" placeholder="Tìm kiếm phim..." aria-label="Search" name="SearchString">
-                <input class="btn btn-outline-success" type="submit" value="Tìm kiếm"/>
-            </form>
-
-            <nav id="user-navbar" class="navbar">
+            <nav id="navbar" class="navbar">
                 <ul>
-                    <li><a class="nav-link scrollto" href="#login">Đăng nhập</a></li>
-                    <li><a class="nav-link scrollto" href="#register">Đăng ký</a></li>
+                    <li><a class="nav-link scrollto active" href="#hero">Đăng nhập</a></li>
+                    <li><a class="nav-link scrollto active" href="#hero">Đăng ký</a></li>
                 </ul>
             </nav>
         </div>
@@ -56,53 +40,10 @@
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+        @await RenderSectionAsync("Scripts", required: false)
     </div>
-
-    <footer id="footer">
-        <div class="footer-top">
-            <div class="container">
-                <h3>Coly Cinema<span></span></h3>
-                <div class="row">
-                    <div class="col-lg-3 col-md-6 footer-contact">
-                        <h4>Địa Chỉ</h4>
-                        <p>
-                            170 An Dương Vương <br>
-                            Nguyễn Văn Cừ, TP.Quy Nhơn<br>
-                            Bình Định <br><br>
-                        </p>
-                    </div>
-                    <div class="col-lg-3 col-md-6 footer-links">
-                        <h4>Chăm Sóc Khách Hàng</h4>
-                            <strong>Phone:</strong> +1 5589 55488 55<br>
-                            <strong>Email:</strong> coly123@example.com<br> 
-                    </div>
-                    <div class="col-lg-3 col-md-6 footer-links">
-                        <h4>Danh sách thành viên</h4>
-                        <ul>
-                            <li><i class="bx bx-chevron-right"></i> Trần Đình Chiến - 4451050025</li>
-                            <li><i class="bx bx-chevron-right"></i> Lê Anh Đức - 4451050080</li>
-                            <li><i class="bx bx-chevron-right"></i> Trần Phúc Hưng - 4451050147</li>
-                            <li><i class="bx bx-chevron-right"></i> Nguyễn Phi Hùng - 4451050140</li>
-                            <li><i class="bx bx-chevron-right"></i> Trần Đặng Lâm - 4451050172</li>
-                            <li><i class="bx bx-chevron-right"></i> Nguyễn Thị Kiều Oanh - 4451050252</li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-3 col-md-6 footer-links">
-
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="container py-4">
-            <div class="copyright">
-                &copy; Copyright <strong><span>Coly Cenima</span></strong>. All Rights Reserved
-            </div>
-        </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

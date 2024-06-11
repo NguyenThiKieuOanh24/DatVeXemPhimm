@@ -54,7 +54,7 @@ namespace DatVeXemPhim.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("iD,hoTen,diaChi,soDienThoai,eMail,ngaySinh,gioiTinh,taiKhoan,matKhau")] NhanVien nhanVien)
+        public async Task<IActionResult> Create([Bind("id, hoTen, diaChi, soDienThoai, email, ngaySinh, gioiTinh, taiKhoan, matKhau")] NhanVien nhanVien)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace DatVeXemPhim.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("iD,hoTen,diaChi,soDienThoai,eMail,ngaySinh,gioiTinh,taiKhoan,matKhau")] NhanVien nhanVien)
+        public async Task<IActionResult> Edit(int id, [Bind("id, hoTen, diaChi, soDienThoai, email, ngaySinh, gioiTinh, taiKhoan, matKhau")] NhanVien nhanVien)
         {
             if (id != nhanVien.id)
             {

@@ -34,7 +34,7 @@ namespace DatVeXemPhim.Controllers
             }
 
             var ghe = await _context.Ghe
-                .FirstOrDefaultAsync(m => m.iD == id);
+                .FirstOrDefaultAsync(m => m.id == id);
             if (ghe == null)
             {
                 return NotFound();
@@ -55,7 +55,7 @@ namespace DatVeXemPhim.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
 
-        public async Task<IActionResult> Create([Bind("iD, maPhong, tenGhe")] Ghe ghe)
+        public async Task<IActionResult> Create([Bind("id, tenGhe")] Ghe ghe)
 
         {
             if (ModelState.IsValid)
@@ -91,10 +91,10 @@ namespace DatVeXemPhim.Controllers
 
 
 
-        public async Task<IActionResult> Edit(int id, [Bind("iD, maPhong, tenghe")] Ghe ghe)
+        public async Task<IActionResult> Edit(int id, [Bind("id, tenGhe")] Ghe ghe)
 
         {
-            if (id != ghe.iD)
+            if (id != ghe.id)
             {
                 return NotFound();
             }
@@ -108,7 +108,7 @@ namespace DatVeXemPhim.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!GheExists(ghe.iD))
+                    if (!GheExists(ghe.id))
                     {
                         return NotFound();
                     }
@@ -131,7 +131,7 @@ namespace DatVeXemPhim.Controllers
             }
 
             var ghe = await _context.Ghe
-                .FirstOrDefaultAsync(m => m.iD == id);
+                .FirstOrDefaultAsync(m => m.id == id);
             if (ghe == null)
             {
                 return NotFound();
@@ -157,7 +157,7 @@ namespace DatVeXemPhim.Controllers
 
         private bool GheExists(int id)
         {
-            return _context.Ghe.Any(e => e.iD == id);
+            return _context.Ghe.Any(e => e.id == id);
         }
     }
 }
