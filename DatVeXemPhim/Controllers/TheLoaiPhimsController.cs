@@ -10,22 +10,22 @@ using DatVeXemPhim.Models;
 
 namespace DatVeXemPhim.Controllers
 {
-    public class PhimsController : Controller
+    public class TheLoaiPhimsController : Controller
     {
         private readonly DatVeXemPhimContext _context;
 
-        public PhimsController(DatVeXemPhimContext context)
+        public TheLoaiPhimsController(DatVeXemPhimContext context)
         {
             _context = context;
         }
 
-        // GET: Phims
+        // GET: QuanLyGhes
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Phim.ToListAsync());
+            return View(await _context.TheLoaiPhim.ToListAsync());
         }
 
-        // GET: Phims/Details/5
+        // GET: QuanLyGhes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,41 +33,41 @@ namespace DatVeXemPhim.Controllers
                 return NotFound();
             }
 
-            var phim = await _context.Phim
-                .FirstOrDefaultAsync(m => m.id == id);
-            if (phim == null)
+            var theLoaiPhim = await _context.TheLoaiPhim
+                .FirstOrDefaultAsync(m => m.iD == id);
+            if (theLoaiPhim == null)
             {
                 return NotFound();
             }
 
-            return View(phim);
+            return View(theLoaiPhim);
         }
 
-        // GET: Phims/Create
+        // GET: QuanLyGhes/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Phims/Create
+        // POST: QuanLyGhes/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-     
-        public async Task<IActionResult> Create([Bind("iD,tenPhim,daoDien,dienVien,theLoai,thoiGianKhoiChieu,thoiLuong,ngonNgu")] Phim phim)
+
+        public async Task<IActionResult> Create([Bind("iD, tenLoaiPhim")] TheLoaiPhim theLoaiPhim)
 
         {
             if (ModelState.IsValid)
             {
-                _context.Add(phim);
+                _context.Add(theLoaiPhim);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(phim);
+            return View(theLoaiPhim);
         }
 
-        // GET: Phims/Edit/5
+        // GET: QuanLyGhes/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -75,15 +75,15 @@ namespace DatVeXemPhim.Controllers
                 return NotFound();
             }
 
-            var phim = await _context.Phim.FindAsync(id);
-            if (phim == null)
+            var theLoaiPhim = await _context.TheLoaiPhim.FindAsync(id);
+            if (theLoaiPhim == null)
             {
                 return NotFound();
             }
-            return View(phim);
+            return View(theLoaiPhim);
         }
 
-        // POST: Phims/Edit/5
+        // POST: QuanLyGhes/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -91,10 +91,10 @@ namespace DatVeXemPhim.Controllers
 
 
 
-        public async Task<IActionResult> Edit(int id, [Bind("iD,tenPhim,daoDien,dienVien,theLoai,thoiGianKhoiChieu,thoiLuong,ngonNgu")] Phim phim)
+        public async Task<IActionResult> Edit(int id, [Bind("iD, tenLoaiPhim")] TheLoaiPhim theLoaiPhim)
 
         {
-            if (id != phim.id)
+            if (id != theLoaiPhim.iD)
             {
                 return NotFound();
             }
@@ -103,12 +103,12 @@ namespace DatVeXemPhim.Controllers
             {
                 try
                 {
-                    _context.Update(phim);
+                    _context.Update(theLoaiPhim);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PhimExists(phim.id))
+                    if (!TheLoaiPhimExists(theLoaiPhim.iD))
                     {
                         return NotFound();
                     }
@@ -119,10 +119,10 @@ namespace DatVeXemPhim.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(phim);
+            return View(theLoaiPhim);
         }
 
-        // GET: Phims/Delete/5
+        // GET: QuanLyGhes/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -130,56 +130,34 @@ namespace DatVeXemPhim.Controllers
                 return NotFound();
             }
 
-            var phim = await _context.Phim
-                .FirstOrDefaultAsync(m => m.id == id);
-            if (phim == null)
+            var theLoaiPhim = await _context.TheLoaiPhim
+                .FirstOrDefaultAsync(m => m.iD == id);
+            if (theLoaiPhim == null)
             {
                 return NotFound();
             }
 
-            return View(phim);
+            return View(theLoaiPhim);
         }
 
-        // POST: Phims/Delete/5
+        // POST: QuanLyGhes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var phim = await _context.Phim.FindAsync(id);
-            if (phim != null)
+            var theLoaiPhim = await _context.TheLoaiPhim.FindAsync(id);
+            if (theLoaiPhim != null)
             {
-                _context.Phim.Remove(phim);
+                _context.TheLoaiPhim.Remove(theLoaiPhim);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool PhimExists(int id)
+        private bool TheLoaiPhimExists(int id)
         {
-            return _context.Phim.Any(e => e.id == id);
+            return _context.TheLoaiPhim.Any(e => e.iD == id);
         }
-        public async Task<IActionResult> NowShowing()
-        {
-            var NowShowing = await _context.XuatChieu
-                .Include(x => x.fk_Phim)
-                .Where(x => x.ngayChieu <= DateTime.Now && x.gioKetThuc >= DateTime.Now)
-                .Select(x => x.fk_Phim)
-                .Distinct()
-                .ToListAsync();
-
-            return View(NowShowing);
-        }
-
-        // GET: Movies/Upcoming
-        public async Task<IActionResult> Upcoming()
-        {
-            var UpComing = await _context.Phim
-                .Where(p => p.thoiGianKhoiChieu > DateTime.Now)
-                .ToListAsync();
-
-            return View(UpComing);
-        }
-
     }
 }
