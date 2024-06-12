@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DatVeXemPhim.Data;
 using DatVeXemPhim.Models;
+using ClosedXML.Excel;
+using System.Linq;
+
 
 namespace DatVeXemPhim.Controllers
 {
@@ -234,5 +237,42 @@ namespace DatVeXemPhim.Controllers
             return View(veList);
         }
 
+        [Route("QuanLiKhachHangs/ExportToExcel")]
+        public async Task<IActionResult> ExportToExcel()
+        {
+            // Lấy danh sách khách hàng từ database
+            var khachHangs = await _context.KhachHang.ToListAsync();
+
+            // Tạo file Excel
+            var workbook = new XLWorkbook();
+            var worksheet = workbook.Worksheets.Add("KhachHangs");
+
+            // Thêm tiêu đề cột
+            var columns = typeof(KhachHang).GetProperties().Select(p => p.Name).ToList();
+            for (int i = 0; i < columns.Count; i++)
+            {
+                worksheet.Cell(1, i + 1).Value = columns[i];
+            }
+
+            // Thêm dữ liệu vào worksheet từ dòng thứ 2
+            for (int i = 0; i < khachHangs.Count; i++)
+            {
+                var khachHang = khachHangs[i];
+                for (int j = 0; j < columns.Count; j++)
+                {
+                    var value = typeof(KhachHang).GetProperty(columns[j]).GetValue(khachHang);
+                    worksheet.Cell(i + 2, j + 1).Value = value != null ? value.ToString() : ""; // Chuyển đổi giá trị sang chuỗi
+                }
+            }
+
+            // Lưu workbook vào memory stream
+            var stream = new MemoryStream();
+            workbook.SaveAs(stream);
+            stream.Position = 0;
+
+            // Trả về file Excel
+            string excelName = $"KhachHangs_{DateTime.Now.ToString("HH-mm-ss dd-MM-yyyy")}.xlsx";
+            return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", excelName);
+        }
     }
 }
