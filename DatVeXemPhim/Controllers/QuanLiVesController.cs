@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using DatVeXemPhim.Data;
 using DatVeXemPhim.Models;
 using Microsoft.Data.SqlClient;
+using ClosedXML.Excel;
+
 
 namespace DatVeXemPhim.Controllers
 {
@@ -219,6 +221,44 @@ namespace DatVeXemPhim.Controllers
         private bool VeExists(int id)
         {
             return _context.Ve.Any(e => e.id == id);
+        }
+
+        [Route("QuanLiVes/ExportToExcel")]
+        public async Task<IActionResult> ExportToExcel()
+        {
+            // Lấy danh sách vé từ database
+            var ves = await _context.Ve.ToListAsync();
+
+            // Tạo file Excel
+            var workbook = new XLWorkbook();
+            var worksheet = workbook.Worksheets.Add("Ves");
+
+            // Thêm tiêu đề cột
+            var columns = typeof(Ve).GetProperties().Select(p => p.Name).ToList();
+            for (int i = 0; i < columns.Count; i++)
+            {
+                worksheet.Cell(1, i + 1).Value = columns[i];
+            }
+
+            // Thêm dữ liệu vào worksheet từ dòng thứ 2
+            for (int i = 0; i < ves.Count; i++)
+            {
+                var ve = ves[i];
+                for (int j = 0; j < columns.Count; j++)
+                {
+                    var value = typeof(Ve).GetProperty(columns[j]).GetValue(ve);
+                    worksheet.Cell(i + 2, j + 1).Value = value != null ? value.ToString() : ""; // Chuyển đổi giá trị sang chuỗi
+                }
+            }
+
+            // Lưu workbook vào memory stream
+            var stream = new MemoryStream();
+            workbook.SaveAs(stream);
+            stream.Position = 0;
+
+            // Trả về file Excel
+            string excelName = $"Ves_{DateTime.Now.ToString("HH-mm-ss dd-MM-yyyy")}.xlsx";
+            return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", excelName);
         }
     }
 }
