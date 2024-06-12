@@ -24,7 +24,8 @@ namespace DatVeXemPhim.Controllers
         {
             ViewData["CurrentSort"] = sortOrder;
             ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewData["NumberSortParm"] = sortOrder == "Number" ? "TaiKhoan" : "Number";
+            ViewData["NumberSortParm"] = sortOrder == "Number" ? "" : "Number";
+            ViewData["CurrentFilter"] = searchString;
 
             if (searchString != null)
             {
@@ -35,35 +36,35 @@ namespace DatVeXemPhim.Controllers
                 searchString = currentFilter;
             }
 
-            ViewData["CurrentFilter"] = searchString;
+
             var khachHangs = from s in _context.KhachHang
-                           select s;
+                             select s;
+
             if (!String.IsNullOrEmpty(searchString))
             {
                 khachHangs = khachHangs.Where(s => s.hoTen.Contains(searchString)
-                                       || s.taiKhoan.Contains(searchString));
+                                                || s.soDienThoai.Contains(searchString));
             }
-            switch (sortOrder)
+
+            khachHangs = sortOrder switch
             {
-                case "name_desc":
-                    khachHangs = khachHangs.OrderByDescending(s => s.hoTen);
-                    break;
-                case "Number":
-                    khachHangs = khachHangs.OrderBy(s => s.soDienThoai);
-                    break;
-                case "TaiKhoan":
-                    khachHangs = khachHangs.OrderByDescending(s => s.taiKhoan);
-                    break;
-                default:
-                    khachHangs = khachHangs.OrderBy(s => s.hoTen);
-                    break;
-            }
-            int pageSize = 10;
+                "name_desc" => khachHangs.OrderByDescending(s => s.hoTen),
+                "Number" => khachHangs.OrderBy(s => s.soDienThoai),
+                _ => khachHangs.OrderBy(s => s.hoTen),
+            };
+
+            int pageSize = 5;
             return View(await phanTrang<KhachHang>.CreateAsync(khachHangs.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
-      
+
+
 
         // GET: QuanLiKhachHangs/Details/5
+        //Include(kh => kh.Ves): Tải các vé liên quan đến khách hàng.
+        //ThenInclude(v => v.fk_XuatChieu) : Tải các thông tin của xuất chiếu liên quan đến vé.
+        //ThenInclude(xc => xc.fk_Phim): Tải thông tin của phim liên quan đến xuất chiếu.
+        //Include(kh => kh.Ves): (Lần thứ hai) Tải lại các vé liên quan để tiếp tục nạp các thuộc tính khác của vé.
+        //ThenInclude(v => v.fk_MaGhe): Tải thông tin ghế liên quan đến vé.
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -72,8 +73,11 @@ namespace DatVeXemPhim.Controllers
             }
 
             var khachHang = await _context.KhachHang
-                .Include(s => s.Ves)
-                    .ThenInclude(e => e.fk_XuatChieu)
+                .Include(kh => kh.Ves)
+                    .ThenInclude(v => v.fk_XuatChieu)
+                        .ThenInclude(xc => xc.fk_Phim)
+                .Include(kh => kh.Ves)
+                    .ThenInclude(v => v.fk_MaGhe)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(m => m.id == id);
 
@@ -84,6 +88,7 @@ namespace DatVeXemPhim.Controllers
 
             return View(khachHang);
         }
+
 
         // GET: QuanLiKhachHangs/Create
         public IActionResult Create()

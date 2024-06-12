@@ -1,0 +1,54 @@
+﻿@model DatVeXemPhim.Models.XuatChieu
+
+@{
+    ViewData["Title"] = "Sửa xuất chiếu";
+}
+
+<div class="container mt-4">
+    <h1 class="text-center mb-4">@ViewData["Title"]</h1>
+    <h4>Xuất chiếu</h4>
+    <hr />
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                <input type="hidden" asp-for="id" />
+                <div class="mb-3">
+                    <label asp-for="maPhong" class="form-label"></label>
+                    <select asp-for="maPhong" class="form-select" asp-items="ViewBag.maPhong"></select>
+                    <span asp-validation-for="maPhong" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="maPhim" class="form-label"></label>
+                    <select asp-for="maPhim" class="form-select" asp-items="ViewBag.maPhim"></select>
+                    <span asp-validation-for="maPhim" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="ngayChieu" class="form-label"></label>
+                    <input asp-for="ngayChieu" class="form-control" />
+                    <span asp-validation-for="ngayChieu" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="gioBatDau" class="form-label"></label>
+                    <input asp-for="gioBatDau" class="form-control" />
+                    <span asp-validation-for="gioBatDau" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="gioKetThuc" class="form-label"></label>
+                    <input asp-for="gioKetThuc" class="form-control" />
+                    <span asp-validation-for="gioKetThuc" class="text-danger"></span>
+                </div>
+                <div class="text-center">
+                    <input type="submit" value="Lưu" class="btn btn-primary" />
+                    <a asp-action="Index" class="btn btn-secondary ms-2">Quay lại</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
