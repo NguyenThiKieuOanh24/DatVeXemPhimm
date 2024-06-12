@@ -211,6 +211,28 @@ namespace DatVeXemPhim.Controllers
             return _context.KhachHang.Any(e => e.id == id);
         }
 
+        public async Task<IActionResult> LichSuDonHang(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var veList = await _context.Ve
+                .Include(v => v.fk_XuatChieu)
+                    .ThenInclude(h => h.fk_Phim)
+                .Include(n => n.fk_MaGhe)
+                .AsNoTracking()
+                .Where(m => m.id == id)
+                .ToListAsync();
+
+            if (veList == null || !veList.Any())
+            {
+                return NotFound();
+            }
+
+            return View(veList);
+        }
 
     }
 }

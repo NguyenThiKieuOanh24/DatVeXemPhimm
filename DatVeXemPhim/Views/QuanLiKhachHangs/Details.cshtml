@@ -55,6 +55,10 @@
                     </tbody>
                 </table>
             </div>
+            @foreach (var item in Model.Ves)
+            {
+                <a asp-action="LichSuDonHang" asp-route-id="@item.id" class="btn btn-info btn-sm">Lịch sử đơn hàng</a>
+            }
         </div>
     </div>
     <div class="text-center mt-4">
