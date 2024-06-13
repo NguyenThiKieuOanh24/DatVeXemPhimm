@@ -1,0 +1,41 @@
+﻿@model IEnumerable<DatVeXemPhim.Models.PhongChieu>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Danh Sách</h1>
+
+<p>
+    <a asp-action="Create">Thêm</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.tenPhong)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tenPhong)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.id">Chỉnh Sửa</a> |
+                    <a asp-action="Details" asp-route-id="@item.id">Chi Tiết</a> |
+                    <a asp-action="Delete" asp-route-id="@item.id">Xóa</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

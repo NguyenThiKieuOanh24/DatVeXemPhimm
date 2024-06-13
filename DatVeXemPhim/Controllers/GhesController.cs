@@ -10,22 +10,22 @@ using DatVeXemPhim.Models;
 
 namespace DatVeXemPhim.Controllers
 {
-    public class VesController : Controller
+    public class GhesController : Controller
     {
         private readonly DatVeXemPhimContext _context;
 
-        public VesController(DatVeXemPhimContext context)
+        public GhesController(DatVeXemPhimContext context)
         {
             _context = context;
         }
 
-        // GET: Ves
+        // GET: QuanLyGhes
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Ve.ToListAsync());
+            return View(await _context.Ghe.ToListAsync());
         }
 
-        // GET: Ves/Details/5
+        // GET: QuanLyGhes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +33,39 @@ namespace DatVeXemPhim.Controllers
                 return NotFound();
             }
 
-            var ve = await _context.Ve
+            var ghe = await _context.Ghe
                 .FirstOrDefaultAsync(m => m.id == id);
-            if (ve == null)
+            if (ghe == null)
             {
                 return NotFound();
             }
 
-            return View(ve);
+            return View(ghe);
         }
 
-        // GET: Ves/Create
+        // GET: QuanLyGhes/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Ves/Create
+        // POST: QuanLyGhes/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("iD,maXuatChieu,maKhachHang,maNhanVien,maGhe,ngayBanVe,tongTien")] Ve ve)
+        public async Task<IActionResult> Create([Bind("id, maPhong, tenGhe")] Ghe ghe)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(ve);
+                _context.Add(ghe);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(ve);
+            return View(ghe);
         }
 
-        // GET: Ves/Edit/5
+        // GET: QuanLyGhes/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +73,24 @@ namespace DatVeXemPhim.Controllers
                 return NotFound();
             }
 
-            var ve = await _context.Ve.FindAsync(id);
-            if (ve == null)
+            var ghe = await _context.Ghe.FindAsync(id);
+            if (ghe == null)
             {
                 return NotFound();
             }
-            return View(ve);
+            return View(ghe);
         }
 
-        // POST: Ves/Edit/5
+        // POST: QuanLyGhes/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("iD,maXuatChieu,maKhachHang,maNhanVien,maGhe,ngayBanVe,tongTien")] Ve ve)
+
+        public async Task<IActionResult> Edit(int id, [Bind("id, maPhong, tenGhe")] Ghe ghe)
+
         {
-            if (id != ve.id)
+            if (id != ghe.id)
             {
                 return NotFound();
             }
@@ -97,12 +99,12 @@ namespace DatVeXemPhim.Controllers
             {
                 try
                 {
-                    _context.Update(ve);
+                    _context.Update(ghe);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!VeExists(ve.id))
+                    if (!GheExists(ghe.id))
                     {
                         return NotFound();
                     }
@@ -113,10 +115,10 @@ namespace DatVeXemPhim.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(ve);
+            return View(ghe);
         }
 
-        // GET: Ves/Delete/5
+        // GET: QuanLyGhes/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,47 +126,34 @@ namespace DatVeXemPhim.Controllers
                 return NotFound();
             }
 
-            var ve = await _context.Ve
+            var ghe = await _context.Ghe
                 .FirstOrDefaultAsync(m => m.id == id);
-            if (ve == null)
+            if (ghe == null)
             {
                 return NotFound();
             }
 
-            return View(ve);
+            return View(ghe);
         }
 
-        // POST: Ves/Delete/5
+        // POST: QuanLyGhes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var ve = await _context.Ve.FindAsync(id);
-            if (ve != null)
+            var ghe = await _context.Ghe.FindAsync(id);
+            if (ghe != null)
             {
-                _context.Ve.Remove(ve);
+                _context.Ghe.Remove(ghe);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool VeExists(int id)
+        private bool GheExists(int id)
         {
-            return _context.Ve.Any(e => e.id == id);
-        }
-        public IActionResult ThoiGian()
-        {
-            return View();
-        }
-        public IActionResult DatGhe()
-        {
-            return View();
-        }
-
-        public IActionResult DatVe()
-        {
-            return View();
+            return _context.Ghe.Any(e => e.id == id);
         }
     }
 }

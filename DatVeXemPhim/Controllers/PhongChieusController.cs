@@ -10,22 +10,22 @@ using DatVeXemPhim.Models;
 
 namespace DatVeXemPhim.Controllers
 {
-    public class KhachHangsController : Controller
+    public class PhongChieusController : Controller
     {
         private readonly DatVeXemPhimContext _context;
 
-        public KhachHangsController(DatVeXemPhimContext context)
+        public PhongChieusController(DatVeXemPhimContext context)
         {
             _context = context;
         }
 
-        // GET: KhachHangs
+        // GET: QuanLyGhes
         public async Task<IActionResult> Index()
         {
-            return View(await _context.KhachHang.ToListAsync());
+            return View(await _context.PhongChieu.ToListAsync());
         }
 
-        // GET: KhachHangs/Details/5
+        // GET: QuanLyGhes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +33,40 @@ namespace DatVeXemPhim.Controllers
                 return NotFound();
             }
 
-            var khachHang = await _context.KhachHang
+            var phongChieu = await _context.PhongChieu
                 .FirstOrDefaultAsync(m => m.id == id);
-            if (khachHang == null)
+            if (phongChieu == null)
             {
                 return NotFound();
             }
 
-            return View(khachHang);
+            return View(phongChieu);
         }
 
-        // GET: KhachHangs/Create
+        // GET: QuanLyGhes/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: KhachHangs/Create
+        // POST: QuanLyGhes/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("iD,hoTen,soDienThoai,eMail,taiKhoan,matKhau")] KhachHang khachHang)
+        public async Task<IActionResult> Create([Bind("id, tenPhong")] PhongChieu phongChieu)
+
         {
             if (ModelState.IsValid)
             {
-                _context.Add(khachHang);
+                _context.Add(phongChieu);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(khachHang);
+            return View(phongChieu);
         }
 
-        // GET: KhachHangs/Edit/5
+        // GET: QuanLyGhes/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +74,22 @@ namespace DatVeXemPhim.Controllers
                 return NotFound();
             }
 
-            var khachHang = await _context.KhachHang.FindAsync(id);
-            if (khachHang == null)
+            var phongChieu = await _context.PhongChieu.FindAsync(id);
+            if (phongChieu == null)
             {
                 return NotFound();
             }
-            return View(khachHang);
+            return View(phongChieu);
         }
 
-        // POST: KhachHangs/Edit/5
+        // POST: QuanLyGhes/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("iD,hoTen,soDienThoai,eMail,taiKhoan,matKhau")] KhachHang khachHang)
+        public async Task<IActionResult> Edit(int id, [Bind("id, tenPhong")] PhongChieu phongChieu)
         {
-            if (id != khachHang.id)
+            if (id != phongChieu.id)
             {
                 return NotFound();
             }
@@ -97,12 +98,12 @@ namespace DatVeXemPhim.Controllers
             {
                 try
                 {
-                    _context.Update(khachHang);
+                    _context.Update(phongChieu);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!KhachHangExists(khachHang.id))
+                    if (!PhongChieuExists(phongChieu.id))
                     {
                         return NotFound();
                     }
@@ -113,10 +114,10 @@ namespace DatVeXemPhim.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(khachHang);
+            return View(phongChieu);
         }
 
-        // GET: KhachHangs/Delete/5
+        // GET: QuanLyGhes/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,34 +125,34 @@ namespace DatVeXemPhim.Controllers
                 return NotFound();
             }
 
-            var khachHang = await _context.KhachHang
+            var phongChieu = await _context.PhongChieu
                 .FirstOrDefaultAsync(m => m.id == id);
-            if (khachHang == null)
+            if (phongChieu == null)
             {
                 return NotFound();
             }
 
-            return View(khachHang);
+            return View(phongChieu);
         }
 
-        // POST: KhachHangs/Delete/5
+        // POST: QuanLyGhes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var khachHang = await _context.KhachHang.FindAsync(id);
-            if (khachHang != null)
+            var phongChieu = await _context.PhongChieu.FindAsync(id);
+            if (phongChieu != null)
             {
-                _context.KhachHang.Remove(khachHang);
+                _context.PhongChieu.Remove(phongChieu);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool KhachHangExists(int id)
+        private bool PhongChieuExists(int id)
         {
-            return _context.KhachHang.Any(e => e.id == id);
+            return _context.TheLoaiPhim.Any(e => e.id == id);
         }
     }
 }
