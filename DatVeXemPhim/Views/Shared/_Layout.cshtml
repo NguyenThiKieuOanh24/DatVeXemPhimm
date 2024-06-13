@@ -24,6 +24,21 @@
                     <li><a class="nav-link scrollto" asp-area="" asp-controller="PhongChieus" asp-action="Index">Quản Lí Phòng Chiếu</a></li>
                     <li><a class="nav-link scrollto" asp-area="" asp-controller="Ghes" asp-action="Index">Quản Lí Ghế</a></li>
                     <li><a class="nav-link scrollto" asp-area="" asp-controller="NhanViens" asp-action="Index">Quản Lí Nhân Viên</a></li>
+                    <li><a class="nav-link scrollto active" asp-controller="Home" asp-action="Index">Trang chủ</a></li>
+                    <li class="dropdown">
+                        <a href="#"><span>Danh sách Phim</span> <i class="bi bi-chevron-down"></i></a>
+                        <ul>
+                            <li class="dropdown">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Phims" asp-action="NowShowing">Phim đang chiếu</a>
+                            </li>
+                            <li>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Phims" asp-action="UpComing">Phim sắp chiếu</a>
+                            </li>    
+                        </ul>
+                    </li>
+                    <li><a class="nav-link scrollto" href="#contact">Tin Tức</a></li>
+                    <li><a class="nav-link scrollto" asp-area="" asp-controller="QuanLiKhachHangs" asp-action="Index">Quản lí khách hàng</a></li>
+
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav><!-- .navbar -->
