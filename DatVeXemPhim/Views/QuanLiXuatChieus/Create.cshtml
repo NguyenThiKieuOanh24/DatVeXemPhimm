@@ -1,0 +1,58 @@
+﻿@model DatVeXemPhim.Models.XuatChieu
+
+@{
+    ViewData["Title"] = "Thêm xuất chiếu";
+}
+
+<div class="container mt-4">
+    <h1 class="text-center">@ViewData["Title"]</h1>
+    <div class="card mt-4">
+        <div class="card-body">
+            <h4 class="card-title">Thêm xuất chiếu</h4>
+            <hr />
+            <div class="row">
+                <div class="col-md-6">
+                    <form asp-action="Create">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="maPhong" class="control-label">Phòng chiếu:</label>
+                            <select asp-for="maPhong" class="form-control" asp-items="ViewBag.maPhong"></select>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="maPhim" class="control-label">Phim:</label>
+                            <select asp-for="maPhim" class="form-control" asp-items="ViewBag.maPhim"></select>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="ngayChieu" class="control-label">Ngày chiếu:</label>
+                            <input asp-for="ngayChieu" class="form-control" />
+                            <span asp-validation-for="ngayChieu" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="gioBatDau" class="control-label">Giờ bắt đầu:</label>
+                            <input asp-for="gioBatDau" class="form-control" />
+                            <span asp-validation-for="gioBatDau" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="gioKetThuc" class="control-label">Giờ kết thúc:</label>
+                            <input asp-for="gioKetThuc" class="form-control" />
+                            <span asp-validation-for="gioKetThuc" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Tạo mới</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="text-center mt-4">
+    <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

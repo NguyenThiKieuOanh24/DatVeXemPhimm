@@ -1,0 +1,38 @@
+﻿@model DatVeXemPhim.Models.XuatChieu
+
+@{
+    ViewData["Title"] = "Xoá";
+}
+
+<div class="container mt-4">
+    <h1 class="text-center">@ViewData["Title"]</h1>
+    <div class="card mt-4">
+        <div class="card-body">
+            <h4 class="card-title">Xoá xuất chiếu</h4>
+            <hr />
+            <h3>Bạn có chắc muốn xoá xuất chiếu này không?</h3>
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <h4>Xuất chiếu</h4>
+                    <dl class="row">
+                        <dt class="col-sm-3">Phòng chiếu:</dt>
+                        <dd class="col-sm-9">@Html.DisplayFor(model => model.fk_PhongChieu.id)</dd>
+                        <dt class="col-sm-3">Phim:</dt>
+                        <dd class="col-sm-9">@Html.DisplayFor(model => model.fk_Phim.id)</dd>
+                        <dt class="col-sm-3">Ngày chiếu:</dt>
+                        <dd class="col-sm-9">@Html.DisplayFor(model => model.ngayChieu)</dd>
+                        <dt class="col-sm-3">Giờ bắt đầu:</dt>
+                        <dd class="col-sm-9">@Html.DisplayFor(model => model.gioBatDau)</dd>
+                        <dt class="col-sm-3">Giờ kết thúc:</dt>
+                        <dd class="col-sm-9">@Html.DisplayFor(model => model.gioKetThuc)</dd>
+                    </dl>
+                </div>
+            </div>
+            <form asp-action="Delete">
+                <input type="hidden" asp-for="id" />
+                <button type="submit" class="btn btn-danger">Xoá</button> |
+                <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+            </form>
+        </div>
+    </div>
+</div>

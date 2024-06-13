@@ -1,0 +1,68 @@
+﻿@model DatVeXemPhim.Models.KhachHang
+
+@{
+    ViewData["Title"] = "Chi tiết";
+}
+
+
+<div class="container mt-4">
+    <h1 class="text-center">@ViewData["Title"]</h1>
+    <div class="card mt-4">
+        <div class="card-body">
+            <h4 class="card-title">Khách hàng</h4>
+            <hr />
+            <dl class="row">
+                <dt class="col-sm-3">Họ Tên</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.hoTen)</dd>
+                <dt class="col-sm-3">Số Điện Thoại</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.soDienThoai)</dd>
+                <dt class="col-sm-3">Email</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.email)</dd>
+                <dt class="col-sm-3">Tài Khoản</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.taiKhoan)</dd>
+                <dt class="col-sm-3">Mật Khẩu</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.matKhau)</dd>
+            </dl>
+
+            <h4 class="mt-4">Chi tiết vé đã đặt:</h4>
+            <hr />
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Mã xuất chiếu</th>
+                            <th scope="col">Tên phim</th>
+                            <th scope="col">Tên ghế</th>
+                            <th scope="col">Giờ bắt đầu</th>
+                            <th scope="col">Giờ kết thúc</th>
+                            <th scope="col">Ngày bán vé</th>
+                            <th scope="col">Tổng tiền (đv: nghìn đồng)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Ves)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(modelItem => item.fk_XuatChieu.id)</td>
+                                <td>@Html.DisplayFor(modelItem => item.fk_XuatChieu.fk_Phim.tenPhim)</td>
+                                <td>@Html.DisplayFor(modelItem => item.fk_MaGhe.tenGhe)</td>
+                                <td>@Html.DisplayFor(modelItem => item.fk_XuatChieu.gioBatDau)</td>
+                                <td>@Html.DisplayFor(modelItem => item.fk_XuatChieu.gioKetThuc)</td>
+                                <td>@Html.DisplayFor(modelItem => item.ngayBanVe)</td>
+                                <td>@Html.DisplayFor(modelItem => item.tongTien)</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            @foreach (var item in Model.Ves)
+            {
+                <a asp-action="LichSuDonHang" asp-route-id="@item.id" class="btn btn-info btn-sm">Lịch sử đơn hàng</a>
+            }
+        </div>
+    </div>
+    <div class="text-center mt-4">
+        <a asp-action="Edit" asp-route-id="@Model?.id" class="btn btn-primary">Chỉnh sửa</a>
+        <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+    </div>
+</div>

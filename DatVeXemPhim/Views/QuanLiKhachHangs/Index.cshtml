@@ -1,0 +1,87 @@
+﻿@model phanTrang<DatVeXemPhim.Models.KhachHang>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1 class="text-center">Quản lí khách hàng</h1>
+
+<div class="mb-3 text-end">
+    <a asp-action="Create" class="btn btn-primary">Thêm khách hàng</a>
+</div>
+
+<form asp-action="Index" method="get" class="mb-4">
+    <div class="input-group">
+        <input type="text" name="SearchString" class="form-control" placeholder="Tìm khách hàng (tên/tài khoản)" value="@ViewData["CurrentFilter"]" />
+        <button class="btn btn-secondary" type="submit">Tìm kiếm</button>
+        <a asp-action="Index" class="btn btn-outline-secondary">Xem toàn bộ danh sách khách hàng</a>
+    </div>
+    <a class="btn btn-primary" href="/QuanLiKhachHangs/ExportToExcel">Xuất Excel</a>
+</form>
+
+<table class="table table-striped table-bordered">
+    <thead class="table-dark">
+        <tr>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Họ Tên</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["NumberSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Số điện thoại</a>
+            </th>
+            <th>
+                email
+            </th>
+            <th>
+                Tài khoản
+            </th>
+            <th>
+                Mật Khẩu
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.hoTen)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.soDienThoai)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.taiKhoan)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.matKhau)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.id" class="btn btn-warning btn-sm">Chỉnh sửa</a>
+                    <a asp-action="Details" asp-route-id="@item.id" class="btn btn-info btn-sm">Chi tiết</a>
+                    <a asp-action="Delete" asp-route-id="@item.id" class="btn btn-danger btn-sm">Xoá</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<nav aria-label="Page navigation">
+    <ul class="pagination justify-content-center">
+        <li class="page-item @(!Model.HasPreviousPage ? "disabled" : "")">
+            <a class="page-link" asp-action="Index"
+               asp-route-sortOrder="@ViewData["CurrentSort"]"
+               asp-route-pageNumber="@(Model.soTrang - 1)"
+               asp-route-currentFilter="@ViewData["CurrentFilter"]">Trước</a>
+        </li>
+        <li class="page-item @(!Model.HasNextPage ? "disabled" : "")">
+            <a class="page-link" asp-action="Index"
+               asp-route-sortOrder="@ViewData["CurrentSort"]"
+               asp-route-pageNumber="@(Model.soTrang + 1)"
+               asp-route-currentFilter="@ViewData["CurrentFilter"]">Sau</a>
+        </li>
+    </ul>
+</nav>
