@@ -34,7 +34,9 @@ namespace DatVeXemPhim.Controllers
                 return NotFound();
             }
 
-            var phim = await _context.Phim.FirstOrDefaultAsync(n => n.id == id);
+            var phim = await _context.Phim
+        .Include(p => p.fk_TheLoaiPhim)
+        .FirstOrDefaultAsync(m => m.id == id);
             if (phim == null)
             {
                 return NotFound ();
