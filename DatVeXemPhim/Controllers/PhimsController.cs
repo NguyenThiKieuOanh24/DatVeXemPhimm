@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DatVeXemPhim.Data;
 using DatVeXemPhim.Models;
+using Microsoft.AspNetCore.Razor.Runtime.TagHelpers;
 
 namespace DatVeXemPhim.Controllers
 {
@@ -33,14 +34,14 @@ namespace DatVeXemPhim.Controllers
                 return NotFound();
             }
 
-            var phim = await _context.Phim
-                .FirstOrDefaultAsync(m => m.id == id);
+            var phim = await _context.Phim.FirstOrDefaultAsync(n => n.id == id);
             if (phim == null)
             {
-                return NotFound();
+                return NotFound ();
             }
-
+            await _context.SaveChangesAsync();
             return View(phim);
+
         }
 
         // GET: Phims/Create

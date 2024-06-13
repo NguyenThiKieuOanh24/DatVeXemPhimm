@@ -4,6 +4,7 @@ using DatVeXemPhim.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DatVeXemPhim.Migrations
 {
     [DbContext(typeof(DatVeXemPhimContext))]
-    partial class DatVeXemPhimContextModelSnapshot : ModelSnapshot
+    [Migration("20240611075051_updateThoiLuong")]
+    partial class updateThoiLuong
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -153,8 +156,9 @@ namespace DatVeXemPhim.Migrations
                     b.Property<DateTime>("thoiGianKhoiChieu")
                         .HasColumnType("datetime2");
 
-                    b.Property<TimeSpan>("thoiLuong")
-                        .HasColumnType("time");
+                    b.Property<string>("thoiLuong")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("id");
 

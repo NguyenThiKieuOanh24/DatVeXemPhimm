@@ -8,7 +8,7 @@ namespace DatVeXemPhim.Data
         {
             context.Database.EnsureCreated();
 
-            // Look for any ve.
+            // Look for any khach hang.
             if (context.KhachHang.Any())
             {
                 return;   // DB has been seeded

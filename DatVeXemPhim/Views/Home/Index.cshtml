@@ -8,9 +8,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - My ASP.NET Application</title>
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <link href="~/css/style.css" rel="stylesheet" />
-    <link href="~/css/styles.css" rel="stylesheet" />
+ 
 </head>
 <body>
     <section id="portfolio-details" class="portfolio-details">
@@ -34,40 +33,26 @@
                 </div>
             </div>
 
-<h1>TOP 5 BỘ PHIM HOT NHẤT</h1>
-<div class="row movie-list">
-    <div class="col-lg-8">
-        @foreach (var movie in Model.OrderBy(m => Guid.NewGuid()).Take(5))
-        {
-            <div class="movie-item">
-                <img src="@movie.posterPhim" alt="@movie.tenPhim">
-                <div class="movie-details">
-                    <div class="movie-title">@movie.tenPhim</div>
-                    <div class="movie-description">@movie.daoDien</div>
-                    <div><a asp-controller="Phims" asp-action="Details" asp-route-id="@movie.id"><button style="margin-top: 20px" class="btn btn-warning">Xem chi tiết</button></a></div>
+            <h1>TOP 5 BỘ PHIM HOT NHẤT</h1>
+            <div class="movie-list">
+                <div class="col-lg-8">
+                    @foreach (var movie in Model.OrderBy(m => Guid.NewGuid()).Take(5))
+                    {
+                        <div class="movie-item">
+                            <img src="@movie.posterPhim" alt="@movie.tenPhim">
+                            <div class="movie-details">
+                                <div class="movie-title">@movie.tenPhim</div>
+                                <div class="movie-description">@movie.daoDien</div>
+                                <div><a asp-controller="Phims" asp-action="Details" asp-route-id="@movie.id"><button style="margin-top: 20px" class="btn btn-warning">Xem chi tiết</button></a></div>
+                            </div>
+                        </div>
+                    }
                 </div>
             </div>
-        }
-    </div>
-</div>
-
-
         </div>
     </section>
 
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    <script>
-        var swiper = new Swiper('.swiper', {
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-            },
-            autoplay: {
-                delay: 2500,
-                disableOnInteraction: false,
-            },
-            loop: true,
-        });
-    </script>
+    <script src="~/js/site.js"></script>
 </body>
 </html>
