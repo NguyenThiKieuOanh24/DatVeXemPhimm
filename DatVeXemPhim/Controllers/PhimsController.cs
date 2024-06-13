@@ -34,14 +34,13 @@ namespace DatVeXemPhim.Controllers
                 return NotFound();
             }
 
-                          on phim.maLoaiPhim equals theloai.id
-            var bophim = await _context.Phim.FirstOrDefaultAsync(n => n.id == id);
-            if (bophim == null)
+            var phim = await _context.Phim.FirstOrDefaultAsync(n => n.id == id);
+            if (phim == null)
             {
                 return NotFound ();
             }
             await _context.SaveChangesAsync();
-            return View(bophim);
+            return View(phim);
 
         }
 
