@@ -1,0 +1,26 @@
+﻿@model IEnumerable<DatVeXemPhim.Models.Phim>
+
+<h1 style="margin-top: 20px">Phim Sắp Chiếu - Không nên bỏ lỡ</h1>
+<div class="row">
+    @foreach (var phim in Model)
+    {
+        <div class="col-md-4">
+            <div class="card mb-4 shadow-sm">
+                <img src="@phim.posterPhim" class="card-img-top" alt="@phim.tenPhim">
+                <div class="card-body">
+                    <h5 class="card-title">@phim.tenPhim</h5>
+                    <p class="card-text">@phim.daoDien</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <small class="text-muted">Diễn viên: @phim.dienVien</small>
+                        <small class="text-muted">Thể loại: @phim.maLoaiPhim</small>
+                        <small class="text-muted">Thời lượng: @phim.thoiLuong</small>
+                        <small class="text-muted">Ngôn ngữ: @phim.ngonNgu</small>
+                        <small class="text-muted">Khởi chiếu: @phim.thoiGianKhoiChieu.ToShortDateString()</small>
+                    </div>
+                    <div><a asp-controller="Phims" asp-action="Details" asp-route-id="@phim.id"><button style="margin-top: 20px" class="btn btn-warning">Xem chi tiết</button></a></div>
+
+                </div>
+            </div>
+        </div>
+    }
+</div>
