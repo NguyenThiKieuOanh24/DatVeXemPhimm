@@ -164,16 +164,12 @@ namespace DatVeXemPhim.Controllers
         }
         public async Task<IActionResult> NowShowing()
         {
-            var NowShowing = await _context.XuatChieu
-                .Include(x => x.fk_Phim)
-                .Where(x => x.ngayChieu <= DateTime.Now && x.gioKetThuc >= DateTime.Now)
-                .Select(x => x.fk_Phim)
-                .Distinct()
-                .ToListAsync();
+            var NowShowing = await _context.Phim
+                 .Where(p => p.thoiGianKhoiChieu <= DateTime.Now)
+                 .ToListAsync();
 
             return View(NowShowing);
         }
-
         // GET: Movies/Upcoming
         public async Task<IActionResult> Upcoming()
         {

@@ -601,18 +601,15 @@ section {
 
 .movie-list {
     margin-top: 20px;
-    align-items:center;
     display: flex;
     flex-direction: column;
 }
 
 .movie-item {
     margin-bottom: 30px;
-    padding: 15px;
     background-color: #f8f9fa;
     border-radius: 10px;
     display: flex;
-    align-items: center;
     width:auto;
 }
 
@@ -634,4 +631,35 @@ section {
     font-size: 16px;
     color: #666;
 }
+
+/* Swiper styles */
+.swiper {
+    width: 100%;
+    height: 100%;
+}
+
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+    .swiper-slide img {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
 

@@ -1,70 +1,29 @@
-﻿/* Global styles */
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: gray;
-    margin: 0;
-    padding: 0;
-}
-
-h1 {
-    text-align: center;
-    font-weight: bold;
-    margin: 20px 0;
-    color: floralwhite;
-}
-
-.row {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.card {
-    width: 300px;
-    margin: 15px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s;
-}
-
-    .card:hover {
-        transform: scale(1.05);
+﻿
+    .movie-item img {
+        width: 150px;
+        height: auto;
+        margin-right: 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
 
-.card-img-top {
-    width: 100%;
-    height: auto;
-}
-
-.card-body {
-    padding: 15px;
-    background-color: #fff;
+.movie-details {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    width: 100%; /* Chiếm toàn bộ không gian còn lại */
 }
 
-.card-title {
-    font-size: 2.5rem;
-    font-style: italic;
+.movie-title {
+    font-size: 24px;
     font-weight: bold;
-    margin-bottom: 10px;
-    color: brown;
-}
-
-.card-text {
-    font-size: 1.25rem;
-    font-weight: bold;
-    margin-bottom: 10px;
-    color: mediumpurple;
-}
-
-.text-muted {
-    font-size: 0.875rem;
-    color: #999;
+    color: #333;
     margin-bottom: 5px;
-    font-weight: bold;
+}
+
+.movie-description {
+    font-size: 16px;
+    color: #666;
 }
 
 .btn-warning {
@@ -77,43 +36,9 @@ h1 {
     cursor: pointer;
     transition: background-color 0.2s;
     margin-top: 20px;
-    align-self: center;
+    align-self: flex-start; /* Căn nút về bên trái */
 }
 
     .btn-warning:hover {
-        background-color: #e6b800;
-    }
-/*detail*/
-/* Global styles */
-
-
-.dl-horizontal dt {
-    font-weight: bold;
-    color: floralwhite;
-}
-
-.dl-horizontal dd {
-    color: #333;
-}
-
-.poster-img {
-    max-width: 50%;
-    height: 50%;
-}
-
-a.btn {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 10px 20px;
-    background-color: #ffcc00;
-    color: #fff;
-    text-transform: uppercase;
-    font-weight: bold;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.2s;
-}
-
-    a.btn:hover {
         background-color: #e6b800;
     }

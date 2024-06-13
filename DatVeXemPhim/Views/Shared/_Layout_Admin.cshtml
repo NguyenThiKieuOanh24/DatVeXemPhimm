@@ -1,4 +1,4 @@
-@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -14,50 +14,37 @@
 </head>
 <body>
     <header id="header" class="d-flex align-items-center">
-        <div class="container d-flex align-items-center justify-content-between">
-            <h1 class="logo"><a asp-controller="Home" asp-action="Index">Coly Cinema<span></span></a></h1>
-            <nav id="navbar" class="navbar">
-                <ul>
-                    <li><a class="nav-link scrollto active" asp-controller="Home" asp-action="Index">Trang chủ</a></li>
-                    <li class="dropdown">
-                        <a href="#"><span>Danh sách Phim</span> <i class="bi bi-chevron-down"></i></a>
-                        <ul>
-                            <li class="dropdown">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Phims" asp-action="NowShowing">Phim đang chiếu</a>
-                            </li>
-                            <li>
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Phims" asp-action="UpComing">Phim sắp chiếu</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li><a class="nav-link scrollto" href="#contact">Tin Tức</a></li>
-                </ul>
-                <i class="bi bi-list mobile-nav-toggle"></i>
-            </nav><!-- .navbar -->
-            <!-- Search Bar -->
-            <form class="d-flex search-bar" asp-controller="Home" asp-action="Search" method="get">
-                <input class="form-control me-2" type="search" placeholder="Tìm kiếm phim..." aria-label="Search" name="SearchString">
-                <input class="btn btn-outline-success" type="submit" value="Tìm kiếm" />
-            </form>
-
-            <nav id="user-navbar" class="navbar">
-                <ul>
-                    <li><a class="nav-link scrollto" href="#login">Đăng nhập</a></li>
-                    <li><a class="nav-link scrollto" href="#register">Đăng ký</a></li>
-                </ul>
-            </nav>
-        </div>
     </header>
 
     <div class="container-fluid">
         <div class="row">
-           
+            <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
+                <div class="position-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="QuanLiKhachHangs" asp-action="Index">
+                                Quản lí khách hàng
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="QuanLiXuatChieus" asp-action="Index">
+                                Quản lí xuất chiếu
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="QuanLiVes" asp-action="Index">
+                                Quản lí vé
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
 
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
                 @RenderBody()
             </main>
         </div>
-    </div>    
+    </div>
 
     <footer id="footer">
         <div class="footer-top">
