@@ -54,13 +54,7 @@ namespace DatVeXemPhim.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-     
-<<<<<<< HEAD
-        public async Task<IActionResult> Create([Bind("id, posterPhim, tenPhim, daoDien, dienVien, theLoaiPhim, thoiGianKhoiChieu, thoiLuong, ngonNgu")] Phim phim)
-=======
-        public async Task<IActionResult> Create([Bind("iD,tenPhim,daoDien,dienVien,theLoai,thoiGianKhoiChieu,thoiLuong,ngonNgu")] Phim phim)
->>>>>>> 6d85becf45debd6a7bb0ef55dd8d8fba8adfbd46
-
+        public async Task<IActionResult> Create([Bind("id, posterPhim, tenPhim, daoDien, dienVien, maLoaiPhim, thoiGianKhoiChieu, thoiLuong, ngonNgu")] Phim phim)
         {
             if (ModelState.IsValid)
             {
@@ -92,15 +86,7 @@ namespace DatVeXemPhim.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-
-
-
-<<<<<<< HEAD
-        public async Task<IActionResult> Edit(int id, [Bind("id, posterPhim, tenPhim, daoDien, dienVien, theLoaiPhim, thoiGianKhoiChieu, thoiLuong, ngonNgu")] Phim phim)
-=======
-        public async Task<IActionResult> Edit(int id, [Bind("iD,tenPhim,daoDien,dienVien,theLoai,thoiGianKhoiChieu,thoiLuong,ngonNgu")] Phim phim)
->>>>>>> 6d85becf45debd6a7bb0ef55dd8d8fba8adfbd46
-
+        public async Task<IActionResult> Edit(int id, [Bind("id, posterPhim, tenPhim, daoDien, dienVien, maLoaiPhim, thoiGianKhoiChieu, thoiLuong, ngonNgu")] Phim phim)
         {
             if (id != phim.id)
             {
@@ -188,6 +174,5 @@ namespace DatVeXemPhim.Controllers
 
             return View(UpComing);
         }
-
     }
 }

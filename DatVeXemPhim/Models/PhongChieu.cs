@@ -4,6 +4,7 @@
     {
         public int id { get; set; }
         public string tenPhong { get; set; }
-        public ICollection<XuatChieu> XuatChieus { get; set; }
+        public ICollection<Ghe>? Ghes { get; set; }
+        public ICollection<XuatChieu>? XuatChieus { get; set; }
     }
 }

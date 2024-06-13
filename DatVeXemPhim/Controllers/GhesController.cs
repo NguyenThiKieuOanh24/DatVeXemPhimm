@@ -34,11 +34,7 @@ namespace DatVeXemPhim.Controllers
             }
 
             var ghe = await _context.Ghe
-<<<<<<< HEAD
                 .FirstOrDefaultAsync(m => m.id == id);
-=======
-                .FirstOrDefaultAsync(m => m.iD == id);
->>>>>>> 6d85becf45debd6a7bb0ef55dd8d8fba8adfbd46
             if (ghe == null)
             {
                 return NotFound();
@@ -58,13 +54,7 @@ namespace DatVeXemPhim.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-
-<<<<<<< HEAD
-        public async Task<IActionResult> Create([Bind("id, tenGhe")] Ghe ghe)
-=======
-        public async Task<IActionResult> Create([Bind("iD, maPhong, tenGhe")] Ghe ghe)
->>>>>>> 6d85becf45debd6a7bb0ef55dd8d8fba8adfbd46
-
+        public async Task<IActionResult> Create([Bind("id, maPhong, tenGhe")] Ghe ghe)
         {
             if (ModelState.IsValid)
             {
@@ -97,19 +87,10 @@ namespace DatVeXemPhim.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
 
-
-
-<<<<<<< HEAD
-        public async Task<IActionResult> Edit(int id, [Bind("id, tenGhe")] Ghe ghe)
+        public async Task<IActionResult> Edit(int id, [Bind("id, maPhong, tenGhe")] Ghe ghe)
 
         {
             if (id != ghe.id)
-=======
-        public async Task<IActionResult> Edit(int id, [Bind("iD, maPhong, tenghe")] Ghe ghe)
-
-        {
-            if (id != ghe.iD)
->>>>>>> 6d85becf45debd6a7bb0ef55dd8d8fba8adfbd46
             {
                 return NotFound();
             }
@@ -123,11 +104,7 @@ namespace DatVeXemPhim.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-<<<<<<< HEAD
                     if (!GheExists(ghe.id))
-=======
-                    if (!GheExists(ghe.iD))
->>>>>>> 6d85becf45debd6a7bb0ef55dd8d8fba8adfbd46
                     {
                         return NotFound();
                     }
@@ -150,11 +127,7 @@ namespace DatVeXemPhim.Controllers
             }
 
             var ghe = await _context.Ghe
-<<<<<<< HEAD
                 .FirstOrDefaultAsync(m => m.id == id);
-=======
-                .FirstOrDefaultAsync(m => m.iD == id);
->>>>>>> 6d85becf45debd6a7bb0ef55dd8d8fba8adfbd46
             if (ghe == null)
             {
                 return NotFound();
@@ -180,11 +153,7 @@ namespace DatVeXemPhim.Controllers
 
         private bool GheExists(int id)
         {
-<<<<<<< HEAD
             return _context.Ghe.Any(e => e.id == id);
-=======
-            return _context.Ghe.Any(e => e.iD == id);
->>>>>>> 6d85becf45debd6a7bb0ef55dd8d8fba8adfbd46
         }
     }
 }
