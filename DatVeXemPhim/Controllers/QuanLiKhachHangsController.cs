@@ -46,7 +46,7 @@ namespace DatVeXemPhim.Controllers
             if (!String.IsNullOrEmpty(searchString))
             {
                 khachHangs = khachHangs.Where(s => s.hoTen.Contains(searchString)
-                                                || s.soDienThoai.Contains(searchString));
+                                                || s.taiKhoan.Contains(searchString));
             }
 
             khachHangs = sortOrder switch
