@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DatVeXemPhim.Data;
 using DatVeXemPhim.Models;
+using Microsoft.AspNetCore.Razor.Runtime.TagHelpers;
 
 namespace DatVeXemPhim.Controllers
 {
@@ -33,14 +34,21 @@ namespace DatVeXemPhim.Controllers
                 return NotFound();
             }
 
-            var phim = await _context.Phim
-                .FirstOrDefaultAsync(m => m.id == id);
-            if (phim == null)
+            var bophim = (from phim in _context.Phim
+                          join theloai in _context.TheLoaiPhim
+                          on phim.maLoaiPhim equals theloai.id
+                          where phim.id == id
+                          select new
+                          {
+                              phimxxx = phim,
+                              name = theloai.tenLoaiPhim
+                          }).FirstOrDefaultAsync();
+            if (bophim == null)
             {
-                return NotFound();
+                return NotFound ();
             }
+            return View(bophim);
 
-            return View(phim);
         }
 
         // GET: Phims/Create
