@@ -34,19 +34,13 @@ namespace DatVeXemPhim.Controllers
                 return NotFound();
             }
 
-            var bophim = (from phim in _context.Phim
-                          join theloai in _context.TheLoaiPhim
                           on phim.maLoaiPhim equals theloai.id
-                          where phim.id == id
-                          select new
-                          {
-                              phimxxx = phim,
-                              name = theloai.tenLoaiPhim
-                          }).FirstOrDefaultAsync();
+            var bophim = await _context.Phim.FirstOrDefaultAsync(n => n.id == id);
             if (bophim == null)
             {
                 return NotFound ();
             }
+            await _context.SaveChangesAsync();
             return View(bophim);
 
         }

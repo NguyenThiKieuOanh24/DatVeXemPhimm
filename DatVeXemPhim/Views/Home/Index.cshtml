@@ -8,61 +8,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - My ASP.NET Application</title>
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <link href="~/css/style.css" rel="stylesheet" />
-    <link href="~/css/styles.css" rel="stylesheet" />
-    <style>
-        /* Add custom styles here */
-        .portfolio-details {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            min-height: 80vh; /* Adjust this value based on your header/footer height */
-        }
-
-        .container {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            max-width: 1200px;
-            padding: 20px;
-        }
-
-        .row {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .movie-list {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .movie-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin: 10px;
-            text-align: center;
-        }
-
-            .movie-item img {
-                max-width: 100%;
-                height: auto;
-            }
-
-        .swiper {
-            max-width: 100%;
-            margin-bottom: 20px;
-        }
-    </style>
+ 
 </head>
 <body>
     <section id="portfolio-details" class="portfolio-details">
@@ -87,7 +34,7 @@
             </div>
 
             <h1>TOP 5 BỘ PHIM HOT NHẤT</h1>
-            <div class="row movie-list">
+            <div class="movie-list">
                 <div class="col-lg-8">
                     @foreach (var movie in Model.OrderBy(m => Guid.NewGuid()).Take(5))
                     {
@@ -106,18 +53,6 @@
     </section>
 
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    <script>
-        var swiper = new Swiper('.swiper', {
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-            },
-            autoplay: {
-                delay: 2500,
-                disableOnInteraction: false,
-            },
-            loop: true,
-        });
-    </script>
+    <script src="~/js/site.js"></script>
 </body>
 </html>
