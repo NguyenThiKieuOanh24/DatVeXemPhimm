@@ -21,9 +21,10 @@
                             @foreach (var movie in Model.OrderBy(m => Guid.NewGuid()).Take(5))
                             {
                                 <div class="swiper-slide">
-                                    <img style="" src="@movie.posterPhim" alt="@movie.tenPhim">
+                                    <img style="width:300px;height:400px" src="@movie.posterPhim" alt="@movie.tenPhim">
                                 </div>
-                            
+                            }
+
                         </div>
                         <!-- Add Pagination -->
                         <div class="swiper-pagination"></div>
