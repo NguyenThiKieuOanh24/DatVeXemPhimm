@@ -21,7 +21,7 @@ namespace DatVeXemPhim.Controllers
         }
 
         // GET: QuanLiXuatChieus
-        public async Task<IActionResult> Index(string sortOrder, string searchString, string searchDay, string searchMonth, string searchYear, string currentFilter, int? pageNumber)
+        public async Task<IActionResult> Index(string sortOrder, string searchString, string searchDay, string searchMonth, string searchYear, string currentFilter, int? pageNumber, DateTime? startDate, DateTime? endDate)
         {
             ViewData["CurrentSort"] = sortOrder;
             ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
@@ -54,6 +54,20 @@ namespace DatVeXemPhim.Controllers
             {
                 xuatChieus = xuatChieus.Where(s => s.ngayChieu.Year == year);
             }
+
+            if (startDate.HasValue)
+            {
+                xuatChieus = xuatChieus.Where(x => x.ngayChieu >= startDate.Value);
+            }
+
+            if (endDate.HasValue)
+            {
+                xuatChieus = xuatChieus.Where(x => x.ngayChieu <= endDate.Value);
+            }
+
+            // Truyền giá trị ngày bắt đầu và ngày kết thúc đến view
+            ViewBag.StartDate = startDate?.ToString("yyyy-MM-dd");
+            ViewBag.EndDate = endDate?.ToString("yyyy-MM-dd");
 
             switch (sortOrder)
             {

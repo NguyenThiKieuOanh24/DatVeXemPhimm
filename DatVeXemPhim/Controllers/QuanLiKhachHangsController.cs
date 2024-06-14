@@ -27,7 +27,6 @@ namespace DatVeXemPhim.Controllers
         {
             ViewData["CurrentSort"] = sortOrder;
             ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewData["NumberSortParm"] = sortOrder == "Number" ? "" : "Number";
             ViewData["CurrentFilter"] = searchString;
 
             if (searchString != null)
@@ -52,7 +51,6 @@ namespace DatVeXemPhim.Controllers
             khachHangs = sortOrder switch
             {
                 "name_desc" => khachHangs.OrderByDescending(s => s.hoTen),
-                "Number" => khachHangs.OrderBy(s => s.soDienThoai),
                 _ => khachHangs.OrderBy(s => s.hoTen),
             };
 
