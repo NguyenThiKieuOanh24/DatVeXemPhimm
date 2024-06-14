@@ -12,6 +12,15 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddAuthorizationBuilder();
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
+// Thêm dịch vụ session
+builder.Services.AddSession(options =>
+{
+    // Cấu hình tùy chỉnh session ở đây, ví dụ:
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+
 var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
@@ -52,7 +61,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+// Sử dụng middleware session
+app.UseSession();
 app.UseAuthorization();
 
 app.MapControllerRoute(

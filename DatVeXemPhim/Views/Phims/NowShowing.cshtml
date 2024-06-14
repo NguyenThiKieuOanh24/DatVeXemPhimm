@@ -1,7 +1,6 @@
 ﻿@model IEnumerable<DatVeXemPhim.Models.Phim>
 @{
     ViewData["Title"] = "Phim Sắp Chiếu";
-    ViewData["Title"] = "Phim Đang Chiếu";
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -10,45 +9,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"]</title>
 
-    <link href="~/css/site.css" rel="stylesheet" />
     <link href="~/css/phim.css" rel="stylesheet" />
 </head>
 <body>
     <h1 style="margin-top: 20px">Phim Đang Chiếu</h1>
-    <h1 style="margin-top: 20px">Phim Sắp Chiếu - Không nên bỏ lỡ</h1>
-    <div>
-        <label for="timePicker">Chọn thời gian:</label>
-        <div>
-            <a asp-controller="Ves" asp-action="DatGhe" asp-route-id=""><button style="margin-top: 20px" class="btn btn-warning">11:30</button></a>
-            <a asp-controller="Ves" asp-action="DatGhe" asp-route-id=""><button style="margin-top: 20px" class="btn btn-warning">11:30</button></a>
-            <a asp-controller="Ves" asp-action="DatGhe" asp-route-id=""><button style="margin-top: 20px" class="btn btn-warning">11:30</button></a>
-            <a asp-controller="Ves" asp-action="DatGhe" asp-route-id=""><button style="margin-top: 20px" class="btn btn-warning">11:30</button></a>
-        </div>
-    </div>
-    <div><a class="nav-link scrollto" asp-controller="Ves" asp-action="ThoiGian">Đặt Vé</a></div>
-
-    <div class="row">
-        @foreach (var phim in Model)
-        {
-            <div class="col-md-4">
-                <div class="card mb-4 shadow-sm">
-                    <img src="@phim.posterPhim" class="card-img-top" alt="@phim.tenPhim">
-                    <div class="card-body">
-                        <h5 class="card-title">@phim.tenPhim</h5>
-                        <p class="card-text">Đạo diễn: @phim.daoDien</p>
-                        <p class="text-muted">Diễn viên: @phim.dienVien</p>
-                        <p class="text-muted">Khởi chiếu: @phim.thoiGianKhoiChieu.ToShortDateString()</p>
-                        <a asp-controller="Phims" asp-action="Details" asp-route-id="@phim.id">
-                            <button class="btn btn-warning">Xem chi tiết</button>
-                        </a>
+    <div class="movie-list">
+        <div class="col-lg-8">
+            @foreach (var movie in Model)
+            {
+                <div class="movie-item">
+                    <img src="@movie.posterPhim" alt="@movie.tenPhim">
+                    <div class="movie-details">
+                        <div class="movie-title">@movie.tenPhim</div>
+                        <div class="movie-description">@movie.daoDien</div>
+                        <div><a asp-controller="Phims" asp-action="Details" asp-route-id="@movie.id"><button style="margin-top: 20px" class="btn btn-warning">Xem chi tiết</button></a></div>
                     </div>
                 </div>
-            </div>
+            }
         </div>
-    }
-</div>
-        }
-    </div>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             // Add any JavaScript code here if needed
