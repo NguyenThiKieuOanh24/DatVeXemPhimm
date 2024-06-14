@@ -15,8 +15,17 @@
 <body>
     <header id="header" class="d-flex align-items-center">
     </header>
-
-    <div class="container-fluid">
+            <nav id="navbar" class="navbar" style="align-items:center">
+                <ul>
+                    <li>
+                <a class="nav-link scrollto active" asp-controller="Admin" asp-action="Index" style="align-items:center">Trang chủ</a>
+                    </li>
+                    <li>
+                <a class="nav-link scrollto active" asp-controller="Admin" asp-action="Logout" style="align-items:center">Đăng xuất</a>
+            </li>
+                </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav>
         <div class="row">
             <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
                 <div class="position-sticky">

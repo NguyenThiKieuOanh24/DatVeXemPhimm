@@ -21,33 +21,32 @@
                             @foreach (var movie in Model.OrderBy(m => Guid.NewGuid()).Take(5))
                             {
                                 <div class="swiper-slide">
-                                    <img style="width:300px;height:400px" src="@movie.posterPhim" alt="@movie.tenPhim">
+                                    <img src="@movie.posterPhim" alt="@movie.tenPhim">
                                 </div>
                             }
-
                         </div>
-                        <!-- Add Pagination -->
                         <div class="swiper-pagination"></div>
                     </div>
                 </div>
             </div>
-
             <h1>TOP 5 BỘ PHIM HOT NHẤT</h1>
             <div class="movie-list">
                 <div class="col-lg-8">
                     @foreach (var movie in Model.OrderBy(m => Guid.NewGuid()).Take(5))
                     {
-                        <div class="movie-item">
+                        <div class="movie-item" style="">
                             <img src="@movie.posterPhim" alt="@movie.tenPhim">
                             <div class="movie-details">
                                 <div class="movie-title">@movie.tenPhim</div>
-                                <div class="movie-description">@movie.daoDien</div>
-                                <a asp-controller="Phims" asp-action="Details" asp-route-id="@movie.id"><button class="btn btn-warning">Xem chi tiết</button></a>
+                                <div class="movie-description">Đạo diễn: @movie.daoDien</div>
+                                <div class="movie-description">Diễn viên: @movie.dienVien</div><br>
+                                <a asp-controller="Home" asp-action="Details" asp-route-id="@movie.id"><button class="btn btn-warning">Xem chi tiết</button></a>
                             </div>
                         </div>
                     }
                 </div>
             </div>
+        </div>
         </div>
     </section>
 
@@ -55,20 +54,18 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             var swiper = new Swiper('.swiper-container', {
-                spaceBetween: 30,
+                spaceBetween: 10000,
                 centeredSlides: true,
                 autoplay: {
                     delay: 2500,
                     disableOnInteraction: false,
                 },
-                navigation: {
-                    nextEl: '.swiper-button-next',
-                    prevEl: '.swiper-button-prev',
-                },
+                loop:true,
                 pagination: {
                     el: '.swiper-pagination',
                     clickable: true,
                 },
+                
             });
         });
     </script>

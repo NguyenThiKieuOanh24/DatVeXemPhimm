@@ -21,7 +21,18 @@ namespace DatVeXemPhim.Data
         public DbSet<DatVeXemPhim.Models.XuatChieu> XuatChieu { get; set; } 
         public DbSet<DatVeXemPhim.Models.Ghe> Ghe { get; set; } 
         public DbSet<DatVeXemPhim.Models.PhongChieu> PhongChieu { get; set; }
-        public DbSet<DatVeXemPhim.Models.TheLoaiPhim> TheLoaiPhim { get; set; } 
+        public DbSet<DatVeXemPhim.Models.TheLoaiPhim> TheLoaiPhim { get; set; }
+
+        public async Task<List<Ve>> GetVesByKhachHangIdAsync(int maKhachHang)
+        {
+            return await Ve
+                .Include(v => v.fk_XuatChieu)
+                .Include(v => v.fk_KhachHang)
+                .Include(v => v.fk_NhanVien)
+                .Include(v => v.fk_MaGhe)
+                .Where(v => v.maKhachHang == maKhachHang)
+                .ToListAsync();
+        }
 
     }
 }
