@@ -1,39 +1,43 @@
 ﻿@model DatVeXemPhim.Models.Ghe
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Chỉnh Sửa";
 }
 
-<h1>Chỉnh Sửa</h1>
+<h1 class="text-center">Chỉnh sửa</h1>
 
-<h4>Ghế</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="id" />
-            <div class="form-group">
-                <label asp-for="maPhong" class="control-label"></label>
-                <input asp-for="maPhong" class="form-control" />
-                <span asp-validation-for="maPhong" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="tenGhe" class="control-label"></label>
-                <input asp-for="tenGhe" class="form-control" />
-                <span asp-validation-for="tenGhe" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h4>Ghế</h4>
+            <hr />
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="id" />
+                <div class="form-group">
+                    <label asp-for="maPhong" class="control-label"></label>
+                    <input asp-for="maPhong" class="form-control" />
+                    <span asp-validation-for="maPhong" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="tenGhe" class="control-label"></label>
+                    <input asp-for="tenGhe" class="form-control" />
+                    <span asp-validation-for="tenGhe" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Lưu</button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Trở Lại</a>
+<div class="text-center mt-4">
+    <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

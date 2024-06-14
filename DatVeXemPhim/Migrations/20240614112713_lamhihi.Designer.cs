@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DatVeXemPhim.Migrations
 {
     [DbContext(typeof(DatVeXemPhimContext))]
-    [Migration("20240611075051_updateThoiLuong")]
-    partial class updateThoiLuong
+    [Migration("20240614112713_lamhihi")]
+    partial class lamhihi
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -57,23 +57,28 @@ namespace DatVeXemPhim.Migrations
 
                     b.Property<string>("email")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("hoTen")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("matKhau")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("soDienThoai")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(11)
+                        .HasColumnType("nvarchar(11)");
 
                     b.Property<string>("taiKhoan")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.HasKey("id");
 
@@ -116,7 +121,8 @@ namespace DatVeXemPhim.Migrations
 
                     b.Property<string>("taiKhoan")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.HasKey("id");
 
@@ -147,6 +153,7 @@ namespace DatVeXemPhim.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("posterPhim")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("tenPhim")
@@ -156,9 +163,8 @@ namespace DatVeXemPhim.Migrations
                     b.Property<DateTime>("thoiGianKhoiChieu")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("thoiLuong")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<TimeSpan>("thoiLuong")
+                        .HasColumnType("time");
 
                     b.HasKey("id");
 

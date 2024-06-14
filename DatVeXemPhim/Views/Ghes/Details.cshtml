@@ -1,36 +1,26 @@
 ﻿@model DatVeXemPhim.Models.Ghe
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Chi tiết";
 }
-
-<h1>Chi Tiết</h1>
-
-<div>
-    <h4>Ghế</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.id)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.id)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.maPhong)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.maPhong)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.tenGhe)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.tenGhe)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.id">Sửa</a> |
-    <a asp-action="Index">Trở Lại</a>
+<div class="container mt-4">
+    <h1 class="text-center">@ViewData["Title"]</h1>
+    <div class="card mt-4">
+        <div class="card-body">
+            <h4 class="card-title">Ghế</h4>
+            <hr />
+            <dl class="row">
+                <dt class="col-sm-3">Mã Ghế</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.id)</dd>
+                <dt class="col-sm-3">Mã Phòng</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.maPhong)</dd>
+                <dt class="col-sm-3">Tên Ghế</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.tenGhe)</dd>
+            </dl>
+        </div>
+    </div>
+    <div class="text-center mt-4">
+        <a asp-action="Edit" asp-route-id="@Model?.id" class="btn btn-primary">Chỉnh sửa</a>
+        <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+    </div>
 </div>
