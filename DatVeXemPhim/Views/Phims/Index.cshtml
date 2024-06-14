@@ -1,7 +1,8 @@
 ﻿@model IEnumerable<DatVeXemPhim.Models.Phim>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Quản Lý Phim";
+    Layout = "_Layout_Admin";
 }
 
 <h1>Danh Sách</h1>
@@ -12,9 +13,6 @@
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.id)
-            </th>
             <th>
                 @Html.DisplayNameFor(model => model.posterPhim)
             </th>
@@ -45,9 +43,6 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.id)
-            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.posterPhim)
             </td>

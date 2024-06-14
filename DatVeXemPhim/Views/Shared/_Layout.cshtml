@@ -30,21 +30,27 @@
                         <a class="nav-link text-dark" asp-area="" asp-controller="Phims" asp-action="NowShowing"><span>Vé đã đặt</span> <i class="bi bi-chevron-down"></i></a>
                     </li>
                 <i class="bi bi-list mobile-nav-toggle"></i>
-            </nav>
-            <nav id="search-navbar" class="navbar">
-                <ul>
-                    <form class="d-flex search-bar" asp-controller="Home" asp-action="Search" method="get">
-                        <input class="form-control me-2" type="search" placeholder="Tìm kiếm phim..." aria-label="Search" name="SearchString">
-                        <input class="btn btn-outline-success" type="submit" value="Tìm kiếm" />
-                    </form>
-                </ul>
-            </nav>
-            <nav id="user-navbar" class="navbar">
-                <ul>
-                    <li><a class="nav-link scrollto active" href="#hero">Đăng nhập</a></li>
-                    <li><a class="nav-link scrollto active" href="#hero">Đăng ký</a></li>
-                </ul>
-            </nav>
+            </nav><!-- .navbar -->
+            <nav id="navbar" class="navbar">
+                <!-- Search Bar -->
+                <form class="d-flex search-bar" asp-controller="Home" asp-action="Search" method="get">
+                    <input class="form-control me-2" type="search" placeholder="Tìm kiếm phim..." aria-label="Search" name="SearchString">
+                    <input class="btn btn-outline-success" type="submit" value="Tìm kiếm" />
+                </form>
+
+                <nav id="user-navbar" class="navbar">
+                    <ul>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li><a class="nav-link scrollto active" asp-controller="Account" asp-action="Logout">Đăng xuất</a></li>
+                        }
+                        else
+                        {
+                            <li><a class="nav-link scrollto active" asp-controller="Account" asp-action="Login">Đăng nhập</a></li>
+                            <li><a class="nav-link scrollto active" asp-controller="Account" asp-action="Register">Đăng ký</a></li>
+                        }
+                    </ul>
+                </nav>
         </div>
     </header>
     <div class="container">
@@ -105,6 +111,5 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
