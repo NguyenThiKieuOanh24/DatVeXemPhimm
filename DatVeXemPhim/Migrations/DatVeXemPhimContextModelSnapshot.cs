@@ -150,6 +150,7 @@ namespace DatVeXemPhim.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("posterPhim")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("tenPhim")

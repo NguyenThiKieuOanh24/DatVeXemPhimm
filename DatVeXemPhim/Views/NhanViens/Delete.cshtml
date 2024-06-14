@@ -1,73 +1,78 @@
 ﻿@model DatVeXemPhim.Models.NhanVien
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Xóa";
 }
+<h1 class="text-center">Xoá</h1>
+<p class="text-danger text-center">@ViewData["ErrorMessage"]</p>
+<h3 class="text-center">Bạn có chắc chắn muốn xoá nhân viên "@Html.DisplayFor(model => model.hoTen)" không?</h3>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h4 class="mt-4">Nhân Viên</h4>
+            <hr />
+            <dl class="row">
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.id)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.id)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.hoTen)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.hoTen)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.diaChi)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.diaChi)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.soDienThoai)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.soDienThoai)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.email)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.email)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.ngaySinh)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.ngaySinh)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.gioiTinh)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.gioiTinh)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.taiKhoan)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.taiKhoan)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.matKhau)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.matKhau)
+                </dd>
+            </dl>
 
-<h1>Xóa</h1>
-<div>
-    <h4>Nhân Viên</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.id)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.id)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.hoTen)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.hoTen)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.diaChi)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.diaChi)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.soDienThoai)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.soDienThoai)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.email)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.email)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ngaySinh)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ngaySinh)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.gioiTinh)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.gioiTinh)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.taiKhoan)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.taiKhoan)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.matKhau)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.matKhau)
-        </dd>
-    </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="id" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Trở Lại</a>
-    </form>
+            <form asp-action="Delete" class="text-center">
+                <input type="hidden" asp-for="id" />
+                <button type="submit" class="btn btn-danger mr-2">Xoá</button>
+                <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+            </form>
+        </div>
+    </div>
 </div>

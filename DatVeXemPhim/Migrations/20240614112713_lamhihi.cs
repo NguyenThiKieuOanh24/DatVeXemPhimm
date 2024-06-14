@@ -1,15 +1,46 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace DatVeXemPhim.Migrations
 {
     /// <inheritdoc />
-    public partial class updateTbNhanVien : Migration
+    public partial class lamhihi : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropForeignKey(
+                name: "FK_Ve_XuatChieu_XuatChieuid",
+                table: "Ve");
+
+            migrationBuilder.DropIndex(
+                name: "IX_Ve_XuatChieuid",
+                table: "Ve");
+
+            migrationBuilder.DropColumn(
+                name: "XuatChieuid",
+                table: "Ve");
+
+            migrationBuilder.AlterColumn<TimeSpan>(
+                name: "thoiLuong",
+                table: "Phim",
+                type: "time",
+                nullable: false,
+                oldClrType: typeof(string),
+                oldType: "nvarchar(max)");
+
+            migrationBuilder.AlterColumn<string>(
+                name: "posterPhim",
+                table: "Phim",
+                type: "nvarchar(max)",
+                nullable: false,
+                defaultValue: "",
+                oldClrType: typeof(string),
+                oldType: "nvarchar(max)",
+                oldNullable: true);
+
             migrationBuilder.AlterColumn<string>(
                 name: "taiKhoan",
                 table: "NhanVien",
@@ -63,11 +94,54 @@ namespace DatVeXemPhim.Migrations
                 nullable: false,
                 oldClrType: typeof(string),
                 oldType: "nvarchar(max)");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Ve_maXuatChieu",
+                table: "Ve",
+                column: "maXuatChieu");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Ve_XuatChieu_maXuatChieu",
+                table: "Ve",
+                column: "maXuatChieu",
+                principalTable: "XuatChieu",
+                principalColumn: "id",
+                onDelete: ReferentialAction.Cascade);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropForeignKey(
+                name: "FK_Ve_XuatChieu_maXuatChieu",
+                table: "Ve");
+
+            migrationBuilder.DropIndex(
+                name: "IX_Ve_maXuatChieu",
+                table: "Ve");
+
+            migrationBuilder.AddColumn<int>(
+                name: "XuatChieuid",
+                table: "Ve",
+                type: "int",
+                nullable: true);
+
+            migrationBuilder.AlterColumn<string>(
+                name: "thoiLuong",
+                table: "Phim",
+                type: "nvarchar(max)",
+                nullable: false,
+                oldClrType: typeof(TimeSpan),
+                oldType: "time");
+
+            migrationBuilder.AlterColumn<string>(
+                name: "posterPhim",
+                table: "Phim",
+                type: "nvarchar(max)",
+                nullable: true,
+                oldClrType: typeof(string),
+                oldType: "nvarchar(max)");
+
             migrationBuilder.AlterColumn<string>(
                 name: "taiKhoan",
                 table: "NhanVien",
@@ -121,6 +195,18 @@ namespace DatVeXemPhim.Migrations
                 oldClrType: typeof(string),
                 oldType: "nvarchar(20)",
                 oldMaxLength: 20);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Ve_XuatChieuid",
+                table: "Ve",
+                column: "XuatChieuid");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Ve_XuatChieu_XuatChieuid",
+                table: "Ve",
+                column: "XuatChieuid",
+                principalTable: "XuatChieu",
+                principalColumn: "id");
         }
     }
 }
