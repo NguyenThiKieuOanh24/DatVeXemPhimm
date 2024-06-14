@@ -38,18 +38,25 @@
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav><!-- .navbar -->
             <nav id="navbar" class="navbar">
-            <!-- Search Bar -->
-            <form class="d-flex search-bar" asp-controller="Home" asp-action="Search" method="get">
-                <input class="form-control me-2" type="search" placeholder="Tìm kiếm phim..." aria-label="Search" name="SearchString">
-                <input class="btn btn-outline-success" type="submit" value="Tìm kiếm" />
-            </form>
+                <!-- Search Bar -->
+                <form class="d-flex search-bar" asp-controller="Home" asp-action="Search" method="get">
+                    <input class="form-control me-2" type="search" placeholder="Tìm kiếm phim..." aria-label="Search" name="SearchString">
+                    <input class="btn btn-outline-success" type="submit" value="Tìm kiếm" />
+                </form>
 
-            <nav id="user-navbar" class="navbar">
-                <ul>
-                    <li><a class="nav-link scrollto active" href="#hero">Đăng nhập</a></li>
-                    <li><a class="nav-link scrollto active" href="#hero">Đăng ký</a></li>
-                </ul>
-            </nav>
+                <nav id="user-navbar" class="navbar">
+                    <ul>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li><a class="nav-link scrollto active" asp-controller="Account" asp-action="Logout">Đăng xuất</a></li>
+                        }
+                        else
+                        {
+                            <li><a class="nav-link scrollto active" asp-controller="Account" asp-action="Login">Đăng nhập</a></li>
+                            <li><a class="nav-link scrollto active" asp-controller="Account" asp-action="Register">Đăng ký</a></li>
+                        }
+                    </ul>
+                </nav>
         </div>
     </header>
     <div class="container">
@@ -63,13 +70,11 @@
     </div>
     <div class="container-fluid">
         <div class="row">
-           
-
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
                 @RenderBody()
             </main>
         </div>
-    </div>    
+    </div>
 
     <footer id="footer">
         <div class="footer-top">

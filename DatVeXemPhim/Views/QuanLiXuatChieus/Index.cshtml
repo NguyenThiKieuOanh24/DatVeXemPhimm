@@ -13,12 +13,34 @@
     </p>
 
     <form asp-action="Index" method="get" class="mb-4">
-        <div class="input-group mb-3">
-            <input type="text" name="searchDay" class="form-control" placeholder="Ngày" value="@ViewData["CurrentDay"]" />
-            <input type="text" name="searchMonth" class="form-control" placeholder="Tháng" value="@ViewData["CurrentMonth"]" />
-            <input type="text" name="searchYear" class="form-control" placeholder="Năm" value="@ViewData["CurrentYear"]" />
-            <button class="btn btn-secondary" type="submit">Tìm xuất chiếu</button>
-            <a asp-action="Index" class="btn btn-outline-secondary">Xem toàn bộ danh sách xuất chiếu</a>
+        <div class="row mb-3">
+            <div class="col-md-3">
+                <input type="text" name="searchDay" class="form-control" placeholder="Ngày" value="@ViewData["CurrentDay"]" />
+            </div>
+            <div class="col-md-3">
+                <input type="text" name="searchMonth" class="form-control" placeholder="Tháng" value="@ViewData["CurrentMonth"]" />
+            </div>
+            <div class="col-md-3">
+                <input type="text" name="searchYear" class="form-control" placeholder="Năm" value="@ViewData["CurrentYear"]" />
+            </div>
+            <div class="col-md-3">
+                <button class="btn btn-secondary" type="submit">Tìm xuất chiếu</button>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-4">
+                <label for="startDate">Ngày bắt đầu:</label>
+                <input type="date" id="startDate" name="startDate" class="form-control" value="@ViewBag.StartDate" />
+            </div>
+            <div class="col-md-4">
+                <label for="endDate">Ngày kết thúc:</label>
+                <input type="date" id="endDate" name="endDate" class="form-control" value="@ViewBag.EndDate" />
+            </div>
+            <div class="col-md-4">
+                <p></p>
+                <button class="btn btn-primary" type="submit">Các xuất chiếu trong khoảng thời gian đã chọn</button>
+            </div>
         </div>
         <a class="btn btn-primary" href="/QuanLiXuatChieus/ExportToExcel">Xuất Excel</a>
     </form>
@@ -29,7 +51,7 @@
                 <th>Phòng chiếu</th>
                 <th>Phim</th>
                 <th>
-                    <a asp-action="Index" asp-route-sortOrder="@ViewData["DateSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Ngày chiếu</a>
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["DateSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]" class="text-white">Ngày chiếu</a>
                 </th>
                 <th>Giờ bắt đầu</th>
                 <th>Giờ kết thúc</th>
