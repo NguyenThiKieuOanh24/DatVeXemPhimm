@@ -35,7 +35,6 @@ namespace DatVeXemPhim.Controllers
             }
 
             var phim = await _context.Phim
-                .Include(p => p.fk_TheLoaiPhim)
                 .FirstOrDefaultAsync(m => m.id == id);
             if (phim == null)
             {

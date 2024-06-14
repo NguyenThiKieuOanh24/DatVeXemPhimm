@@ -65,5 +65,24 @@ namespace DatVeXemPhim.Controllers
         {
             return View();
         }
+
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var phim = await _context.Phim
+                .Include(p => p.fk_TheLoaiPhim)
+                .FirstOrDefaultAsync(m => m.id == id);
+            if (phim == null)
+            {
+                return NotFound();
+            }
+            await _context.SaveChangesAsync();
+            return View(phim);
+
+        }
     }
 }

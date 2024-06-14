@@ -8,7 +8,6 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"]</title>
-
     <link href="~/css/phim.css" rel="stylesheet" />
 </head>
 <body>
@@ -21,15 +20,15 @@
                     <img src="@movie.posterPhim" alt="@movie.tenPhim">
                     <div class="movie-details">
                         <div class="movie-title">@movie.tenPhim</div>
-                        <div class="movie-description">@movie.daoDien</div>
-                        <div><a asp-controller="Phims" asp-action="Details" asp-route-id="@movie.id"><button style="margin-top: 20px" class="btn btn-warning">Xem chi tiết</button></a></div>
+                        <div class="movie-description">Đạo diễn: @movie.daoDien</div>
+                        <div class="movie-description">Diễn viên: @movie.dienVien</div><br>                        
+                        <div><a asp-controller="Home" asp-action="Details" asp-route-id="@movie.id"><button style="margin-top: 20px" class="btn btn-warning">Xem chi tiết</button></a></div>
                     </div>
                 </div>
             }
         </div>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // Add any JavaScript code here if needed
         });
     </script>
 </body>

@@ -9,10 +9,12 @@ using DatVeXemPhim.Data;
 using DatVeXemPhim.Models;
 using ClosedXML.Excel;
 using System.Linq;
+using DatVeXemPhim.App_Start;
 
 
 namespace DatVeXemPhim.Controllers
 {
+    [RoleNhanVien]
     public class QuanLiKhachHangsController : Controller
     {
         private readonly DatVeXemPhimContext _context;
@@ -77,10 +79,10 @@ namespace DatVeXemPhim.Controllers
 
             var khachHang = await _context.KhachHang
                 .Include(kh => kh.Ves)
-                    .ThenInclude(v => v.fk_XuatChieu)
-                        .ThenInclude(xc => xc.fk_Phim)
+                .ThenInclude(v => v.fk_XuatChieu)
+                .ThenInclude(xc => xc.fk_Phim)
                 .Include(kh => kh.Ves)
-                    .ThenInclude(v => v.fk_MaGhe)
+                .ThenInclude(v => v.fk_MaGhe)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(m => m.id == id);
 
@@ -274,5 +276,6 @@ namespace DatVeXemPhim.Controllers
             string excelName = $"KhachHangs_{DateTime.Now.ToString("HH-mm-ss dd-MM-yyyy")}.xlsx";
             return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", excelName);
         }
+
     }
 }
