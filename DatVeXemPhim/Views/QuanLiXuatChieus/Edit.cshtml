@@ -14,27 +14,27 @@
                 <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
                 <input type="hidden" asp-for="id" />
                 <div class="mb-3">
-                    <label asp-for="maPhong" class="form-label">Mã phòng</label>
+                    <label asp-for="maPhong" class="form-label">Tên phòng</label>
                     <select asp-for="maPhong" class="form-select" asp-items="ViewBag.maPhong"></select>
                     <span asp-validation-for="maPhong" class="text-danger"></span>
                 </div>
                 <div class="mb-3">
-                    <label asp-for="maPhim" class="form-label">Mã phim</label>
+                    <label asp-for="maPhim" class="form-label">Tên phim</label>
                     <select asp-for="maPhim" class="form-select" asp-items="ViewBag.maPhim"></select>
                     <span asp-validation-for="maPhim" class="text-danger"></span>
                 </div>
                 <div class="mb-3">
-                    <label asp-for="ngayChieu" class="form-label"></label>
+                    <label asp-for="ngayChieu" class="form-label">Ngày chiếu</label>
                     <input asp-for="ngayChieu" class="form-control" />
                     <span asp-validation-for="ngayChieu" class="text-danger"></span>
                 </div>
                 <div class="mb-3">
-                    <label asp-for="gioBatDau" class="form-label"></label>
+                    <label asp-for="gioBatDau" class="form-label">Giờ bắt đầu</label>
                     <input asp-for="gioBatDau" class="form-control" />
                     <span asp-validation-for="gioBatDau" class="text-danger"></span>
                 </div>
                 <div class="mb-3">
-                    <label asp-for="gioKetThuc" class="form-label"></label>
+                    <label asp-for="gioKetThuc" class="form-label">Giờ kết thúc</label>
                     <input asp-for="gioKetThuc" class="form-control" />
                     <span asp-validation-for="gioKetThuc" class="text-danger"></span>
                 </div>
