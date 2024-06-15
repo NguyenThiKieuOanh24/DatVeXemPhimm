@@ -4,7 +4,6 @@
     ViewData["Title"] = "Chi tiết";
 }
 
-
 <div class="container mt-4">
     <h1 class="text-center">@ViewData["Title"]</h1>
     <div class="card mt-4">
@@ -30,7 +29,9 @@
                 <table class="table">
                     <thead>
                         <tr>
+                            <th scope="col">Mã đơn hàng</th>
                             <th scope="col">Mã xuất chiếu</th>
+                            <th scope="col">Mã nhân viên</th>
                             <th scope="col">Tên phim</th>
                             <th scope="col">Tên ghế</th>
                             <th scope="col">Giờ bắt đầu</th>
@@ -43,7 +44,9 @@
                         @foreach (var item in Model.Ves)
                         {
                             <tr>
+                                <td>@Html.DisplayFor(modelItem => item.id)</td>
                                 <td>@Html.DisplayFor(modelItem => item.fk_XuatChieu.id)</td>
+                                <td>@Html.DisplayFor(modelItem => item.maNhanVien)</td>
                                 <td>@Html.DisplayFor(modelItem => item.fk_XuatChieu.fk_Phim.tenPhim)</td>
                                 <td>@Html.DisplayFor(modelItem => item.fk_MaGhe.tenGhe)</td>
                                 <td>@Html.DisplayFor(modelItem => item.fk_XuatChieu.gioBatDau)</td>
@@ -55,10 +58,21 @@
                     </tbody>
                 </table>
             </div>
-            @foreach (var item in Model.Ves)
-            {
-                <a asp-action="LichSuDonHang" asp-route-id="@item.id" class="btn btn-info btn-sm">Lịch sử đơn hàng</a>
-            }
+
+            <h4 class="mt-4">Chọn lịch sử đơn hàng:</h4>
+            <hr />
+            <form method="get" asp-action="LichSuDonHang">
+                <div class="form-group">
+                    <label for="selectedOrderId">Chọn ID đơn hàng</label>
+                    <select id="selectedOrderId" name="id" class="form-control">
+                        @foreach (var item in Model.Ves)
+                        {
+                            <option value="@item.id">@item.id</option>
+                        }
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-info btn-sm mt-2">Xem lịch sử đơn hàng</button>
+            </form>
         </div>
     </div>
     <div class="text-center mt-4">

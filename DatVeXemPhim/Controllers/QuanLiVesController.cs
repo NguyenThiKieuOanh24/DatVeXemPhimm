@@ -11,6 +11,7 @@ using Microsoft.Data.SqlClient;
 using ClosedXML.Excel;
 
 
+
 namespace DatVeXemPhim.Controllers
 {
     public class QuanLiVesController : Controller
@@ -260,5 +261,149 @@ namespace DatVeXemPhim.Controllers
             string excelName = $"Ves_{DateTime.Now.ToString("HH-mm-ss dd-MM-yyyy")}.xlsx";
             return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", excelName);
         }
+
+        public IActionResult DangKy()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult DangKy(KhachHang khachHang)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var existingKhachHang = _context.KhachHang.FirstOrDefault(kh => kh.taiKhoan == khachHang.taiKhoan);
+
+                    if (existingKhachHang != null)
+                    {
+                        // Tài khoản đã tồn tại, lưu ID và thông báo
+                        TempData["Message"] = "Tài khoản đã tồn tại.";
+                        TempData["KhachHangID"] = existingKhachHang.id;
+                        return View(khachHang); // Hiển thị lại view để hiển thị thông báo
+                    }
+
+                    // Tài khoản chưa tồn tại, thêm mới và chuyển sang DatVe
+                    _context.KhachHang.Add(khachHang);
+                    _context.SaveChanges();
+
+                    TempData["KhachHangID"] = khachHang.id;
+                    return RedirectToAction("DatVe");
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", "Có lỗi xảy ra khi lưu thông tin. Vui lòng thử lại.");
+                    // Log lỗi nếu cần thiết
+                }
+            }
+
+            return View(khachHang);
+        }
+
+
+
+
+
+
+        public IActionResult DatVe()
+        {
+            var khachHangID = TempData["KhachHangID"];
+            if (khachHangID == null)
+            {
+                return RedirectToAction("DangKy");
+            }
+
+            var phims = _context.Phim.ToList();
+            var xuatChieus = _context.XuatChieu.ToList();
+            var ghes = _context.Ghe.ToList();
+            var nhanViens = _context.NhanVien.ToList();
+
+            ViewBag.Phims = new SelectList(phims, "id", "tenPhim");
+            ViewBag.XuatChieus = new SelectList(xuatChieus, "id", "ngayChieu");
+            ViewBag.Ghes = new SelectList(ghes, "id", "tenGhe");
+            ViewBag.NhanViens = new SelectList(nhanViens, "id", "hoTen");
+            ViewBag.KhachHangID = khachHangID;
+
+            return View();
+        }
+
+
+        // POST: DatVe
+        [HttpPost]
+        public IActionResult DatVe(Ve ve)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    // Lấy thông tin khách hàng từ database
+                    var khachHang = _context.KhachHang.FirstOrDefault(k => k.id == ve.maKhachHang);
+                    var xuatChieu = _context.XuatChieu.FirstOrDefault(x => x.id == ve.maXuatChieu);
+                    var ghe = _context.Ghe.FirstOrDefault(g => g.id == ve.maGhe);
+                    var nhanVien = _context.NhanVien.FirstOrDefault(nv => nv.id == ve.maNhanVien);
+
+                    if (khachHang == null || xuatChieu == null || ghe == null || nhanVien == null)
+                    {
+                        ModelState.AddModelError("", "Thông tin khách hàng, xuất chiếu hoặc ghế không hợp lệ.");
+                        return View(ve);
+                    }
+
+                    ve.fk_XuatChieu = xuatChieu;
+                    ve.fk_KhachHang = khachHang;
+                    ve.fk_MaGhe = ghe;
+                    ve.fk_NhanVien = nhanVien;
+                    ve.ngayBanVe = DateTime.Now; // Cập nhật ngày bán vé
+                    ve.tongTien = 45; // Giá vé mặc định
+
+                    _context.Ve.Add(ve);
+                    _context.SaveChanges();
+
+                    return RedirectToAction("ThanhCong", new { id = ve.id });
+                }
+                catch (DbUpdateException ex)
+                {
+                    ModelState.AddModelError("", "Có lỗi xảy ra khi lưu dữ liệu. Vui lòng thử lại.");
+                    // Log lỗi nếu cần thiết
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", "Có lỗi xảy ra. Vui lòng thử lại.");
+                    // Log lỗi nếu cần thiết
+                }
+            }
+
+            // Nếu ModelState không hợp lệ, lấy lại danh sách để hiển thị
+            var phims = _context.Phim.ToList();
+            var xuatChieus = _context.XuatChieu.ToList();
+            var ghes = _context.Ghe.ToList();
+            var nhanViens = _context.NhanVien.ToList();
+
+            ViewBag.Phims = new SelectList(phims, "id", "tenPhim");
+            ViewBag.XuatChieus = new SelectList(xuatChieus, "id", "ngayChieu");
+            ViewBag.Ghes = new SelectList(ghes, "id", "tenGhe");
+            ViewBag.NhanViens = new SelectList(nhanViens, "id", "hoTen");
+
+            return View(ve);
+        }
+
+        // GET: ThanhCong
+        public IActionResult ThanhCong(int id)
+        {
+            // Lấy thông tin của vé từ database dựa trên id đã được truyền từ action DatVe
+            var ve = _context.Ve
+                .Include(v => v.fk_XuatChieu)
+                .ThenInclude(x => x.fk_Phim)
+                .Include(v => v.fk_MaGhe)
+                .FirstOrDefault(v => v.id == id);
+
+            if (ve == null)
+            {
+                return NotFound(); // Trường hợp không tìm thấy vé
+            }
+
+            return View(ve); // Trả về view ThanhCong với dữ liệu của vé
+        }
+
     }
 }
