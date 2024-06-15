@@ -110,8 +110,8 @@ namespace DatVeXemPhim.Controllers
         // GET: QuanLiXuatChieus/Create
         public IActionResult Create()
         {
-            ViewData["maPhim"] = new SelectList(_context.Phim, "id", "id");
-            ViewData["maPhong"] = new SelectList(_context.PhongChieu, "id", "id");
+            ViewData["maPhim"] = new SelectList(_context.Phim, "id", "tenPhim");
+            ViewData["maPhong"] = new SelectList(_context.PhongChieu, "id", "tenPhong");
             return View();
         }
 
@@ -146,8 +146,8 @@ namespace DatVeXemPhim.Controllers
             {
                 return NotFound();
             }
-            ViewData["maPhim"] = new SelectList(_context.Phim, "id", "id", xuatChieu.maPhim);
-            ViewData["maPhong"] = new SelectList(_context.PhongChieu, "id", "id", xuatChieu.maPhong);
+            ViewData["maPhim"] = new SelectList(_context.Phim, "id", "tenPhim", xuatChieu.maPhim);
+            ViewData["maPhong"] = new SelectList(_context.PhongChieu, "id", "tenPhong", xuatChieu.maPhong);
             return View(xuatChieu);
         }
 

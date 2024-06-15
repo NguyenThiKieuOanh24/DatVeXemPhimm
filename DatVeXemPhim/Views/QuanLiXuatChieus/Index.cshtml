@@ -44,6 +44,7 @@
         </div>
         <a class="btn btn-primary" href="/QuanLiXuatChieus/ExportToExcel">Xuất Excel</a>
         <a class="btn btn-primary" asp-action="Index" asp-route-sortOrder="@ViewData["DateSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Sắp xếp danh sách</a>
+        <a asp-action="Index" class="btn btn-outline-secondary ms-2">Xem toàn bộ danh sách xuất chiếu</a>
     </form>
 
     <table class="table table-striped table-bordered">
@@ -61,8 +62,8 @@
             @foreach (var item in Model)
             {
                 <tr>
-                    <td>@Html.DisplayFor(modelItem => item.fk_PhongChieu.id)</td>
-                    <td>@Html.DisplayFor(modelItem => item.fk_Phim.id)</td>
+                    <td>@Html.DisplayFor(modelItem => item.fk_PhongChieu.tenPhong)</td>
+                    <td>@Html.DisplayFor(modelItem => item.fk_Phim.tenPhim)</td>
                     <td>@Html.DisplayFor(modelItem => item.ngayChieu)</td>
                     <td>@Html.DisplayFor(modelItem => item.gioBatDau)</td>
                     <td>@Html.DisplayFor(modelItem => item.gioKetThuc)</td>
