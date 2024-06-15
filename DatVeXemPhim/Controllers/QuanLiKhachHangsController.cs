@@ -100,8 +100,6 @@ namespace DatVeXemPhim.Controllers
         }
 
         // POST: QuanLiKhachHangs/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("id,hoTen,soDienThoai,email,taiKhoan,matKhau")] KhachHang khachHang)
@@ -110,6 +108,12 @@ namespace DatVeXemPhim.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    if (TaiKhoanDaTonTai(khachHang.taiKhoan))
+                    {
+                        ModelState.AddModelError(nameof(khachHang.taiKhoan), "Tài khoản đã tồn tại.");
+                        return View(khachHang); // Trả về view với thông báo lỗi
+                    }
+
                     _context.Add(khachHang);
                     await _context.SaveChangesAsync();
                     return RedirectToAction(nameof(Index));
@@ -124,6 +128,14 @@ namespace DatVeXemPhim.Controllers
             }
             return View(khachHang);
         }
+
+        private bool TaiKhoanDaTonTai(string taiKhoan)
+        {
+            return _context.KhachHang.Any(kh => kh.taiKhoan == taiKhoan);
+        }
+
+
+
 
         // GET: QuanLiKhachHangs/Edit/5
         public async Task<IActionResult> Edit(int? id)
