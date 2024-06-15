@@ -336,7 +336,6 @@ h6 {
 # Sections General
 --------------------------------------------------------------*/
 section {
-  padding: 60px 0;
   overflow: hidden;
 }
 
@@ -509,36 +508,30 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 50%;
-    padding: 20px 0;
 }
 
 .portfolio-details-slider {
     position: relative;
     width: 100%; /* Adjusted width for the slider */
     height:100%; /* Adjusted height for the slider */
-    margin: 0 auto; /* Center align the slider */
 }
 
     .portfolio-details-slider .swiper-slide {
         display: flex;
         justify-content: center;
         align-items: center;
+        width: 1200px;
     }
 
     .portfolio-details-slider img {
-        width: 50%; 
-        max-height: 100%; 
-        max-width: 50%; 
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        width: 100%; 
     }
 
 .swiper {
-    max-width: 100%;
-    margin-bottom: 20px;
 }
-
+.swiper-wrapper{
+    width:100%;
+}
 .swiper-pagination {
     position: absolute;
     text-align: center;

@@ -18,12 +18,27 @@
                 <div class="col-lg-8">
                     <div class="portfolio-details-slider swiper-container">
                         <div class="swiper-wrapper">
-                            @foreach (var movie in Model.OrderBy(m => Guid.NewGuid()).Take(5))
-                            {
-                                <div class="swiper-slide">
-                                    <img src="@movie.posterPhim" alt="@movie.tenPhim">
-                                </div>
-                            }
+                            <div class="swiper-slide">
+                                <img src="https://i.imgur.com/vvd6l0K.jpeg">
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="https://i.imgur.com/ZAsFRGV.png">
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="https://i.imgur.com/NdkeTHe.jpeg">
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="https://i.imgur.com/HFatZYJ.jpeg">
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="https://i.imgur.com/8oj3EkB.jpeg">
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="https://i.imgur.com/7Ct45cq.png">
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="https://i.imgur.com/o62EDEu.png">
+                            </div>
                         </div>
                         <div class="swiper-pagination"></div>
                     </div>
@@ -54,10 +69,10 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             var swiper = new Swiper('.swiper-container', {
-                spaceBetween: 10000,
+                spaceBetween: 100,
                 centeredSlides: true,
                 autoplay: {
-                    delay: 2500,
+                    delay: 2000,
                     disableOnInteraction: false,
                 },
                 loop:true,

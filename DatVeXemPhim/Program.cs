@@ -2,6 +2,11 @@
 using Microsoft.Extensions.DependencyInjection;
 using DatVeXemPhim.Data;
 using DatVeXemPhim.Models;
+using DatVeXemPhim.Middleware;
+using DatVeXemPhim.App_Start;
+using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<DatVeXemPhimContext>(options =>
@@ -12,7 +17,9 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddAuthorizationBuilder();
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
+
 // Thêm dịch vụ session
+builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
 {
     // Cấu hình tùy chỉnh session ở đây, ví dụ:
@@ -20,6 +27,8 @@ builder.Services.AddSession(options =>
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
@@ -63,7 +72,11 @@ app.UseStaticFiles();
 app.UseRouting();
 // Sử dụng middleware session
 app.UseSession();
+app.UseAuthentication();
+app.UseMiddleware<Middleware>();
 app.UseAuthorization();
+
+SessionConfig.Configure(app.Services.GetRequiredService<IHttpContextAccessor>());
 
 app.MapControllerRoute(
     name: "default",

@@ -1,5 +1,7 @@
-﻿using DatVeXemPhim.Data;
+﻿using DatVeXemPhim.App_Start;
+using DatVeXemPhim.Data;
 using DatVeXemPhim.Models;
+using DocumentFormat.OpenXml.Office2010.Excel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
@@ -83,6 +85,31 @@ namespace DatVeXemPhim.Controllers
             await _context.SaveChangesAsync();
             return View(phim);
 
+        }
+        public async Task<IActionResult> VeDaDat()
+        {
+            var user = SessionConfig.GetKhachHang();
+
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+            int userId = user.id;
+            var dsve = await _context.Ve
+                .Where(v => v.maKhachHang == userId)
+                .Include(p => p.fk_MaGhe)
+                .Include(p => p.fk_XuatChieu)
+                .ThenInclude(xc => xc.fk_Phim)
+                .Include(p => p.fk_MaGhe)
+                .ThenInclude(g => g.fk_PhongChieu)
+                .ToListAsync();
+
+            if (dsve == null || dsve.Count == 0)
+            {
+                return NotFound(); // Nếu không tìm thấy vé nào, trả về NotFound
+            }
+
+            return View(dsve);
         }
     }
 }

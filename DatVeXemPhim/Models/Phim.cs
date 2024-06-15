@@ -30,7 +30,7 @@ namespace DatVeXemPhim.Models
         public DateTime thoiGianKhoiChieu { get; set; }
 
         [DisplayName("Thời lượng")]
-        public string thoiLuong { get; set; }
+        public TimeSpan thoiLuong { get; set; }
 
         [DisplayName("Ngôn ngữ")]
         public string ngonNgu { get; set; }
