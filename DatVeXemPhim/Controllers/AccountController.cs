@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http;
 using DatVeXemPhim.Data;
 using Microsoft.AspNetCore.Authentication;
+using DatVeXemPhim.App_Start;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace DatVeXemPhim.Controllers
 {
@@ -93,7 +95,8 @@ namespace DatVeXemPhim.Controllers
                 if (user != null)
                 {
                     // Đăng nhập thành công
-                    HttpContext.Session.SetString("KhachHangId", user.id.ToString());
+                    /*HttpContext.Session.SetString("KhachHangId", user.id.ToString())*/;
+                    SessionConfig.SaveKhachHang(user);
                     if (RememberMe)
                     {
                         // Thiết lập cookie RememberMe
@@ -116,8 +119,12 @@ namespace DatVeXemPhim.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
         {
-            await HttpContext.SignOutAsync();
+            // Đăng xuất người dùng
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
+            // Chuyển hướng đến trang chủ hoặc trang đăng nhập
             return RedirectToAction("Index", "Home");
         }
+
     }
 }

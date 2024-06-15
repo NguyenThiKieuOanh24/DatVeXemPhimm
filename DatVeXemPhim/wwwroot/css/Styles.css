@@ -84,13 +84,13 @@ body {
     width: 100%; /* Added to make each item take full width */
 }
 
-    .movie-item img {
-        width: 150px;
-        height: auto;
-        margin-right: 20px;
-        border-radius: 10px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
+.movie-item img {
+    width: 150px;
+    height: auto;
+    margin-right: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
 
     .movie-item .movie-details {
         display: flex;

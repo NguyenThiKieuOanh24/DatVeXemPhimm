@@ -1,8 +1,10 @@
 @{
     ViewData["Title"] = "Home Page";
+    var user = DatVeXemPhim.App_Start.SessionConfig.GetKhachHang();
 }
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -27,7 +29,7 @@
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Phims" asp-action="NowShowing"><span>Vé đã đặt</span> <i class="bi bi-chevron-down"></i></a>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="VeDaDat"><span>Vé đã đặt</span> <i class="bi bi-chevron-down"></i></a>
                     </li>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav><!-- .navbar -->
@@ -40,9 +42,16 @@
 
                 <nav id="user-navbar" class="navbar">
                     <ul>
-                        @if (User.Identity.IsAuthenticated)
+                        @if (user != null)
                         {
-                            <li><a class="nav-link scrollto active" asp-controller="Account" asp-action="Logout">Đăng xuất</a></li>
+                            <li class="dropdown">
+                                <a href="#"><span><img style="width:70px;height:70px;left:100%" src="https://cdn0.iconfinder.com/data/icons/basic-ui-elements-2-1-flat-style/512/Basic_UI_Elements_-_2.1_-_Flat_Style_-_36_-_Expand-11-1024.png"></span> <i class="bi bi-chevron-down"></i></a>
+                                <ul>
+                                    <li><a class="nav-link text-dark" asp-controller="" asp-action="">Thông tin cá nhân</a></li>
+                                    <li><a class="nav-link text-dark" asp-controller="Account" asp-action="LichSuDonHang">Danh sách vé đã đặt</a></li>
+                                    <li><a class="nav-link text-dark" asp-controller="Account" asp-action="Logout">Đăng xuất</a></li>
+                                </ul>
+                            </li>
                         }
                         else
                         {

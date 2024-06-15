@@ -9,12 +9,10 @@ using DatVeXemPhim.Data;
 using DatVeXemPhim.Models;
 using ClosedXML.Excel;
 using System.Linq;
-using DatVeXemPhim.App_Start;
 
 
 namespace DatVeXemPhim.Controllers
 {
-    [RoleNhanVien]
     public class QuanLiKhachHangsController : Controller
     {
         private readonly DatVeXemPhimContext _context;
@@ -274,6 +272,6 @@ namespace DatVeXemPhim.Controllers
             string excelName = $"KhachHangs_{DateTime.Now.ToString("HH-mm-ss dd-MM-yyyy")}.xlsx";
             return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", excelName);
         }
-
+        
     }
 }

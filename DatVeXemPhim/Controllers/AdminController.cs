@@ -1,5 +1,7 @@
-﻿using DatVeXemPhim.Data;
+﻿using DatVeXemPhim.App_Start;
+using DatVeXemPhim.Data;
 using DatVeXemPhim.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,6 +23,11 @@ namespace DatVeXemPhim.Controllers
         [HttpGet]
         public IActionResult DangNhap()
         {
+            /*if (HttpContext.Session.GetString("UserId") != null)
+            {
+                return RedirectToAction("Index", "Admin");
+            }*/
+
             return View();
         }
 
@@ -32,7 +39,9 @@ namespace DatVeXemPhim.Controllers
 
             if (user != null)
             {
-                HttpContext.Session.SetString("UserId", user.id.ToString());
+                SessionConfig.SaveUser(user);
+                /*HttpContext.Session.SetString("UserId", user.id.ToString());
+                HttpContext.Session.SetString("Role", "Admin");*/
                 return RedirectToAction("Index", "Admin");
             }
             else
@@ -44,8 +53,9 @@ namespace DatVeXemPhim.Controllers
 
         public IActionResult LogOut()
         {
-            HttpContext.Session.Clear();
-            return RedirectToAction("Login");
+            SessionConfig.LogOut();
+
+            return RedirectToAction("DangNhap", "Admin");
         }
     }
 }

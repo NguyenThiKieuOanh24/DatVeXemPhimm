@@ -1,0 +1,27 @@
+﻿@model IEnumerable<DatVeXemPhim.Models.Ve>
+
+<h1>Danh sách vé đã đặt</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Mã vé</th>
+            <th>Mã xuất chiếu</th>
+            <th>Mã ghế</th>
+            <th>Ngày bán vé</th>
+            <th>Tổng tiền</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var ve in Model)
+        {
+            <tr>
+                <td>@ve.id</td>
+                <td>@ve.fk_XuatChieu?.id</td>
+                <td>@ve.fk_MaGhe?.id</td>
+                <td>@ve.ngayBanVe.ToString("dd/MM/yyyy")</td>
+                <td>@ve.tongTien.ToString("N0")</td>
+            </tr>
+        }
+    </tbody>
+</table>
