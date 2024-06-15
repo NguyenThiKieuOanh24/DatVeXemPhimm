@@ -10,22 +10,17 @@
     <title>@ViewData["Title"] - DatVeXemPhim</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="shortcut icon" href="~/lib/favicon.ico" />
-    <link href="~/css/style.css" rel="stylesheet" />
+    <link href="~/css/styles.css" rel="stylesheet" />
 </head>
 <body>
     <header id="header" class="d-flex align-items-center">
+        <div class="container d-flex align-items-center justify-content-between">
+            <img style="width:150px;height:150px" src="https://i.imgur.com/9l0fapj.png" alt="Logo">
+            <h1 class="logo"><a asp-controller="Admin" asp-action="Logout">Đăng xuất<span></span></a></h1>
+        </div>
     </header>
-            <nav id="navbar" class="navbar" style="align-items:center">
-                <ul>
-                    <li>
-                <a class="nav-link scrollto active" asp-controller="Admin" asp-action="Index" style="align-items:center">Trang chủ</a>
-                    </li>
-                    <li>
-                <a class="nav-link scrollto active" asp-controller="Admin" asp-action="LogOut" style="align-items:center">Đăng xuất</a>
-            </li>
-                </ul>
-                <i class="bi bi-list mobile-nav-toggle"></i>
-            </nav>
+    </header>
+            
         <div class="row">
             <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
                 <div class="position-sticky">
