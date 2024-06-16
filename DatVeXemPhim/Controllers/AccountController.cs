@@ -8,6 +8,7 @@ using DatVeXemPhim.Data;
 using Microsoft.AspNetCore.Authentication;
 using DatVeXemPhim.App_Start;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using DocumentFormat.OpenXml.Spreadsheet;
 
 namespace DatVeXemPhim.Controllers
 {
@@ -126,10 +127,9 @@ namespace DatVeXemPhim.Controllers
         public async Task<IActionResult> Profile()
         { 
             var user = SessionConfig.GetKhachHang();
-
             if (user == null)
             {
-                return Unauthorized();
+                return RedirectToAction("Index", "Home");
             }
             int userId = user.id;
             var khachhang = await _context.KhachHang
@@ -149,9 +149,8 @@ public async Task<IActionResult> EditProfile()
 
     if (user == null)
     {
-        return Unauthorized();
+        return RedirectToAction("Index", "Home");
     }
-
     int userId = user.id;
     var khachHang = await _context.KhachHang.FindAsync(userId);
 
@@ -168,6 +167,11 @@ public async Task<IActionResult> EditProfile()
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditProfile([Bind("id,hoTen,soDienThoai,email,taiKhoan,matKhau")] KhachHang khachHang)
         {
+            var user = SessionConfig.GetKhachHang();
+            if (user == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             if (!ModelState.IsValid)
             {
                 return View(khachHang);
@@ -203,6 +207,12 @@ public async Task<IActionResult> EditProfile()
         [HttpGet]
         public IActionResult ChangePassword()
         {
+            var user = SessionConfig.GetKhachHang();
+
+            if (user == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             return View();
         }
 
@@ -212,11 +222,6 @@ public async Task<IActionResult> EditProfile()
         public async Task<IActionResult> ChangePassword(string currentPassword, string newPassword, string confirmPassword)
         {
             var user = SessionConfig.GetKhachHang();
-
-            if (user == null)
-            {
-                return Unauthorized();
-            }
             int userId = user.id;
             var khachhang = await _context.KhachHang
                 .FirstOrDefaultAsync(v => v.id == userId);
