@@ -94,6 +94,22 @@ namespace DatVeXemPhim.Controllers
         {
             if (ModelState.IsValid)
             {
+                bool phimExists = await _context.Phim.AnyAsync(p =>
+                p.posterPhim == phim.posterPhim &&
+                p.tenPhim == phim.tenPhim &&
+                p.daoDien == phim.daoDien &&
+                p.dienVien == phim.dienVien &&
+                p.maLoaiPhim == phim.maLoaiPhim &&
+                p.thoiGianKhoiChieu == phim.thoiGianKhoiChieu &&
+                p.thoiLuong == phim.thoiLuong &&
+                p.ngonNgu == phim.ngonNgu);
+
+                if (phimExists)
+                {
+                    // Thêm lỗi vào ModelState
+                    ModelState.AddModelError("", "Bộ phim đã tồn tại.");
+                    return View(phim);
+                }
                 _context.Add(phim);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -115,6 +131,7 @@ namespace DatVeXemPhim.Controllers
             {
                 return NotFound();
             }
+            ViewData["TheLoaiPhimList"] = new SelectList(_context.TheLoaiPhim, "id", "tenLoaiPhim");
             return View(phim);
         }
 
@@ -150,6 +167,7 @@ namespace DatVeXemPhim.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["TheLoaiPhimList"] = new SelectList(_context.TheLoaiPhim, "id", "tenPhong", phim.maLoaiPhim);
             return View(phim);
         }
 

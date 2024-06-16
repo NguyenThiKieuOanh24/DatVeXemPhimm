@@ -9,7 +9,7 @@ namespace DatVeXemPhim.Models
         public int id { get; set; }
         [DisplayName("Ảnh phim")]
         public string? posterPhim { get; set; }
-
+            
         [Required]
         [DisplayName("Tên phim")]
         public string? tenPhim { get; set; }
