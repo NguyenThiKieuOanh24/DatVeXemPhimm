@@ -12,9 +12,8 @@
             <form asp-action="Create">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group mb-3">
-                    <label asp-for="maPhong" class="form-label">Mã Phòng</label>
-                    <input asp-for="maPhong" class="form-control" />
-                    <span asp-validation-for="maPhong" class="text-danger"></span>
+                    <label asp-for="maPhong" class="form-label">Phòng Chiếu</label>
+                    <select asp-for="maPhong" class="form-control" asp-items="ViewBag.PhongChieuList"></select>
                 </div>
                 <div class="form-group mb-3">
                     <label asp-for="tenGhe" class="form-label">Tên Ghế</label>
