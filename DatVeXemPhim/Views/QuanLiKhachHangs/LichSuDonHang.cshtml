@@ -17,6 +17,7 @@
                         <th scope="col">Mã xuất chiếu</th>
                         <th scope="col">Mã nhân viên</th>
                         <th scope="col">Tên phim</th>
+                        <th scope="col">Tên phòng</th>
                         <th scope="col">Tên ghế</th>
                         <th scope="col">Giờ bắt đầu</th>
                         <th scope="col">Giờ kết thúc</th>
@@ -32,6 +33,7 @@
                             <td>@Html.DisplayFor(modelItem => item.maXuatChieu)</td>
                             <td>@Html.DisplayFor(modelItem => item.maNhanVien)</td>
                             <td>@Html.DisplayFor(modelItem => item.fk_XuatChieu.fk_Phim.tenPhim)</td>
+                            <td>@Html.DisplayFor(modelItem => item.fk_XuatChieu.fk_PhongChieu.tenPhong)</td>
                             <td>@Html.DisplayFor(modelItem => item.fk_MaGhe.tenGhe)</td>
                             <td>@Html.DisplayFor(modelItem => item.fk_XuatChieu.gioBatDau)</td>
                             <td>@Html.DisplayFor(modelItem => item.fk_XuatChieu.gioKetThuc)</td>

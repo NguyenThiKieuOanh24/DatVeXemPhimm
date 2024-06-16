@@ -24,15 +24,16 @@ namespace DatVeXemPhim.Controllers
         }
 
         // GET: QuanLiVes
-        public async Task<IActionResult> Index(string sortOrder, string searchString, string currentFilter, int? pageNumber, string searchCodeXC, string searchCodeKH)
+        public async Task<IActionResult> Index(string sortOrder, string searchString, string currentFilter, int? pageNumber, string searchCodeXC, string searchCodeKH, string searchCodeV)
         {
             ViewData["CurrentSort"] = sortOrder;
             ViewData["CurrentFilter"] = searchString;
+            ViewData["CurrentCodeV"] = searchCodeV;
             ViewData["CurrentCodeXC"] = searchCodeXC;
             ViewData["CurrentCodeKH"] = searchCodeKH;
 
             // Lưu lại filter hiện tại để giữ trạng thái khi chuyển trang
-            if (searchString != null || searchCodeXC != null || searchCodeKH != null)
+            if (searchString != null || searchCodeXC != null || searchCodeKH != null || searchCodeV != null)
             {
                 pageNumber = 1;
             }
@@ -42,7 +43,12 @@ namespace DatVeXemPhim.Controllers
             }
 
             // Bắt đầu truy vấn
-            var ves = from s in _context.Ve.Include(v => v.fk_KhachHang).Include(v => v.fk_MaGhe).Include(v => v.fk_NhanVien).Include(v => v.fk_XuatChieu)
+            var ves = from s in _context.Ve
+                      .Include(v => v.fk_KhachHang)
+                      .Include(v => v.fk_MaGhe)
+                      .Include(v => v.fk_NhanVien)
+                      .Include(v => v.fk_XuatChieu)
+                      .ThenInclude(x => x.fk_PhongChieu)
                       select s;
 
             // Thêm điều kiện tìm kiếm cho mã xuất chiếu
@@ -51,7 +57,7 @@ namespace DatVeXemPhim.Controllers
                 int codeXC;
                 if (Int32.TryParse(searchCodeXC, out codeXC))
                 {
-                    ves = ves.Where(s => s.fk_XuatChieu.id.ToString().Contains(codeXC.ToString()));
+                    ves = ves.Where(s => s.fk_XuatChieu.id == codeXC);
                 }
             }
 
@@ -61,10 +67,19 @@ namespace DatVeXemPhim.Controllers
                 int codeKH;
                 if (Int32.TryParse(searchCodeKH, out codeKH))
                 {
-                    ves = ves.Where(s => s.fk_KhachHang.id.ToString().Contains(codeKH.ToString()));
+                    ves = ves.Where(s => s.fk_KhachHang.id == codeKH);
                 }
             }
 
+            // Thêm điều kiện tìm kiếm cho mã vé
+            if (!String.IsNullOrEmpty(searchCodeV))
+            {
+                int codeV;
+                if (Int32.TryParse(searchCodeV, out codeV))
+                {
+                    ves = ves.Where(s => s.id == codeV);
+                }
+            }
 
             int pageSize = 5;
             return View(await phanTrang<Ve>.CreateAsync(ves.AsNoTracking(), pageNumber ?? 1, pageSize));
@@ -84,6 +99,7 @@ namespace DatVeXemPhim.Controllers
                 .Include(v => v.fk_MaGhe)
                 .Include(v => v.fk_NhanVien)
                 .Include(v => v.fk_XuatChieu)
+                .ThenInclude(p => p.fk_PhongChieu)
                 .FirstOrDefaultAsync(m => m.id == id);
             if (ve == null)
             {
@@ -118,7 +134,7 @@ namespace DatVeXemPhim.Controllers
             }
             ViewData["maKhachHang"] = new SelectList(_context.KhachHang, "id", "hoTen", ve.maKhachHang);
             ViewData["maGhe"] = new SelectList(_context.Ghe, "id", "tenGhe", ve.maGhe);
-            ViewData["maNhanVien"] = new SelectList(_context.NhanVien, "hoTen", "id", ve.maNhanVien);
+            ViewData["maNhanVien"] = new SelectList(_context.NhanVien, "id", "hoTen", ve.maNhanVien);
             ViewData["maXuatChieu"] = new SelectList(_context.XuatChieu, "id", "id", ve.maXuatChieu);
             return View(ve);
         }
@@ -407,6 +423,8 @@ namespace DatVeXemPhim.Controllers
                 .Include(v => v.fk_XuatChieu)
                 .ThenInclude(x => x.fk_Phim)
                 .Include(v => v.fk_MaGhe)
+                .Include(v => v.fk_XuatChieu)
+                .ThenInclude(x => x.fk_PhongChieu)
                 .FirstOrDefault(v => v.id == id);
 
             if (ve == null)

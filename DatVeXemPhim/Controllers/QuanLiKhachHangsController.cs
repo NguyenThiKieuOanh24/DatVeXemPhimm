@@ -167,6 +167,11 @@ namespace DatVeXemPhim.Controllers
             {
                 try
                 {
+                    if (TaiKhoanDaTonTai(khachHang.taiKhoan))
+                    {
+                        ModelState.AddModelError(nameof(khachHang.taiKhoan), "Tài khoản đã tồn tại.");
+                        return View(khachHang); // Trả về view với thông báo lỗi
+                    }
                     _context.Update(khachHang);
                     await _context.SaveChangesAsync();
                 }
@@ -234,6 +239,8 @@ namespace DatVeXemPhim.Controllers
             var veList = await _context.Ve
                 .Include(v => v.fk_XuatChieu)
                     .ThenInclude(h => h.fk_Phim)
+                .Include(v => v.fk_XuatChieu)
+                    .ThenInclude(x => x.fk_PhongChieu)
                 .Include(n => n.fk_MaGhe)
                 .AsNoTracking()
                 .Where(m => m.id == id)
