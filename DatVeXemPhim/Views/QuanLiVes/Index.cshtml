@@ -30,8 +30,11 @@
                 <tr>
                     <th>Mã xuất chiếu</th>
                     <th>Mã khách hàng</th>
+                    <th>Tên khách hàng</th>
                     <th>Mã nhân viên</th>
+                    <th>Tên nhân viên</th>
                     <th>Mã ghế</th>
+                    <th>Tên ghế</th>
                     <th>Ngày bán vé</th>
                     <th>Tổng tiền</th>
                     <th>Hành động</th>
@@ -43,8 +46,11 @@
                     <tr>
                         <td>@Html.DisplayFor(modelItem => item.fk_XuatChieu.id)</td>
                         <td>@Html.DisplayFor(modelItem => item.fk_KhachHang.id)</td>
+                        <td>@Html.DisplayFor(modelItem => item.fk_KhachHang.hoTen)</td>
                         <td>@Html.DisplayFor(modelItem => item.fk_NhanVien.id)</td>
+                        <td>@Html.DisplayFor(modelItem => item.fk_NhanVien.hoTen)</td>
                         <td>@Html.DisplayFor(modelItem => item.fk_MaGhe.id)</td>
+                        <td>@Html.DisplayFor(modelItem => item.fk_MaGhe.tenGhe)</td>
                         <td>@Html.DisplayFor(modelItem => item.ngayBanVe)</td>
                         <td>@Html.DisplayFor(modelItem => item.tongTien)</td>
                         <td>

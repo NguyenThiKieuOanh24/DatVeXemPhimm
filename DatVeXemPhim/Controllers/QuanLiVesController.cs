@@ -96,9 +96,9 @@ namespace DatVeXemPhim.Controllers
         // GET: QuanLiVes/Create
         public IActionResult Create()
         {
-            ViewData["maKhachHang"] = new SelectList(_context.KhachHang, "id", "id");
-            ViewData["maGhe"] = new SelectList(_context.Ghe, "id", "id");
-            ViewData["maNhanVien"] = new SelectList(_context.NhanVien, "id", "id");
+            ViewData["maKhachHang"] = new SelectList(_context.KhachHang, "id", "hoTen");
+            ViewData["maGhe"] = new SelectList(_context.Ghe, "id", "tenGhe");
+            ViewData["maNhanVien"] = new SelectList(_context.NhanVien, "id", "hoTen");
             ViewData["maXuatChieu"] = new SelectList(_context.XuatChieu, "id", "id");
             return View();
         }
@@ -116,9 +116,9 @@ namespace DatVeXemPhim.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["maKhachHang"] = new SelectList(_context.KhachHang, "id", "id", ve.maKhachHang);
-            ViewData["maGhe"] = new SelectList(_context.Ghe, "id", "id", ve.maGhe);
-            ViewData["maNhanVien"] = new SelectList(_context.NhanVien, "id", "id", ve.maNhanVien);
+            ViewData["maKhachHang"] = new SelectList(_context.KhachHang, "id", "hoTen", ve.maKhachHang);
+            ViewData["maGhe"] = new SelectList(_context.Ghe, "id", "tenGhe", ve.maGhe);
+            ViewData["maNhanVien"] = new SelectList(_context.NhanVien, "hoTen", "id", ve.maNhanVien);
             ViewData["maXuatChieu"] = new SelectList(_context.XuatChieu, "id", "id", ve.maXuatChieu);
             return View(ve);
         }
@@ -136,9 +136,9 @@ namespace DatVeXemPhim.Controllers
             {
                 return NotFound();
             }
-            ViewData["maKhachHang"] = new SelectList(_context.KhachHang, "id", "id", ve.maKhachHang);
-            ViewData["maGhe"] = new SelectList(_context.Ghe, "id", "id", ve.maGhe);
-            ViewData["maNhanVien"] = new SelectList(_context.NhanVien, "id", "id", ve.maNhanVien);
+            ViewData["maKhachHang"] = new SelectList(_context.KhachHang, "id", "hoTen", ve.maKhachHang);
+            ViewData["maGhe"] = new SelectList(_context.Ghe, "id", "tenGhe", ve.maGhe);
+            ViewData["maNhanVien"] = new SelectList(_context.NhanVien, "id", "hoTen", ve.maNhanVien);
             ViewData["maXuatChieu"] = new SelectList(_context.XuatChieu, "id", "id", ve.maXuatChieu);
             return View(ve);
         }
@@ -301,11 +301,6 @@ namespace DatVeXemPhim.Controllers
             return View(khachHang);
         }
 
-
-
-
-
-
         public IActionResult DatVe()
         {
             var khachHangID = TempData["KhachHangID"];
@@ -315,13 +310,9 @@ namespace DatVeXemPhim.Controllers
             }
 
             var phims = _context.Phim.ToList();
-            var xuatChieus = _context.XuatChieu.ToList();
-            var ghes = _context.Ghe.ToList();
             var nhanViens = _context.NhanVien.ToList();
 
             ViewBag.Phims = new SelectList(phims, "id", "tenPhim");
-            ViewBag.XuatChieus = new SelectList(xuatChieus, "id", "ngayChieu");
-            ViewBag.Ghes = new SelectList(ghes, "id", "tenGhe");
             ViewBag.NhanViens = new SelectList(nhanViens, "id", "hoTen");
             ViewBag.KhachHangID = khachHangID;
 
@@ -329,7 +320,32 @@ namespace DatVeXemPhim.Controllers
         }
 
 
-        // POST: DatVe
+
+        public IActionResult GetXuatChieuByPhim(int phimId)
+        {
+            var xuatChieus = _context.XuatChieu
+                .Where(x => x.maPhim == phimId)
+                .Select(x => new { x.id, x.ngayChieu })
+                .ToList();
+            return Json(xuatChieus);
+        }
+
+        public IActionResult GetAvailableGhesByXuatChieu(int xuatChieuId)
+        {
+            var gheDaChon = _context.Ve
+                .Where(v => v.maXuatChieu == xuatChieuId)
+                .Select(v => v.maGhe)
+                .ToList();
+
+            var ghes = _context.Ghe
+                .Where(g => !gheDaChon.Contains(g.id))
+                .Select(g => new { g.id, g.tenGhe })
+                .ToList();
+
+            return Json(ghes);
+        }
+
+
         [HttpPost]
         public IActionResult DatVe(Ve ve)
         {
@@ -337,18 +353,19 @@ namespace DatVeXemPhim.Controllers
             {
                 try
                 {
-                    // Lấy thông tin khách hàng từ database
                     var khachHang = _context.KhachHang.FirstOrDefault(k => k.id == ve.maKhachHang);
                     var xuatChieu = _context.XuatChieu.FirstOrDefault(x => x.id == ve.maXuatChieu);
                     var ghe = _context.Ghe.FirstOrDefault(g => g.id == ve.maGhe);
                     var nhanVien = _context.NhanVien.FirstOrDefault(nv => nv.id == ve.maNhanVien);
+                    var phim = _context.Phim.FirstOrDefault(p => p.id == xuatChieu.maPhim);
 
-                    if (khachHang == null || xuatChieu == null || ghe == null || nhanVien == null)
+                    if (khachHang == null || xuatChieu == null || ghe == null || nhanVien == null || phim == null)
                     {
-                        ModelState.AddModelError("", "Thông tin khách hàng, xuất chiếu hoặc ghế không hợp lệ.");
+                        ModelState.AddModelError("", "Thông tin khách hàng, xuất chiếu, ghế hoặc phim không hợp lệ.");
                         return View(ve);
                     }
 
+                    ve.fk_XuatChieu.maPhim = phim.id;
                     ve.fk_XuatChieu = xuatChieu;
                     ve.fk_KhachHang = khachHang;
                     ve.fk_MaGhe = ghe;
@@ -364,23 +381,18 @@ namespace DatVeXemPhim.Controllers
                 catch (DbUpdateException ex)
                 {
                     ModelState.AddModelError("", "Có lỗi xảy ra khi lưu dữ liệu. Vui lòng thử lại.");
-                    // Log lỗi nếu cần thiết
                 }
                 catch (Exception ex)
                 {
                     ModelState.AddModelError("", "Có lỗi xảy ra. Vui lòng thử lại.");
-                    // Log lỗi nếu cần thiết
                 }
             }
 
-            // Nếu ModelState không hợp lệ, lấy lại danh sách để hiển thị
             var phims = _context.Phim.ToList();
-            var xuatChieus = _context.XuatChieu.ToList();
             var ghes = _context.Ghe.ToList();
             var nhanViens = _context.NhanVien.ToList();
 
             ViewBag.Phims = new SelectList(phims, "id", "tenPhim");
-            ViewBag.XuatChieus = new SelectList(xuatChieus, "id", "ngayChieu");
             ViewBag.Ghes = new SelectList(ghes, "id", "tenGhe");
             ViewBag.NhanViens = new SelectList(nhanViens, "id", "hoTen");
 
