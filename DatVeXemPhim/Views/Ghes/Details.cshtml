@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Chi tiết";
+    Layout = "_LayOut_Admin";
 }
 <div class="container mt-4">
     <h1 class="text-center">@ViewData["Title"]</h1>
@@ -10,12 +11,10 @@
             <h4 class="card-title">Ghế</h4>
             <hr />
             <dl class="row">
-                <dt class="col-sm-3">Mã Ghế</dt>
-                <dd class="col-sm-9">@Html.DisplayFor(model => model.id)</dd>
-                <dt class="col-sm-3">Phòng Chiếu</dt>
-                <dd class="col-sm-9">@Html.DisplayFor(model => model.maPhong)</dd>
                 <dt class="col-sm-3">Tên Ghế</dt>
                 <dd class="col-sm-9">@Html.DisplayFor(model => model.tenGhe)</dd>
+                <dt class="col-sm-3">Phòng Chiếu</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.fk_PhongChieu.tenPhong)</dd>
             </dl>
         </div>
     </div>

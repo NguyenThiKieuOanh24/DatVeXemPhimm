@@ -22,18 +22,17 @@
     <table class="table table-striped table-bordered">
         <thead class="table-dark">
             <tr>
-                <th>Mã Ghế</th>
-                <th>Phòng Chiếu</th>
                 <th>Tên Ghế</th>
+                <th>Phòng Chiếu</th>
+                <th>Hành động</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model)
             {
                 <tr>
-                    <td>@Html.DisplayFor(modelItem => item.id)</td>
-                    <td>@Html.DisplayFor(modelItem => item.maPhong)</td>
                     <td>@Html.DisplayFor(modelItem => item.tenGhe)</td>
+                    <td>@Html.DisplayFor(modelItem => item.fk_PhongChieu.tenPhong)</td>
                     <td>
                         <a asp-action="Edit" asp-route-id="@item.id" class="btn btn-warning btn-sm">Chỉnh sửa</a>
                         <a asp-action="Details" asp-route-id="@item.id" class="btn btn-info btn-sm">Chi tiết</a>
