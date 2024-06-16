@@ -22,9 +22,6 @@ namespace DatVeXemPhim.Controllers
         // GET: QuanLyGhes
         public async Task<IActionResult> Index(string sortOrder, string searchString, string currentFilter, int? pageNumber)
         {
-            ViewData["CurrentSort"] = sortOrder;
-            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewData["NumberSortParm"] = sortOrder == "Number" ? "" : "Number";
             ViewData["CurrentFilter"] = searchString;
 
             if (searchString != null)
@@ -36,8 +33,7 @@ namespace DatVeXemPhim.Controllers
                 searchString = currentFilter;
             }
 
-
-            var ghe = from s in _context.Ghe
+            var ghe = from s in _context.Ghe.Include(x => x.fk_PhongChieu)
                              select s;
 
             if (!String.IsNullOrEmpty(searchString))
@@ -45,14 +41,8 @@ namespace DatVeXemPhim.Controllers
                 ghe = ghe.Where(s => s.tenGhe.Contains(searchString));
             }
 
-            ghe = sortOrder switch
-            {
-                "name_desc" => ghe.OrderByDescending(s => s.tenGhe),
-                "Number" => ghe.OrderBy(s => s.tenGhe),
-                _ => ghe.OrderBy(s => s.tenGhe),
-            };
-
-            int pageSize = 5;
+            int pageSize = 10;
+ 
             return View(await phanTrang<Ghe>.CreateAsync(ghe.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
@@ -64,8 +54,7 @@ namespace DatVeXemPhim.Controllers
                 return NotFound();
             }
 
-            var ghe = await _context.Ghe
-                .FirstOrDefaultAsync(m => m.id == id);
+            var ghe = _context.Ghe.Include(p=>p.fk_PhongChieu).FirstOrDefault();
             if (ghe == null)
             {
                 return NotFound();
@@ -168,7 +157,7 @@ namespace DatVeXemPhim.Controllers
                 return NotFound();
             }
 
-            var ghe = await _context.Ghe
+            var ghe = await _context.Ghe.Include(P=> P.fk_PhongChieu)
                 .FirstOrDefaultAsync(m => m.id == id);
             if (ghe == null)
             {
