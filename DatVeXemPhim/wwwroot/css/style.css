@@ -65,7 +65,8 @@ h6 {
 * Desktop Navigation 
 */
 .navbar {
-  padding: 0;
+    padding: 0;
+    display: flex;
 }
 
 .navbar ul {
