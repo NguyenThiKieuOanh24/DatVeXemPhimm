@@ -1,24 +1,20 @@
 ﻿@model IEnumerable<DatVeXemPhim.Models.Phim>
 
-<h1 class="mb-4">Phim mầy cần xem nè</h1>
-<div class="row row-cols-1 row-cols-md-3 g-4">
-    @foreach (var phim in Model)
-    {
-        <div class="col">
-            <div class="card h-100 shadow-sm">
-                <img src="@phim.posterPhim" class="card-img-top" alt="@phim.tenPhim">
-                <div class="card-body">
-                    <h5 class="card-title">@phim.tenPhim</h5>
-                    <p class="card-text">@phim.daoDien</p>
+<h1 class="mb-4">Kết quả tìm kiếm từ khóa "@ViewBag.SearchString"</h1>
+
+<div class="movie-list">
+    <div class="col-lg-8">
+        @foreach (var movie in Model)
+        {
+            <div class="movie-item" style="">
+                <img src="@movie.posterPhim" alt="@movie.tenPhim">
+                <div class="movie-details">
+                    <div class="movie-title">@movie.tenPhim</div>
+                    <div class="movie-description">Đạo diễn: @movie.daoDien</div>
+                    <div class="movie-description">Diễn viên: @movie.dienVien</div><br>
+                    <a asp-controller="Home" asp-action="Details" asp-route-id="@movie.id"><button class="btn btn-warning">Xem chi tiết</button></a>
                 </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><strong>Diễn viên:</strong> @phim.dienVien</li>
-                    <li class="list-group-item"><strong>Thể loại:</strong> @phim.maLoaiPhim</li>
-                    <li class="list-group-item"><strong>Thời lượng:</strong> @phim.thoiLuong</li>
-                    <li class="list-group-item"><strong>Ngôn ngữ:</strong> @phim.ngonNgu</li>
-                    <li class="list-group-item"><strong>Khởi chiếu:</strong> @phim.thoiGianKhoiChieu.ToShortDateString()</li>
-                </ul>
             </div>
-        </div>
-    }
+        }
+    </div>
 </div>
