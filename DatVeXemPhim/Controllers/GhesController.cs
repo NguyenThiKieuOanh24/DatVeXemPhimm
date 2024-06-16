@@ -90,6 +90,13 @@ namespace DatVeXemPhim.Controllers
         {
             if (ModelState.IsValid)
             {
+                bool gheExists = await _context.Ghe.AnyAsync(g => g.tenGhe == ghe.tenGhe && g.maPhong == ghe.maPhong);
+                if (gheExists)
+                {
+                    // Thêm lỗi vào ModelState
+                    ModelState.AddModelError("tenGhe", "Tên ghế đã tồn tại trong phòng chiếu này.");
+                    return View(ghe);
+                }
                 _context.Add(ghe);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -111,6 +118,7 @@ namespace DatVeXemPhim.Controllers
             {
                 return NotFound();
             }
+            ViewData["PhongChieuList"] = new SelectList(_context.PhongChieu, "id", "tenPhong");
             return View(ghe);
         }
 
@@ -148,6 +156,7 @@ namespace DatVeXemPhim.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["PhongChieuList"] = new SelectList(_context.PhongChieu, "id", "tenPhong", ghe.maPhong);
             return View(ghe);
         }
 

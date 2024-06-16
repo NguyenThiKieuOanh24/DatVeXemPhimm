@@ -36,8 +36,7 @@
                 </div>
                 <div class="form-group">
                     <label asp-for="maLoaiPhim" class="control-label">Thể Loại Phim</label>
-                    <input asp-for="maLoaiPhim" class="form-control" />
-                    <span asp-validation-for="maLoaiPhim" class="text-danger"></span>
+                    <select asp-for="maLoaiPhim" class="form-control" asp-items="ViewBag.TheLoaiPhimList"></select>
                 </div>
                 <div class="form-group">
                     <label asp-for="thoiGianKhoiChieu" class="control-label">Thời Gian Khởi Chiếu</label>

@@ -90,6 +90,13 @@ namespace DatVeXemPhim.Controllers
         {
             if (ModelState.IsValid)
             {
+                bool phongChieuExists = await _context.PhongChieu.AnyAsync(p => p.tenPhong == phongChieu.tenPhong);
+                if (phongChieuExists)
+                {
+                    // Thêm lỗi vào ModelState
+                    ModelState.AddModelError("tenPhong", "Tên phòng chiếu đã tồn tại.");
+                    return View(phongChieu);
+                }
                 _context.Add(phongChieu);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

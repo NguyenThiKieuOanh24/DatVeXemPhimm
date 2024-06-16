@@ -90,6 +90,13 @@ namespace DatVeXemPhim.Controllers
         {
             if (ModelState.IsValid)
             {
+                bool taiKhoanExists = await _context.NhanVien.AnyAsync(nv => nv.taiKhoan == nhanVien.taiKhoan);
+                if (taiKhoanExists)
+                {
+                    // Thêm lỗi vào ModelState
+                    ModelState.AddModelError("taiKhoan", "Tài khoản đã tồn tại.");
+                    return View(nhanVien);
+                }
                 _context.Add(nhanVien);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

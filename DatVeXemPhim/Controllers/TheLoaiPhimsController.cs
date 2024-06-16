@@ -89,6 +89,13 @@ namespace DatVeXemPhim.Controllers
         {
             if (ModelState.IsValid)
             {
+                bool theLoaiPhimExists = await _context.TheLoaiPhim.AnyAsync(p => p.tenLoaiPhim == theLoaiPhim.tenLoaiPhim);
+                if (theLoaiPhimExists)
+                {
+                    // Thêm lỗi vào ModelState
+                    ModelState.AddModelError("tenLoaiPhim", "Tên thể loại đã tồn tại.");
+                    return View(theLoaiPhim);
+                }
                 _context.Add(theLoaiPhim);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
