@@ -43,7 +43,9 @@ namespace DatVeXemPhim.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                phim = phim.Where(s => s.tenPhim.Contains(searchString));
+                phim = phim.Where(s => s.tenPhim.Contains(searchString) 
+                                       || s.dienVien.Contains(searchString) 
+                                       || s.daoDien.Contains(searchString));
             }
 
             phim = sortOrder switch
@@ -79,6 +81,7 @@ namespace DatVeXemPhim.Controllers
         // GET: Phims/Create
         public IActionResult Create()
         {
+            ViewData["TheLoaiPhimList"] = new SelectList(_context.TheLoaiPhim, "id", "tenLoaiPhim");
             return View();
         }
 
@@ -95,6 +98,7 @@ namespace DatVeXemPhim.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["TheLoaiPhimList"] = new SelectList(_context.TheLoaiPhim, "id", "tenPhong", phim.maLoaiPhim);
             return View(phim);
         }
 

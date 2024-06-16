@@ -77,6 +77,7 @@ namespace DatVeXemPhim.Controllers
         // GET: QuanLyGhes/Create
         public IActionResult Create()
         {
+            ViewData["PhongChieuList"] = new SelectList(_context.PhongChieu, "id", "tenPhong");
             return View();
         }
 
@@ -93,6 +94,7 @@ namespace DatVeXemPhim.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["PhongChieuList"] = new SelectList(_context.PhongChieu, "id", "tenPhong", ghe.maPhong);
             return View(ghe);
         }
 
