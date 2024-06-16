@@ -18,12 +18,16 @@
             <input type="hidden" asp-for="maKhachHang" value="@ViewBag.KhachHangID" />
         </div>
         <div class="form-group">
+            <label asp-for="fk_XuatChieu.maPhim" class="control-label">Chọn Phim</label>
+            <select asp-for="fk_XuatChieu.maPhim" class="form-control" asp-items="ViewBag.Phims" id="phimDropdown"></select>
+        </div>
+        <div class="form-group">
             <label asp-for="maXuatChieu" class="control-label">Chọn xuất chiếu</label>
-            <select asp-for="maXuatChieu" class="form-control" asp-items="ViewBag.XuatChieus"></select>
+            <select asp-for="maXuatChieu" class="form-control" id="xuatChieuDropdown"></select>
         </div>
         <div class="form-group">
             <label asp-for="maGhe" class="control-label">Chọn Ghế</label>
-            <select asp-for="maGhe" class="form-control" asp-items="ViewBag.Ghes"></select>
+            <select asp-for="maGhe" class="form-control" id="gheDropdown"></select>
         </div>
         <div class="form-group">
             <label for="maNhanVien">Nhân Viên đặt vé</label>
@@ -38,3 +42,50 @@
         </div>
     </form>
 </div>
+
+@section Scripts {
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#phimDropdown').change(function () {
+                var phimId = $(this).val();
+                $.ajax({
+                    url: '@Url.Action("GetXuatChieuByPhim")',
+                    type: 'GET',
+                    data: { phimId: phimId },
+                    success: function (data) {
+                        var xuatChieuDropdown = $('#xuatChieuDropdown');
+                        xuatChieuDropdown.empty();
+                        xuatChieuDropdown.append($('<option>', { value: '', text: 'Chọn xuất chiếu' }));
+                        $.each(data, function (i, xuatChieu) {
+                            xuatChieuDropdown.append($('<option>', {
+                                value: xuatChieu.id,
+                                text: xuatChieu.ngayChieu
+                            }));
+                        });
+                    }
+                });
+            });
+
+            $('#xuatChieuDropdown').change(function () {
+                var xuatChieuId = $(this).val();
+                $.ajax({
+                    url: '@Url.Action("GetAvailableGhesByXuatChieu")',
+                    type: 'GET',
+                    data: { xuatChieuId: xuatChieuId },
+                    success: function (data) {
+                        var gheDropdown = $('#gheDropdown');
+                        gheDropdown.empty();
+                        gheDropdown.append($('<option>', { value: '', text: 'Chọn ghế' }));
+                        $.each(data, function (i, ghe) {
+                            gheDropdown.append($('<option>', {
+                                value: ghe.id,
+                                text: ghe.tenGhe
+                            }));
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+}
