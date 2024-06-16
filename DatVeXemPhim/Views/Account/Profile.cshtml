@@ -1,0 +1,82 @@
+﻿@model DatVeXemPhim.Models.KhachHang
+
+@{
+    ViewData["Title"] = "Thông tin cá nhân";
+}
+
+<style>
+    .container {
+        margin-top: 20px;
+        margin-left:100px;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+        font-weight: bold;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    .info-row dt {
+        font-weight: bold;
+        color: white;
+    }
+
+    .info-row dd {
+        color: white;
+        margin-bottom: 10px;
+    }
+
+    .btn-primary, .btn-secondary {
+        padding: 10px 20px;
+        font-size: 1rem;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border: none;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+    .btn-secondary {
+        background-color: #6c757d;
+        border: none;
+    }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+
+    .actions {
+        display: flex;
+        gap: 10px;
+    }
+</style>
+
+<h1>Thông tin cá nhân</h1>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <dl class="row info-row">
+                <dt class="col-sm-4">Họ tên</dt>
+                <dd class="col-sm-8">@Model.hoTen</dd>
+                <dt class="col-sm-4">Số điện thoại</dt>
+                <dd class="col-sm-8">@Model.soDienThoai</dd>
+                <dt class="col-sm-4">Email</dt>
+                <dd class="col-sm-8">@Model.email</dd>
+                <dt class="col-sm-4">Tài khoản</dt>
+                <dd class="col-sm-8">@Model.taiKhoan</dd>
+            </dl>
+        </div>
+    </div>
+    <div class="mt-4 actions">
+        <a asp-action="EditProfile" class="btn btn-primary">Chỉnh sửa thông tin</a>
+        <a asp-action="ChangePassword" class="btn btn-warning">Đổi mật khẩu</a>
+    </div>
+</div>

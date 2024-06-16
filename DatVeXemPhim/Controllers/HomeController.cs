@@ -48,9 +48,11 @@ namespace DatVeXemPhim.Controllers
         public async Task<IActionResult> Search(string searchString)
         {
 
+            ViewBag.SearchString = searchString;
+
             if (_context.Phim == null)
             {
-                return Problem("List null");
+                return Problem("Danh sách trống");
             }
 
             var movies = from m in _context.Phim
@@ -84,31 +86,31 @@ namespace DatVeXemPhim.Controllers
             }
             await _context.SaveChangesAsync();
             return View(phim);
-
         }
+
         public async Task<IActionResult> VeDaDat()
         {
             var user = SessionConfig.GetKhachHang();
-
             if (user == null)
             {
-                return Unauthorized();
+                return RedirectToAction("Index", "Home");
             }
+
+
             int userId = user.id;
             var dsve = await _context.Ve
                 .Where(v => v.maKhachHang == userId)
                 .Include(p => p.fk_MaGhe)
                 .Include(p => p.fk_XuatChieu)
-                .ThenInclude(xc => xc.fk_Phim)
+                .ThenInclude(x => x.fk_Phim)
                 .Include(p => p.fk_MaGhe)
                 .ThenInclude(g => g.fk_PhongChieu)
                 .ToListAsync();
-
+            
             if (dsve == null || dsve.Count == 0)
             {
-                return NotFound(); // Nếu không tìm thấy vé nào, trả về NotFound
+                return View();
             }
-
             return View(dsve);
         }
     }

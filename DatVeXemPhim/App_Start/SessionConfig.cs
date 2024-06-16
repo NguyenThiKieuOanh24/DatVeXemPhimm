@@ -44,5 +44,10 @@ namespace DatVeXemPhim.App_Start
             // Xoá thông tin người dùng khỏi session
             _httpContextAccessor.HttpContext.Session.Remove("NhanVien");
         }
+        public static void LogOutKhachHang()
+        {
+            // Xoá thông tin người dùng khỏi session
+            _httpContextAccessor.HttpContext.Session.Remove("KhachHang");
+        }
     }
 }

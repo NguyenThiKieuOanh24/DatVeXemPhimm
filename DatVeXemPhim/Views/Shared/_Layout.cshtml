@@ -1,5 +1,5 @@
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "CoLyCinema";
     var user = DatVeXemPhim.App_Start.SessionConfig.GetKhachHang();
 }
 <!DOCTYPE html>
@@ -22,14 +22,11 @@
             <nav id="navbar" class="navbar">
                 <ul>
                     <li class="dropdown">
-                        <a href="#"><span>Danh sách Phim</span> <i class="bi bi-chevron-down"></i></a>
+                        <a class="nav-link text-dark" ><span>Danh sách Phim</span> <i class="bi bi-chevron-down"></i></a>
                         <ul>
                             <li><a class="nav-link text-dark" asp-area="" asp-controller="Phims" asp-action="NowShowing">Phim đang chiếu</a></li>
                             <li><a class="nav-link text-dark" asp-area="" asp-controller="Phims" asp-action="UpComing">Phim sắp chiếu</a></li>
                         </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="VeDaDat"><span>Vé đã đặt</span> <i class="bi bi-chevron-down"></i></a>
                     </li>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav><!-- .navbar -->
@@ -47,8 +44,10 @@
                             <li class="dropdown">
                                 <a href="#"><span><img style="width:70px;height:70px;left:100%" src="https://cdn0.iconfinder.com/data/icons/basic-ui-elements-2-1-flat-style/512/Basic_UI_Elements_-_2.1_-_Flat_Style_-_36_-_Expand-11-1024.png"></span> <i class="bi bi-chevron-down"></i></a>
                                 <ul>
-                                    <li><a class="nav-link text-dark" asp-controller="" asp-action="">Thông tin cá nhân</a></li>
-                                    <li><a class="nav-link text-dark" asp-controller="Account" asp-action="Logout">Đăng xuất</a></li>
+                                    <li><a class="nav-link text-dark" asp-controller="Account" asp-action="Profile">Thông tin cá nhân</a></li>
+                                    <li><a class="nav-link text-dark" asp-controller="Account" asp-action="LogOut">Đăng xuất</a></li>
+                                    <li><a class="nav-link text-dark" asp-controller="Home" asp-action="VeDaDat">Vé đã đặt</a></li>
+
                                 </ul>
                             </li>
                         }

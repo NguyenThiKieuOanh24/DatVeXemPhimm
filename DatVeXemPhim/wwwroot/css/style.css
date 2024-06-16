@@ -267,8 +267,9 @@ section {
 # Footer
 --------------------------------------------------------------*/
 #footer {
-  background-color:white;
-  height:100px;
+    background-color: white;
+    height: 100px;
+    bottom: 0;
 }
 
 #footer .footer-top {

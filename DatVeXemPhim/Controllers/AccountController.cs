@@ -91,7 +91,7 @@ namespace DatVeXemPhim.Controllers
                 // Tìm tài khoản trong cơ sở dữ liệu
                 var user = await _context.KhachHang
                     .FirstOrDefaultAsync(k => k.taiKhoan == taiKhoan && k.matKhau == matKhau);
-
+             
                 if (user != null)
                 {
                     // Đăng nhập thành công
@@ -115,16 +115,134 @@ namespace DatVeXemPhim.Controllers
         }
         // Other methods...
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Logout()
+       
+        public async Task<IActionResult> LogOut()
         {
-            // Đăng xuất người dùng
-            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-
-            // Chuyển hướng đến trang chủ hoặc trang đăng nhập
+            SessionConfig.LogOutKhachHang();
             return RedirectToAction("Index", "Home");
         }
+        // GET: /Account/Profile
+        [HttpGet]
+        public async Task<IActionResult> Profile()
+        { 
+            var user = SessionConfig.GetKhachHang();
 
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+            int userId = user.id;
+            var khachhang = await _context.KhachHang
+                .FirstOrDefaultAsync(v => v.id == userId);
+            if(khachhang == null)
+            {
+                return NotFound();
+            }
+            await _context.SaveChangesAsync();
+            return View(khachhang);
+        }
+        // GET: /Account/EditProfile
+[HttpGet]
+public async Task<IActionResult> EditProfile()
+{
+    var user = SessionConfig.GetKhachHang();
+
+    if (user == null)
+    {
+        return Unauthorized();
+    }
+
+    int userId = user.id;
+    var khachHang = await _context.KhachHang.FindAsync(userId);
+
+    if (khachHang == null)
+    {
+        return NotFound();
+    }
+
+    return View(khachHang);
+}
+
+        // POST: /Account/EditProfile
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditProfile([Bind("id,hoTen,soDienThoai,email,taiKhoan,matKhau")] KhachHang khachHang)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(khachHang);
+            }
+
+            try
+            {
+                _context.Update(khachHang);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!KhachHangExists(khachHang.id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return RedirectToAction(nameof(Profile));
+        }
+
+
+        private bool KhachHangExists(int id)
+{
+    return _context.KhachHang.Any(e => e.id == id);
+}
+
+        // GET: /Account/ChangePassword
+        [HttpGet]
+        public IActionResult ChangePassword()
+        {
+            return View();
+        }
+
+        // POST: /Account/ChangePassword
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ChangePassword(string currentPassword, string newPassword, string confirmPassword)
+        {
+            var user = SessionConfig.GetKhachHang();
+
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+            int userId = user.id;
+            var khachhang = await _context.KhachHang
+                .FirstOrDefaultAsync(v => v.id == userId);
+
+            if (khachhang == null)
+            {
+                return RedirectToAction("Login");
+            }
+
+            if (khachhang.matKhau != currentPassword)
+            {
+                ModelState.AddModelError("CurrentPassword", "Mật khẩu hiện tại không đúng.");
+                return View();
+            }
+
+            if (newPassword != confirmPassword)
+            {
+                ModelState.AddModelError("ConfirmPassword", "Mật khẩu xác nhận không khớp.");
+                return View();
+            }
+
+            khachhang.matKhau = newPassword;
+            _context.Update(khachhang);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Profile");
+        }
     }
 }
