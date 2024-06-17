@@ -21,11 +21,8 @@ namespace DatVeXemPhim.Controllers
         }
 
         // GET: Phims
-        public async Task<IActionResult> Index(string sortOrder, string searchString, string currentFilter, int? pageNumber)
+        public async Task<IActionResult> Index(string searchString, string currentFilter, int? pageNumber)
         {
-            ViewData["CurrentSort"] = sortOrder;
-            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewData["NumberSortParm"] = sortOrder == "Number" ? "" : "Number";
             ViewData["CurrentFilter"] = searchString;
 
             if (searchString != null)
@@ -47,13 +44,6 @@ namespace DatVeXemPhim.Controllers
                                        || s.dienVien.Contains(searchString) 
                                        || s.daoDien.Contains(searchString));
             }
-
-            phim = sortOrder switch
-            {
-                "name_desc" => phim.OrderByDescending(s => s.tenPhim),
-                "Number" => phim.OrderBy(s => s.id),
-                _ => phim.OrderBy(s => s.tenPhim),
-            };
 
             int pageSize = 5;
             return View(await phanTrang<Phim>.CreateAsync(phim.AsNoTracking(), pageNumber ?? 1, pageSize));

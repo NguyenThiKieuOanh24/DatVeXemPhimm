@@ -20,7 +20,7 @@ namespace DatVeXemPhim.Controllers
         }
 
         // GET: QuanLyGhes
-        public async Task<IActionResult> Index(string sortOrder, string searchString, string currentFilter, int? pageNumber)
+        public async Task<IActionResult> Index(string searchString, string currentFilter, int? pageNumber)
         {
             ViewData["CurrentFilter"] = searchString;
 

@@ -90,13 +90,11 @@
     <ul class="pagination justify-content-center">
         <li class="page-item @(!Model.HasPreviousPage ? "disabled" : "")">
             <a class="page-link" asp-action="Index"
-               asp-route-sortOrder="@ViewData["CurrentSort"]"
                asp-route-pageNumber="@(Model.soTrang - 1)"
                asp-route-currentFilter="@ViewData["CurrentFilter"]">Trước</a>
         </li>
         <li class="page-item @(!Model.HasNextPage ? "disabled" : "")">
             <a class="page-link" asp-action="Index"
-               asp-route-sortOrder="@ViewData["CurrentSort"]"
                asp-route-pageNumber="@(Model.soTrang + 1)"
                asp-route-currentFilter="@ViewData["CurrentFilter"]">Sau</a>
         </li>

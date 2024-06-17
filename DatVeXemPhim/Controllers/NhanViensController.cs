@@ -20,11 +20,8 @@ namespace DatVeXemPhim.Controllers
         }
 
         // GET: NhanViens
-        public async Task<IActionResult> Index(string sortOrder, string searchString, string currentFilter, int? pageNumber)
+        public async Task<IActionResult> Index(string searchString, string currentFilter, int? pageNumber)
         {
-            ViewData["CurrentSort"] = sortOrder;
-            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewData["NumberSortParm"] = sortOrder == "Number" ? "" : "Number";
             ViewData["CurrentFilter"] = searchString;
 
             if (searchString != null)
@@ -45,13 +42,6 @@ namespace DatVeXemPhim.Controllers
                 nhanvien = nhanvien.Where(s => s.hoTen.Contains(searchString)
                                             || s.taiKhoan.Contains(searchString));
             }
-
-            nhanvien = sortOrder switch
-            {
-                "name_desc" => nhanvien.OrderByDescending(s => s.hoTen),
-                "Number" => nhanvien.OrderBy(s => s.soDienThoai),
-                _ => nhanvien.OrderBy(s => s.hoTen),
-            };
 
             int pageSize = 5;
             return View(await phanTrang<NhanVien>.CreateAsync(nhanvien.AsNoTracking(), pageNumber ?? 1, pageSize));
