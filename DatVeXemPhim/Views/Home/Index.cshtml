@@ -57,6 +57,7 @@
                                 <div class="movie-description">Đạo diễn: @movie.daoDien</div>
                                 <div class="movie-description">Diễn viên: @movie.dienVien</div><br>
                                 <a asp-controller="Home" asp-action="Details" asp-route-id="@movie.id"><button class="btn btn-warning">Xem chi tiết</button></a>
+                                <a asp-controller="KhachDatVe" asp-action="Step2" asp-route-id="@movie.id" class=" btn btn-primary">Đặt vé</a>
                             </div>
                         </div>
                     }
