@@ -20,11 +20,8 @@ namespace DatVeXemPhim.Controllers
         }
 
         // GET: QuanLyGhes
-        public async Task<IActionResult> Index(string sortOrder, string searchString, string currentFilter, int? pageNumber)
+        public async Task<IActionResult> Index(string searchString, string currentFilter, int? pageNumber)
         {
-            ViewData["CurrentSort"] = sortOrder;
-            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewData["NumberSortParm"] = sortOrder == "Number" ? "" : "Number";
             ViewData["CurrentFilter"] = searchString;
 
             if (searchString != null)
@@ -44,13 +41,6 @@ namespace DatVeXemPhim.Controllers
             {
                 phongChieu = phongChieu.Where(s => s.tenPhong.Contains(searchString));
             }
-
-            phongChieu = sortOrder switch
-            {
-                "name_desc" => phongChieu.OrderByDescending(s => s.tenPhong),
-                "Number" => phongChieu.OrderBy(s => s.tenPhong),
-                _ => phongChieu.OrderBy(s => s.tenPhong),
-            };
 
             int pageSize = 5;
             return View(await phanTrang<PhongChieu>.CreateAsync(phongChieu.AsNoTracking(), pageNumber ?? 1, pageSize));
