@@ -8,11 +8,6 @@
 <div class="container mt-4">
     <h1 class="text-center mb-4">@ViewData["Title"]</h1>
 
-    <p>
-        <a asp-action="Create" class="btn btn-primary">Thêm vé</a>
-        <a asp-controller="QuanLiVes" asp-action="DangKy" class="btn btn-success">Đặt vé</a>
-    </p>
-
     <form asp-action="Index" method="get" class="mb-4">
         <div class="input-group mb-3">
             <input type="text" name="searchCodeV" class="form-control" placeholder="Mã vé" value="@ViewData["CurrentCodeV"]" />
@@ -23,7 +18,7 @@
             <button class="btn btn-secondary" type="submit">Tìm theo mã khách hàng</button>
             <a asp-action="Index" class="btn btn-outline-secondary ms-2">Xem toàn bộ danh sách vé</a>
         </div>
-        <a class="btn btn-primary" href="/QuanLiVes/ExportToExcel">Xuất Excel</a>
+
     </form>
 
     <div class="table-responsive">
@@ -31,17 +26,15 @@
             <thead class="thead-dark">
                 <tr>
                     <th>Mã vé</th>
-                    <th>Mã xuất chiếu</th>
                     <th>Mã khách hàng</th>
-                    <th>Mã nhân viên</th>
-                    <th>Mã phòng</th>
-                    <th>Mã ghế</th>
+                    <th>Mã xuất chiếu</th>
                     <th>Tên khách hàng</th>
-                    <th>Tên nhân viên</th>
+                    <th>Tên phim</th>
+                    <th>Ngày chiếu</th>
                     <th>Tên phòng</th>
                     <th>Tên ghế</th>
                     <th>Ngày bán vé</th>
-                    <th>Tổng tiền</th>
+                    <th>Tổng tiền (đơn vị: vnd)</th>
                     <th>Hành động</th>
                 </tr>
             </thead>
@@ -50,21 +43,18 @@
                 {
                     <tr>
                         <td>@Html.DisplayFor(modelItem => item.id)</td>
-                        <td>@Html.DisplayFor(modelItem => item.fk_XuatChieu.id)</td>
                         <td>@Html.DisplayFor(modelItem => item.fk_KhachHang.id)</td>
-                        <td>@Html.DisplayFor(modelItem => item.fk_NhanVien.id)</td>
-                        <td>@Html.DisplayFor(modelItem => item.fk_XuatChieu.maPhong)</td>
-                        <td>@Html.DisplayFor(modelItem => item.fk_MaGhe.id)</td>
+                        <td>@Html.DisplayFor(modelItem => item.fk_XuatChieu.id)</td>
                         <td>@Html.DisplayFor(modelItem => item.fk_KhachHang.hoTen)</td>
-                        <td>@Html.DisplayFor(modelItem => item.fk_NhanVien.hoTen)</td>
+                        <td>@Html.DisplayFor(modelItem => item.fk_XuatChieu.fk_Phim.tenPhim)</td>
+                        <td>@Html.DisplayFor(modelItem => item.fk_XuatChieu.ngayChieu)</td>
                         <td>@Html.DisplayFor(modelItem => item.fk_XuatChieu.fk_PhongChieu.tenPhong)</td>
                         <td>@Html.DisplayFor(modelItem => item.fk_MaGhe.tenGhe)</td>
                         <td>@Html.DisplayFor(modelItem => item.ngayBanVe)</td>
                         <td>@Html.DisplayFor(modelItem => item.tongTien)</td>
                         <td>
-                            <a asp-action="Edit" asp-route-id="@item.id" class="btn btn-sm btn-warning">Sửa</a>
                             <a asp-action="Details" asp-route-id="@item.id" class="btn btn-sm btn-info">Chi tiết</a>
-                            <a asp-action="Delete" asp-route-id="@item.id" class="btn btn-sm btn-danger">Xoá</a>
+                            <a asp-action="Delete" asp-route-id="@item.id" class="btn btn-sm btn-danger">Huỷ vé</a>
                         </td>
                     </tr>
                 }
