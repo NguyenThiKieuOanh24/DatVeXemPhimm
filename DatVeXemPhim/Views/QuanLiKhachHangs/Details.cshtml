@@ -33,11 +33,10 @@
                         <tr>
                             <th scope="col">Mã đơn hàng</th>
                             <th scope="col">Mã xuất chiếu</th>
-                            <th scope="col">Mã nhân viên</th>
                             <th scope="col">Tên phim</th>
+                            <th scope="col">Ngày chiếu</th>
+                            <th scope="col">Tên phòng</th>
                             <th scope="col">Tên ghế</th>
-                            <th scope="col">Giờ bắt đầu</th>
-                            <th scope="col">Giờ kết thúc</th>
                             <th scope="col">Ngày bán vé</th>
                             <th scope="col">Tổng tiền (đv: nghìn đồng)</th>
                         </tr>
@@ -48,11 +47,10 @@
                             <tr>
                                 <td>@Html.DisplayFor(modelItem => item.id)</td>
                                 <td>@Html.DisplayFor(modelItem => item.fk_XuatChieu.id)</td>
-                                <td>@Html.DisplayFor(modelItem => item.maNhanVien)</td>
                                 <td>@Html.DisplayFor(modelItem => item.fk_XuatChieu.fk_Phim.tenPhim)</td>
+                                <td>@Html.DisplayFor(modelItem => item.fk_XuatChieu.ngayChieu)</td>
+                                <td>@Html.DisplayFor(modelItem => item.fk_XuatChieu.fk_PhongChieu.tenPhong)</td>
                                 <td>@Html.DisplayFor(modelItem => item.fk_MaGhe.tenGhe)</td>
-                                <td>@Html.DisplayFor(modelItem => item.fk_XuatChieu.gioBatDau)</td>
-                                <td>@Html.DisplayFor(modelItem => item.fk_XuatChieu.gioKetThuc)</td>
                                 <td>@Html.DisplayFor(modelItem => item.ngayBanVe)</td>
                                 <td>@Html.DisplayFor(modelItem => item.tongTien)</td>
                             </tr>

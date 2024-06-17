@@ -17,16 +17,12 @@
                 <dd class="col-sm-10">@Html.DisplayFor(model => model.fk_XuatChieu.id)</dd>
                 <dt class="col-sm-2">@Html.DisplayNameFor(model => model.fk_KhachHang)</dt>
                 <dd class="col-sm-10">@Html.DisplayFor(model => model.fk_KhachHang.id)</dd>
-                <dt class="col-sm-2">@Html.DisplayNameFor(model => model.fk_NhanVien)</dt>
-                <dd class="col-sm-10">@Html.DisplayFor(model => model.fk_NhanVien.id)</dd>
-                <dt class="col-sm-2">Mã phòng</dt>
-                <dd class="col-sm-10">@Html.DisplayFor(model => model.fk_XuatChieu.maPhong)</dd>
-                <dt class="col-sm-2">@Html.DisplayNameFor(model => model.fk_MaGhe)</dt>
-                <dd class="col-sm-10">@Html.DisplayFor(model => model.fk_MaGhe.id)</dd>
                 <dt class="col-sm-2">Tên khách hàng</dt>
                 <dd class="col-sm-10">@Html.DisplayFor(model => model.fk_KhachHang.hoTen)</dd>
-                <dt class="col-sm-2">Tên nhân viên</dt>
-                <dd class="col-sm-10">@Html.DisplayFor(model => model.fk_NhanVien.hoTen)</dd>
+                <dt class="col-sm-2">Tên phim</dt>
+                <dd class="col-sm-10">@Html.DisplayFor(model => model.fk_XuatChieu.fk_Phim.tenPhim)</dd>
+                <dt class="col-sm-2">Ngày chiếu</dt>
+                <dd class="col-sm-10">@Html.DisplayFor(model => model.fk_XuatChieu.ngayChieu)</dd>
                 <dt class="col-sm-2">Tên phòng</dt>
                 <dd class="col-sm-10">@Html.DisplayFor(model => model.fk_XuatChieu.fk_PhongChieu.tenPhong)</dd>
                 <dt class="col-sm-2">Tên ghế</dt>
@@ -39,7 +35,6 @@
         </div>
     </div>
     <div class="text-center mt-4">
-        <a asp-action="Edit" asp-route-id="@Model?.id" class="btn btn-primary">Chỉnh sửa</a>
         <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
     </div>
 </div>

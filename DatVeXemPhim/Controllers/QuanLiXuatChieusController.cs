@@ -228,42 +228,5 @@ namespace DatVeXemPhim.Controllers
             return _context.XuatChieu.Any(e => e.id == id);
         }
 
-        [Route("QuanLiXuatChieus/ExportToExcel")]
-        public async Task<IActionResult> ExportToExcel()
-        {
-            // Lấy danh sách xuất chiếu từ database
-            var xuatChieus = await _context.XuatChieu.ToListAsync();
-
-            // Tạo file Excel
-            var workbook = new XLWorkbook();
-            var worksheet = workbook.Worksheets.Add("XuatChieus");
-
-            // Thêm tiêu đề cột
-            var columns = typeof(XuatChieu).GetProperties().Select(p => p.Name).ToList();
-            for (int i = 0; i < columns.Count; i++)
-            {
-                worksheet.Cell(1, i + 1).Value = columns[i];
-            }
-
-            // Thêm dữ liệu vào worksheet từ dòng thứ 2
-            for (int i = 0; i < xuatChieus.Count; i++)
-            {
-                var xuatChieu = xuatChieus[i];
-                for (int j = 0; j < columns.Count; j++)
-                {
-                    var value = typeof(XuatChieu).GetProperty(columns[j]).GetValue(xuatChieu);
-                    worksheet.Cell(i + 2, j + 1).Value = value != null ? value.ToString() : ""; // Chuyển đổi giá trị sang chuỗi
-                }
-            }
-
-            // Lưu workbook vào memory stream
-            var stream = new MemoryStream();
-            workbook.SaveAs(stream);
-            stream.Position = 0;
-
-            // Trả về file Excel
-            string excelName = $"XuatChieus_{DateTime.Now.ToString("HH-mm-ss dd-MM-yyyy")}.xlsx";
-            return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", excelName);
-        }
     }
 }
