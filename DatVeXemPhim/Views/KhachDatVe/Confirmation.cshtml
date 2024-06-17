@@ -1,0 +1,47 @@
+﻿@model DatVeXemPhim.Models.Ve
+
+@{
+    ViewData["Title"] = "Đặt vé thành công";
+}
+
+<div class="container mt-4">
+    <h2 class="text-center">@ViewData["Title"]</h2>
+    <div class="card mt-4">
+        <div class="card-body">
+            <h4 class="card-title">Chi tiết vé đã đặt</h4>
+            <hr />
+            <div class="row">
+                <div class="col-md-6">
+                    <dl class="row">
+                        <dt class="col-sm-5">Mã xuất chiếu:</dt>
+                        <dd class="col-sm-7">@Html.DisplayFor(model => model.fk_XuatChieu.id)</dd>
+
+                        <dt class="col-sm-5">Tên phim:</dt>
+                        <dd class="col-sm-7">@Html.DisplayFor(model => model.fk_XuatChieu.fk_Phim.tenPhim)</dd>
+
+                        <dt class="col-sm-5">Tên ghế:</dt>
+                        <dd class="col-sm-7">@Html.DisplayFor(model => model.fk_MaGhe.tenGhe)</dd>
+                    </dl>
+                </div>
+                <div class="col-md-6">
+                    <dl class="row">
+                        <dt class="col-sm-5">Giờ bắt đầu:</dt>
+                        <dd class="col-sm-7">@Html.DisplayFor(model => model.fk_XuatChieu.gioBatDau)</dd>
+
+                        <dt class="col-sm-5">Giờ kết thúc:</dt>
+                        <dd class="col-sm-7">@Html.DisplayFor(model => model.fk_XuatChieu.gioKetThuc)</dd>
+
+                        <dt class="col-sm-5">Ngày bán vé:</dt>
+                        <dd class="col-sm-7">@Html.DisplayFor(model => model.ngayBanVe)</dd>
+
+                        <dt class="col-sm-5">Tổng tiền (đv: nghìn đồng):</dt>
+                        <dd class="col-sm-7">@Html.DisplayFor(model => model.tongTien)</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="text-center mt-4">
+        <a asp-controller="Home" asp-action="Index" class="btn btn-secondary">Trở về trang chủ</a>
+    </div>
+</div>
